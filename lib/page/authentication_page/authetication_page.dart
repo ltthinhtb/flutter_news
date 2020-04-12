@@ -4,6 +4,7 @@ import 'package:flutter_news/Utils/apptheme.dart';
 import 'package:flutter_news/page/authentication_page/authenticatin_bloc.dart';
 import 'package:flutter_news/page/authentication_page/authentication.dart';
 import 'package:flutter_news/page/home_page/home_page.dart';
+import 'package:flutter_news/service/database.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class AuthenticationPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class AuthenticationPage extends StatefulWidget {
 class _AuthenticationPageState extends State<AuthenticationPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  DataBase _base = DataBase();
   // ignore: close_sinks
   AuthenticationBloc _bloc;
 
@@ -57,7 +58,9 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                       children: <Widget>[
                         SignInButton(
                           Buttons.Facebook,
-                          onPressed: () {},
+                          onPressed: () {
+                            _base.dataUser();
+                          },
                           shape: RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(18.0),
                           ),

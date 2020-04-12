@@ -1,15 +1,24 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
-import 'package:flutter_news/service/AuthService.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_news/models/user.dart';
+import 'package:flutter_news/service/auth_service.dart';
+import 'package:flutter_news/service/database.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:path/path.dart' as Path;
 import 'profile.dart';
 
 class ProfileSettingBloc
     extends Bloc<ProfileSettingEvent, ProfileSettingState> {
   SharedPreferences prefs;
   bool optionValue;
-  String userName = "";
+
+  User user;
+  File file;
   AuthService authService = AuthService();
   bool isLogin;
 
@@ -21,23 +30,32 @@ class ProfileSettingBloc
       ProfileSettingEvent event) async* {
     if (event is LoadProfileEvent) {
       yield LoadingDataState();
+      optionValue = await getOption();
       isLogin = await authService.checkLogin();
       print('trang thai là $isLogin');
       if (isLogin) {
-        userName = await getUser();
-        print(userName);
+        user = await getUser();
       } else
-        userName = "";
-      optionValue = await getOption();
-      yield DataSuccessState();
+        user = null;
+      yield DataSuccessState(optionValue, user);
     }
 
     if (event is LogOut) {
-      yield InitProfileSettingState();
+      yield LoadingDataState();
       await authService.signOut();
-      yield LogOutSuccess();
+      yield DataSuccessState(optionValue, null);
     }
 
+    if (event is UpdateAvatarEvent) {
+      yield InitProfileSettingState();
+      file = await ImagePicker.pickImage(
+          source: event.isUploadFromCamera
+              ? ImageSource.camera
+              : ImageSource.gallery);
+      await uploadFile(file);
+      user = await getUser();
+      yield DataSuccessState(optionValue, user);
+    }
   }
 
   Future<bool> getOption() async {
@@ -46,9 +64,23 @@ class ProfileSettingBloc
     return option;
   }
 
-  Future<String> getUser() async {
+  Future<User> getUser() async {
     prefs = await SharedPreferences.getInstance();
-    String user = prefs.get('email') ?? false;
+    String userId = prefs.get('userId') ?? null;
+    user = await DataBase(uid: userId).dataUser();
     return user;
+  }
+
+  Future uploadFile(File _file) async {
+    String userId = prefs.get('userId') ?? null;
+    StorageReference storageReference = FirebaseStorage.instance.ref().child(
+        'profilePhotoUrl/${Path.basename('profile + userId : $userId')}}');
+    StorageUploadTask uploadTask = storageReference.putFile(_file);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+    storageReference.getDownloadURL().then((fileURL) async {
+      await DataBase(uid: userId).updateAvatar(fileURL);
+      print(fileURL);
+    });
   }
 }

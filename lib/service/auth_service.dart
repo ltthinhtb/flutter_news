@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_news/service/database.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,11 +23,14 @@ class AuthService {
     FirebaseUser firebaseUser =
         (await _auth.signInWithCredential(credential)).user;
     currentUser = firebaseUser;
-    await prefs.setString('id', currentUser.uid);
-    await prefs.setString('nickname', currentUser.displayName);
-    await prefs.setString('photoUrl', currentUser.photoUrl);
-    await prefs.setString('email', currentUser.email);
+//    await prefs.setString('id', currentUser.uid);
+//    await prefs.setString('nickname', currentUser.displayName);
+//    await prefs.setString('photoUrl', currentUser.photoUrl);
+//    await prefs.setString('email', currentUser.email);
+    await prefs.setString('userId', currentUser.uid);
     await prefs.setBool('islogin', true);
+    await DataBase(uid: currentUser.uid).userCreate(
+        currentUser.displayName, currentUser.displayName, currentUser.email);
   }
 
   // ignore: non_constant_identifier_names
@@ -35,19 +40,23 @@ class AuthService {
         email: email, password: password);
     FirebaseUser user = result.user;
     print(user.displayName);
-    await prefs.setString('id', user.uid);
-    await prefs.setString('nickname', user.displayName);
-    await prefs.setString('photoUrl', user.photoUrl);
-    await prefs.setString('email', user.email);
+//    await prefs.setString('id', user.uid);
+//    await prefs.setString('nickname', user.displayName);
+//    await prefs.setString('photoUrl', user.photoUrl);
+//    await prefs.setString('email', user.email);
+    await prefs.setString('userId', user.uid);
     await prefs.setBool('islogin', true);
   }
 
-  Future<void> signUpWithEmail({String email, String password}) async {
-    await _auth.createUserWithEmailAndPassword(
+  Future<String> signUpWithEmail({String email, String password}) async {
+    AuthResult result = await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+    FirebaseUser user = result.user;
+    String id = user.uid;
     _auth.signOut();
+    return id;
   }
 
   Future<void> signOut() async {

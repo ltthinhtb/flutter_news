@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/page/authentication_page/authentication.dart';
-import 'package:flutter_news/service/AuthService.dart';
+import 'package:flutter_news/service/auth_service.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {

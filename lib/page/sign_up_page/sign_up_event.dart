@@ -9,13 +9,15 @@ abstract class SignUpEvent extends Equatable {
 }
 
 class SignUpEmailPassWord extends SignUpEvent {
+  final String name;
+  final String surName;
   final String email;
   final String password;
 
-  SignUpEmailPassWord(this.email, this.password);
+  SignUpEmailPassWord(this.name, this.surName, this.email, this.password);
 
   @override
   String toString() {
-    return 'SignUpEmailPassWord{email: $email, password: $password}';
+    return 'SignUpEmailPassWord{name: $name, surName: $surName, email: $email, password: $password}';
   }
 }

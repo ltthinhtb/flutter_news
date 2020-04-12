@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_news/models/user.dart';
 
 class ProfileSettingState extends Equatable {
   ProfileSettingState([List props = const []]) : super();
@@ -36,8 +37,13 @@ class LogOutSuccess extends ProfileLoadingState {
 }
 
 class DataSuccessState extends ProfileSettingState {
+  final bool optionValue;
+  final User user;
+
+  DataSuccessState(this.optionValue, this.user);
+
   @override
   String toString() {
-    return 'SuccessDataState{}';
+    return 'DataSuccessState{optionValue: $optionValue, user: $user}';
   }
 }

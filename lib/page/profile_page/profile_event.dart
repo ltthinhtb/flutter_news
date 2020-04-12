@@ -28,3 +28,14 @@ class LogOut extends ProfileSettingEvent {
     return 'LogOut{}';
   }
 }
+
+class UpdateAvatarEvent extends ProfileSettingEvent {
+  final bool isUploadFromCamera;
+
+  UpdateAvatarEvent(this.isUploadFromCamera);
+
+  @override
+  String toString() {
+    return 'UpdateAvatarEvent{isUploadFromCamera: $isUploadFromCamera}';
+  }
+}

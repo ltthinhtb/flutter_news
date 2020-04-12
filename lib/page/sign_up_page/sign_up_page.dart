@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/Utils/apptheme.dart';
-import 'package:flutter_news/page/home_page/home_page.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_bloc.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_event.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_state.dart';
@@ -38,9 +37,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 content: Text('Đăng ký thành công'),
                 duration: Duration(seconds: 3),
               ));
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => MyHomePage()));
             }
+            setState(() {
+
+            });
             if (state is SignUpFail) {
               Scaffold.of(context).showSnackBar(SnackBar(
                 content: Text('Đăng ký thất bại'),
@@ -144,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         FlatButton(
                           color: AppTheme.red_dark,
                           onPressed: () {
-                            BlocProvider.of<SignUpBloc>(context).add(SignUpEmailPassWord(_emailController.text, _passwordController.text));
+                            BlocProvider.of<SignUpBloc>(context).add(SignUpEmailPassWord(_nameController.text,_surnameController.text,_emailController.text, _passwordController.text));
                           },
                           child: Text(
                             'Đăng ký',
