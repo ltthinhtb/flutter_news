@@ -12,10 +12,14 @@ class DataBase {
 
   Future userCreate(String name, String surName, String email) async {
     var usersRef = databaseReference.collection("users");
-    await usersRef.document(uid).setData({
-      "name": name,
-      'surName': surName,
-      "email": email,
+    usersRef.document(uid).get().then((snapShot) async {
+      if (snapShot == null || !snapShot.exists) {
+        await usersRef.document(uid).setData({
+          "name": name,
+          'surName': surName,
+          "email": email,
+        });
+      }
     });
   }
 

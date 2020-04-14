@@ -4,6 +4,7 @@ import 'package:flutter_news/Utils/apptheme.dart';
 import 'package:flutter_news/page/authentication_page/authenticatin_bloc.dart';
 import 'package:flutter_news/page/authentication_page/authentication.dart';
 import 'package:flutter_news/page/home_page/home_page.dart';
+import 'package:flutter_news/page/sign_up_page/sign_up_page.dart';
 import 'package:flutter_news/service/database.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -16,6 +17,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   DataBase _base = DataBase();
+
   // ignore: close_sinks
   AuthenticationBloc _bloc;
 
@@ -139,7 +141,9 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                         FlatButton(
                           color: AppTheme.red_dark,
                           onPressed: () {
-                            _bloc.add(LoginInEmailPassWord(_emailController.text, _passwordController.text));
+                            _bloc.add(LoginInEmailPassWord(
+                                _emailController.text,
+                                _passwordController.text));
                           },
                           child: Text(
                             'Đăng Nhập',
@@ -161,6 +165,12 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                           height: 20,
                         ),
                         InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpPage()));
+                          },
                           child: Text('Chưa có tài khoản? Đăng ký'),
                         ),
                       ],
