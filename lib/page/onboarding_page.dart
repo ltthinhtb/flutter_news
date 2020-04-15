@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 
-import 'home_page/home_page.dart';
+import 'main_page/main_page.dart';
 
 
 

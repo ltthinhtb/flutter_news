@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/Utils/apptheme.dart';
 import 'package:flutter_news/page/authentication_page/authenticatin_bloc.dart';
 import 'package:flutter_news/page/authentication_page/authentication.dart';
-import 'package:flutter_news/page/home_page/home_page.dart';
+import 'package:flutter_news/page/main_page/main_page.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_page.dart';
 import 'package:flutter_news/service/database.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
