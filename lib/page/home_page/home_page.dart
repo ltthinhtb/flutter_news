@@ -103,10 +103,10 @@ class _HomePageState extends State<HomePage> {
           );
         else
           return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
       }),
     );
   }
