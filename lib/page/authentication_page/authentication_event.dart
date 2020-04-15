@@ -26,3 +26,14 @@ class LoginInEmailPassWord extends AuthenticationEvent {
     return 'LoginInEmailPassWord{email: $email, password: $password}';
   }
 }
+
+class ValidateEmail extends AuthenticationEvent {
+  final String email;
+
+  ValidateEmail(this.email);
+
+  @override
+  String toString() {
+    return 'ValidateEmail{email: $email}';
+  }
+}

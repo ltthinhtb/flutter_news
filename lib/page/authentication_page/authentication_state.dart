@@ -34,3 +34,10 @@ class AuthenticationLoading extends AuthenticationState {
     return 'AuthenticationLoading{}';
   }
 }
+
+class ValidateError extends AuthenticationState {
+  @override
+  String toString() {
+    return 'ValidateError{}';
+  }
+}

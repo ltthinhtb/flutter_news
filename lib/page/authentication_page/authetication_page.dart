@@ -104,7 +104,9 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                               autocorrect: false,
                               maxLines: 1,
                               autofocus: false,
+                              onChanged: (text) => _bloc.add(ValidateEmail(text)),
                               decoration: InputDecoration(
+                                errorText: _bloc.errorEmail,
                                   hintText: 'Email',
                                   icon: Icon(
                                     Icons.email,

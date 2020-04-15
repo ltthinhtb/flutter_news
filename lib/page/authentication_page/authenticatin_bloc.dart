@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news/Utils/validator.dart';
 import 'package:flutter_news/page/authentication_page/authentication.dart';
 import 'package:flutter_news/service/auth_service.dart';
 
 class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+    extends Bloc<AuthenticationEvent, AuthenticationState>with Validators {
   AuthService authService = AuthService();
+  String errorEmail;
   BuildContext context;
 
   @override
@@ -35,6 +37,12 @@ class AuthenticationBloc
       } catch (e) {
         yield AuthenticationFail();
       }
+    }
+
+    if (event is ValidateEmail) {
+      yield AuthenticationLoading();
+      errorEmail = checkEmail(context, event.email);
+      yield ValidateError();
     }
   }
 }
