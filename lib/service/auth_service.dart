@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_news/service/database.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthService {
   GoogleSignIn _googleSignIn = GoogleSignIn();
   FirebaseAuth _auth = FirebaseAuth.instance;
+  final _facebooklogin = FacebookLogin();
   bool isLoggedIn = false;
   SharedPreferences prefs;
   FirebaseUser currentUser;
@@ -23,14 +25,27 @@ class AuthService {
     FirebaseUser firebaseUser =
         (await _auth.signInWithCredential(credential)).user;
     currentUser = firebaseUser;
-//    await prefs.setString('id', currentUser.uid);
-//    await prefs.setString('nickname', currentUser.displayName);
-//    await prefs.setString('photoUrl', currentUser.photoUrl);
-//    await prefs.setString('email', currentUser.email);
     await prefs.setString('userId', currentUser.uid);
     await prefs.setBool('islogin', true);
     await DataBase(uid: currentUser.uid).userCreate(
         currentUser.displayName, currentUser.displayName, currentUser.email);
+  }
+
+  Future loginWithFacebook() async {
+    final result = await _facebooklogin.logIn(['email']);
+
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      final credential = FacebookAuthProvider.getCredential(
+        accessToken: result.accessToken.token,
+      );
+      final user = (await _auth.signInWithCredential(credential)).user;
+      currentUser = user;
+      await prefs.setString('userId', currentUser.uid);
+      await prefs.setBool('islogin', true);
+      await DataBase(uid: currentUser.uid).userCreate(
+          currentUser.displayName, currentUser.displayName, currentUser.email);
+      await DataBase(uid: currentUser.uid).updateAvatar(currentUser.photoUrl);
+    }
   }
 
   // ignore: non_constant_identifier_names
@@ -63,6 +78,7 @@ class AuthService {
     prefs = await SharedPreferences.getInstance();
     _auth.signOut();
     _googleSignIn.signOut();
+    _facebooklogin.logOut();
     await prefs.setBool('islogin', false);
   }
 

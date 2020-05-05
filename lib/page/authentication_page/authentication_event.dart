@@ -15,6 +15,13 @@ class LoginInGoogle extends AuthenticationEvent {
   }
 }
 
+class LoginFacebook extends AuthenticationEvent {
+  @override
+  String toString() {
+    return 'LoginFacebook{}';
+  }
+}
+
 class LoginInEmailPassWord extends AuthenticationEvent {
   final String email;
   final String password;

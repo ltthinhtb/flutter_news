@@ -21,15 +21,7 @@ class AppTheme {
   static const String fontName = 'WorkSans';
   static const Color red_dark = Color(0xFF8B0000);
 
-  static const TextTheme textTheme = TextTheme(
-    display1: display1,
-    headline: headline,
-    title: title,
-    subtitle: subtitle,
-    body2: body2,
-    body1: body1,
-    caption: caption,
-  );
+
 
   static const TextStyle display1 = TextStyle( // h4 -> display1
     fontFamily: fontName,
@@ -103,6 +95,7 @@ class AppTheme {
     scaffoldBackgroundColor: lightBG,
     appBarTheme: AppBarTheme(
       textTheme: TextTheme(
+        // ignore: deprecated_member_use
         title: TextStyle(
           color: darkBG,
           fontSize: 18.0,
@@ -124,6 +117,7 @@ class AppTheme {
     cursorColor: darkAccent,
     appBarTheme: AppBarTheme(
       textTheme: TextTheme(
+        // ignore: deprecated_member_use
         title: TextStyle(
           color: lightBG,
           fontSize: 18.0,

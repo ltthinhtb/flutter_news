@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 
 class Validators {
-  static final RegExp _phoneRegex = RegExp(r'(\+84|0)\d{9}$');
   static final RegExp _emailRegex = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 

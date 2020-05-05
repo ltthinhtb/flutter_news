@@ -14,7 +14,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ProfileSettingBloc _bloc;
-  bool isSwitch = false;
   AuthService authService = AuthService();
 
   @override

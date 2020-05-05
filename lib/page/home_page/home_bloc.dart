@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_news/models/response/list_new_response.dart';
-import 'package:flutter_news/service/network_factory.dart';
+
 import 'home.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
-  NetworkFactory _networkFactory = NetworkFactory();
   ListNewsResponse _listNewsResponse;
   Data data;
 

@@ -27,6 +27,15 @@ class AuthenticationBloc
         yield AuthenticationFail();
       }
     }
+    if (event is LoginFacebook) {
+      yield AuthenticationLoading();
+      try {
+        await authService.loginWithFacebook();
+        yield AuthenticationSuccess();
+      } catch (e) {
+        yield AuthenticationFail();
+      }
+    }
     if (event is LoginInEmailPassWord) {
       yield AuthenticationLoading();
       String email = event.email;
