@@ -32,19 +32,16 @@ class AuthService {
   }
 
   Future loginWithFacebook() async {
+    _facebooklogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
     final result = await _facebooklogin.logIn(['email']);
-
+    print("result ${result.accessToken.userId}");
     if (result.status == FacebookLoginStatus.loggedIn) {
       final credential = FacebookAuthProvider.getCredential(
         accessToken: result.accessToken.token,
       );
       final user = (await _auth.signInWithCredential(credential)).user;
       currentUser = user;
-      await prefs.setString('userId', currentUser.uid);
       await prefs.setBool('islogin', true);
-      await DataBase(uid: currentUser.uid).userCreate(
-          currentUser.displayName, currentUser.displayName, currentUser.email);
-      await DataBase(uid: currentUser.uid).updateAvatar(currentUser.photoUrl);
     }
   }
 
@@ -55,10 +52,6 @@ class AuthService {
         email: email, password: password);
     FirebaseUser user = result.user;
     print(user.displayName);
-//    await prefs.setString('id', user.uid);
-//    await prefs.setString('nickname', user.displayName);
-//    await prefs.setString('photoUrl', user.photoUrl);
-//    await prefs.setString('email', user.email);
     await prefs.setString('userId', user.uid);
     await prefs.setBool('islogin', true);
   }

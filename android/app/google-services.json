@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:322335809701:android:f1bc3222b6be0eb2f06d4c",
+        "mobilesdk_app_id": "1:322335809701:android:c62890f591c99f1af06d4c",
         "android_client_info": {
           "package_name": "com.example.flutter_news"
         }
       },
       "oauth_client": [
         {
-          "client_id": "322335809701-lvd9eo142fq0gaistb3ossn74034h4a9.apps.googleusercontent.com",
+          "client_id": "322335809701-u09a39r6mh7fmtfn2fpfsvtbkh1ko096.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.flutter_news",
-            "certificate_hash": "85eb6fa8986820d33f63d483a61f3d45485d606b"
+            "certificate_hash": "585246ecdcd8a10af15b6b52e6eee599986148a4"
           }
         },
         {
