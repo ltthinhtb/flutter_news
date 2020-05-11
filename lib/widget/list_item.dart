@@ -4,8 +4,8 @@ import 'package:flutter_news/page/web_page/webview_page.dart';
 class CustomListItem extends StatefulWidget {
   final String thumbnail;
   final String title;
-  final String subtitle;
   final String url;
+  final String author;
   final String publishDate;
   final String category;
 
@@ -13,10 +13,10 @@ class CustomListItem extends StatefulWidget {
     Key key,
     @required this.thumbnail,
     @required this.title,
-    @required this.subtitle,
-    @required this.url,
+    @required this.author,
     @required this.publishDate,
     this.category,
+    this.url,
   }) : super(key: key);
 
   @override
@@ -28,107 +28,64 @@ class _CustomListItemState extends State<CustomListItem> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewPage(url: widget.url, title: widget.title)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    WebViewPage(url: widget.url, title: widget.title)));
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         child: SizedBox(
-          height: 100,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 0.7,
-                child: Image.network(widget.thumbnail),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
-                  child: _ArticleDescription(
-                    category: widget.category,
-                    title: widget.title,
-                    subtitle: widget.subtitle,
-                    publishDate: widget.publishDate,
-                  ),
+            height: 80,
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  child: Image.network(widget.thumbnail),
                 ),
-              )
-            ],
-          ),
-        ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
+                          child: Text(
+                            widget.title,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                widget.author,
+                                style: TextStyle(),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                widget.category,
+                                style: TextStyle(fontSize: 12, color: Colors.blue),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                          child: Text(widget.publishDate,
+                              style: TextStyle(color: Colors.grey)),
+                        )
+                      ],
+                    ))
+              ],
+            )),
       ),
-    );
-  }
-}
-
-class _ArticleDescription extends StatelessWidget {
-  _ArticleDescription({
-    Key key,
-    this.title,
-    this.subtitle,
-    this.publishDate,
-    this.category,
-  }) : super(key: key);
-
-  final String title;
-  final String subtitle;
-  final String publishDate;
-  final String category;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                '$title',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Padding(padding: EdgeInsets.only(bottom: 3.0)),
-              Text(
-                '$subtitle',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.black54,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                category,
-                style: const TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.black87,
-                ),
-              ),
-              Text(
-                '$publishDate. ',
-                style: const TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.black54,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

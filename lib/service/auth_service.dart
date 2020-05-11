@@ -1,14 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_news/service/database.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as JSON;
 
 class AuthService {
   GoogleSignIn _googleSignIn = GoogleSignIn();
+  Map userProfile;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  final _facebooklogin = FacebookLogin();
+  final facebookLogin = FacebookLogin();
   bool isLoggedIn = false;
   SharedPreferences prefs;
   FirebaseUser currentUser;
@@ -29,20 +31,6 @@ class AuthService {
     await prefs.setBool('islogin', true);
     await DataBase(uid: currentUser.uid).userCreate(
         currentUser.displayName, currentUser.displayName, currentUser.email);
-  }
-
-  Future loginWithFacebook() async {
-    _facebooklogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
-    final result = await _facebooklogin.logIn(['email']);
-    print("result ${result.accessToken.userId}");
-    if (result.status == FacebookLoginStatus.loggedIn) {
-      final credential = FacebookAuthProvider.getCredential(
-        accessToken: result.accessToken.token,
-      );
-      final user = (await _auth.signInWithCredential(credential)).user;
-      currentUser = user;
-      await prefs.setBool('islogin', true);
-    }
   }
 
   // ignore: non_constant_identifier_names
@@ -67,11 +55,37 @@ class AuthService {
     return id;
   }
 
+  Future<bool> loginFb() async {
+    prefs = await SharedPreferences.getInstance();
+    bool isLoginFB = false;
+    final result = await facebookLogin.logIn(['email']);
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final token = result.accessToken.token;
+        final graphResponse = await http.get(
+            'https://graph.facebook.com/v2.12/me?fields=name,picture.width(1000).height(1000),email&access_token=$token');
+        final profile = JSON.jsonDecode(graphResponse.body);
+        userProfile = profile;
+        await prefs.setString('userId', userProfile['id']);
+        await prefs.setBool('islogin', true);
+        await DataBase(uid: userProfile['id']).userCreate(
+            userProfile['name'], userProfile['name'], userProfile['email']);
+        await DataBase(uid: userProfile['id']).updateAvatar(userProfile['picture']['data']['url']);
+        isLoginFB = true;
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        break;
+      case FacebookLoginStatus.error:
+        break;
+    }
+    return isLoginFB;
+  }
+
   Future<void> signOut() async {
     prefs = await SharedPreferences.getInstance();
     _auth.signOut();
     _googleSignIn.signOut();
-    _facebooklogin.logOut();
+     facebookLogin.logOut();
     await prefs.setBool('islogin', false);
   }
 

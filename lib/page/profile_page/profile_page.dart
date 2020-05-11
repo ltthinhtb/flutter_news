@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/page/authentication_page/authetication_page.dart';
 import 'package:flutter_news/page/profile_page/profile.dart';
+import 'package:flutter_news/page/recent_list_news/recent_list_news.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_page.dart';
 import 'package:flutter_news/service/auth_service.dart';
 import 'package:flutter_news/theme_bloc/chang_theme.dart';
@@ -115,6 +116,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Text('HOẠT ĐỘNG'),
                   ),
                   ListTile(
+                    onTap: () {
+                      if (state.user == null)
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('Bạn cần đăng nhập.'),
+                          duration: Duration(seconds: 3),
+                        ));
+                      else
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => RecentListNewPage()));
+                    },
                     title: Text('Tin đã xem'),
                     trailing: Icon(Icons.chevron_right),
                     leading: Icon(Icons.refresh),

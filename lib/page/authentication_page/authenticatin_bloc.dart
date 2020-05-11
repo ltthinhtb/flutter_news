@@ -29,12 +29,9 @@ class AuthenticationBloc
     }
     if (event is LoginFacebook) {
       yield AuthenticationLoading();
-      try {
-        await authService.loginWithFacebook();
-        yield AuthenticationSuccess();
-      } catch (e) {
-        yield AuthenticationFail();
-      }
+      bool isLoginFb = await authService.loginFb();
+      if (isLoginFb) yield AuthenticationSuccess();
+      else yield AuthenticationFail();
     }
     if (event is LoginInEmailPassWord) {
       yield AuthenticationLoading();

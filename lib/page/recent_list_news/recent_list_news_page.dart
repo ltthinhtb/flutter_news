@@ -1,25 +1,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_news/page/home_page/home.dart';
-import 'package:flutter_news/page/home_page/home_bloc.dart';
-import 'package:flutter_news/page/home_page/home_event.dart';
+import 'package:flutter_news/page/recent_list_news/recent_list_news.dart';
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-class HomePage extends StatefulWidget {
+import 'recent_list_news_bloc.dart';
+
+class RecentListNewPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _RecentListNewPageState createState() => _RecentListNewPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  HomePageBloc _bloc;
+class _RecentListNewPageState extends State<RecentListNewPage> {
+  RecentListNewPageBloc _bloc;
 
   @override
   void initState() {
     // TODO: implement initState
-    _bloc = HomePageBloc();
-    _bloc.add(LoadDataEvent(isRefresh: true));
+    _bloc = RecentListNewPageBloc();
+    _bloc.add(LoadRecentListNewsEvent(isRefresh: true));
     super.initState();
   }
 
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     return BlocProvider(
       create: (context) => _bloc,
       child:
-          BlocBuilder<HomePageBloc, HomePageState>(builder: (context, state) {
+          BlocBuilder<RecentListNewPageBloc, RecentListNewPageState>(builder: (context, state) {
         if (state is GetDataSuccess)
           return Scaffold(
             appBar: PreferredSize(
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
             body: LiquidPullToRefresh(
               showChildOpacityTransition: false,
               onRefresh: () => Future.delayed(Duration.zero).then(
-                      (_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                      (_) => _bloc.add(LoadRecentListNewsEvent(isRefresh: true))),
               child: ListView.separated(
                 itemCount: state.response.data.category.listData.length,
                 separatorBuilder: (context, index) => Divider(

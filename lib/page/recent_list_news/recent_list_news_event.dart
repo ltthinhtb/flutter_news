@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
 
-abstract class HomePageEvent extends Equatable {
-  HomePageEvent([List props = const []]) : super();
+abstract class RecentListNewPageEvent extends Equatable {
+  RecentListNewPageEvent([List props = const []]) : super();
 
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
 
-class LoadDataEvent extends HomePageEvent {
+class LoadRecentListNewsEvent extends RecentListNewPageEvent {
   final bool isRefresh;
 
-  LoadDataEvent({this.isRefresh});
+  LoadRecentListNewsEvent({this.isRefresh});
 
   @override
   String toString() {

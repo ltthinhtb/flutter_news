@@ -35,7 +35,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           listener: (context, state) {
             if (state is AuthenticationSuccess) {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => MyHomePage()));
+                  MaterialPageRoute(builder: (context) => MyHomePage(currentPage: 3,)));
             }
             if (state is AuthenticationFail) {
               Scaffold.of(context).showSnackBar(SnackBar(

@@ -5,6 +5,10 @@ import 'package:flutter_news/page/home_page/home_page.dart';
 import 'package:flutter_news/page/profile_page/profile_page.dart';
 
 class MyHomePage extends StatefulWidget {
+  final int currentPage;
+
+  const MyHomePage({Key key, this.currentPage}) : super(key: key);
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -37,11 +41,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             HomePage(),
             ListView.separated(
-              itemCount: 5,
+              itemCount: 4,
               separatorBuilder: (context, index) => Divider(
                 color: Colors.black,
               ),
-              itemBuilder: (context,int index){
+              itemBuilder: (context, int index) {
                 return ListTile(
                   title: Text('hello'),
                   subtitle: Text("thinh"),

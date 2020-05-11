@@ -73,15 +73,6 @@ class ProfileSettingBloc
 
   Future uploadFile(File _file) async {
     String userId = prefs.get('userId') ?? null;
-//    StorageReference storageReference = FirebaseStorage.instance.ref().child(
-//        'profilePhotoUrl/${Path.basename('profile + userId : $userId')}}');
-//    StorageUploadTask uploadTask = storageReference.putFile(_file);
-//    await uploadTask.onComplete;
-//    print('File Uploaded');
-//    storageReference.getDownloadURL().then((fileURL) async {
-//      await DataBase(uid: userId).updateAvatar(fileURL);
-//      print(fileURL);
-//    });
     StorageReference ref = FirebaseStorage.instance.ref().child('profilePhotoUrl/${Path.basename('profile + userId : $userId')}}');
     StorageUploadTask uploadTask = ref.putFile(_file);
     var storageTaskSnapshot = await uploadTask.onComplete;

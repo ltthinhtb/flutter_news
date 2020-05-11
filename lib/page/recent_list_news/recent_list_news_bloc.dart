@@ -2,20 +2,20 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_news/models/response/list_new_response.dart';
 
-import 'home.dart';
+import 'recent_list_news.dart';
 
-class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
+class RecentListNewPageBloc extends Bloc<RecentListNewPageEvent, RecentListNewPageState> {
   ListNewsResponse _listNewsResponse;
   Data data;
 
   @override
   // TODO: implement initialState
-  HomePageState get initialState => InitState();
+  RecentListNewPageState get initialState => InitState();
 
   @override
-  Stream<HomePageState> mapEventToState(HomePageEvent event) async* {
+  Stream<RecentListNewPageState> mapEventToState(RecentListNewPageEvent event) async* {
     // TODO: implement mapEventToState
-    if (event is LoadDataEvent) {
+    if (event is LoadRecentListNewsEvent) {
       yield event.isRefresh ? InitState() : LoadingDataState();
       await getData();
       yield GetDataSuccess(_listNewsResponse);
