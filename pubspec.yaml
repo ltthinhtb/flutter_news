@@ -26,13 +26,14 @@ dependencies:
   image_picker: ^0.6.5
   firebase_messaging: ^6.0.13
   flutter_bloc: ^3.2.0
-  liquid_pull_to_refresh: ^1.1.2
+  share: ^0.6.4+2
   shared_preferences: ^0.5.6+3
   equatable: ^1.1.1
   bloc: ^3.0.0
   flutter_signin_button: ^1.0.0
   font_awesome_flutter: ^8.8.1
   google_sign_in: ^4.4.1
+  liquid_pull_to_refresh: ^2.0.0
   intro_views_flutter: ^2.8.0
   carousel_pro: ^1.0.0
   bottom_navy_bar: ^5.3.2

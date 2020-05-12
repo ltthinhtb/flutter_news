@@ -7,6 +7,7 @@ import 'package:flutter_news/page/recent_list_news/recent_list_news.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_page.dart';
 import 'package:flutter_news/service/auth_service.dart';
 import 'package:flutter_news/theme_bloc/chang_theme.dart';
+import 'package:share/share.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -130,6 +131,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     trailing: Icon(Icons.chevron_right),
                     leading: Icon(Icons.refresh),
                   ),
+                  ListTile(
+                    onTap: () => share(context),
+                    title: Text('Share'),
+                    trailing: Icon(Icons.chevron_right),
+                    leading: Icon(Icons.share),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text('TÙY CHỈNH'),
@@ -208,5 +215,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           );
         });
+  }
+
+  share(BuildContext context) {
+    final RenderBox box = context.findRenderObject();
+
+    Share.share("url",
+        subject: "alligator.description",
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
 }
