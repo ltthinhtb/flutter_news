@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/page/home_page/home.dart';
 import 'package:flutter_news/page/home_page/home_bloc.dart';
 import 'package:flutter_news/page/home_page/home_event.dart';
+import 'package:flutter_news/page/web_page/webview_page.dart';
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -86,23 +85,47 @@ class _HomePageState extends State<HomePage> {
             ),
             body: LiquidPullToRefresh(
               showChildOpacityTransition: false,
-              onRefresh: () => Future.delayed(Duration.zero).then(
-                      (_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+              onRefresh: () => Future.delayed(Duration.zero)
+                  .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
               child: ListView.separated(
                 itemCount: state.response.data.category.listData.length,
                 separatorBuilder: (context, index) => Divider(
                   color: Colors.black,
                 ),
                 itemBuilder: (context, int index) {
-                  return CustomListItem(
-                    title: state.response.data.category.listData[index].title,
-                    author : 'Hello',
-                    url:
-                        'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
-                    publishDate: '15/4/2020',
-                    category: 'Việt Cộng',
-                    thumbnail:
-                        state.response.data.category.listData[index].thumbnailUrl,
+                  return InkWell(
+                    onTap: () {
+                      _bloc.add(SaveRecentEvent(
+                          state.response.data.category.listData[index].title,
+                          state.response.data.category.listData[index].shareUrl,
+                          state.response.data.category.listData[index]
+                              .thumbnailUrl,
+                          state.response.data.category.listData[index]
+                              .articleId
+                      ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WebViewPage(
+                                id: state.response.data.category
+                                    .listData[index].articleId,
+                                  photo:state.response.data.category
+                                      .listData[index].thumbnailUrl ,
+                                  url: state.response.data.category
+                                      .listData[index].shareUrl,
+                                  title: state.response.data.category
+                                      .listData[index].title)));
+                    },
+                    child: CustomListItem(
+                      title: state.response.data.category.listData[index].title,
+                      author: 'Hello',
+                      url:
+                          'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                      publishDate: '15/4/2020',
+                      category: 'Việt Cộng',
+                      thumbnail: state
+                          .response.data.category.listData[index].thumbnailUrl,
+                    ),
                   );
                 },
               ),

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/page/recent_list_news/recent_list_news.dart';
+import 'package:flutter_news/page/web_page/webview_page.dart';
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -31,77 +32,40 @@ class _RecentListNewPageState extends State<RecentListNewPage> {
           BlocBuilder<RecentListNewPageBloc, RecentListNewPageState>(builder: (context, state) {
         if (state is GetDataSuccess)
           return Scaffold(
-            appBar: PreferredSize(
-              child: Padding(
-                padding: EdgeInsets.only(top: 30.0, left: 10.0, right: 10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
-                    ),
-                  ),
-                  child: TextField(
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      hintText: "Tìm kiếm...",
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Colors.black,
-                      ),
-                      suffixIcon: Icon(
-                        Icons.filter_list,
-                        color: Colors.black,
-                      ),
-                      hintStyle: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                    maxLines: 1,
-                  ),
-                ),
-              ),
-              preferredSize: Size(
-                MediaQuery.of(context).size.width,
-                60.0,
-              ),
+            appBar: AppBar(
+              title: Text('Tin đã xem'),
             ),
             body: LiquidPullToRefresh(
               showChildOpacityTransition: false,
               onRefresh: () => Future.delayed(Duration.zero).then(
                       (_) => _bloc.add(LoadRecentListNewsEvent(isRefresh: true))),
-              child: ListView.separated(
-                itemCount: state.response.data.category.listData.length,
+              child: state.doc.data['recent_news'] == null ? Center(child: Text('Bạn chưa xem bài nào cả'),)
+                  : ListView.separated(
+                itemCount: state.doc.data['recent_news'].length,
                 separatorBuilder: (context, index) => Divider(
                   color: Colors.black,
                 ),
                 itemBuilder: (context, int index) {
-                  return CustomListItem(
-                    title: state.response.data.category.listData[index].title,
-                    author : 'Hello',
-                    url:
-                        'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
-                    publishDate: '15/4/2020',
-                    category: 'Việt Cộng',
-                    thumbnail:
-                        state.response.data.category.listData[index].thumbnailUrl,
+                  return InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WebViewPage(
+                                id: state.doc.data['recent_news'][index]['id'],
+                                photo: state.doc.data['recent_news'][index]['photo'],
+                                  url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html',
+                                  title: state.doc.data['recent_news'][index]['title'])));
+                    },
+                    child: CustomListItem(
+                      title:  state.doc.data['recent_news'][index]['title'],
+                      author : 'Hello',
+                      url:
+                      'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html',
+                      publishDate: '15/4/2020',
+                      category: 'Việt Cộng',
+                      thumbnail: state.doc.data['recent_news'][index]['photo'],
+                    ),
                   );
                 },
               ),

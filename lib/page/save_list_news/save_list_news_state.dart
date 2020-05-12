@@ -1,29 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class RecentListNewPageState extends Equatable {
-  RecentListNewPageState([List props = const []]) : super();
+abstract class SaveListNewPageState extends Equatable {
+  SaveListNewPageState([List props = const []]) : super();
 
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
 
-class InitState extends RecentListNewPageState {
+class InitState extends SaveListNewPageState {
   @override
   String toString() {
     return 'InitState{}';
   }
 }
 
-class LoadingDataState extends RecentListNewPageState {
+class LoadingDataState extends SaveListNewPageState {
   @override
   String toString() {
     return 'LoadingDataState{}';
   }
 }
 
-class GetDataSuccess extends RecentListNewPageState {
+class GetDataSuccess extends SaveListNewPageState {
   final DocumentSnapshot doc;
 
   GetDataSuccess(this.doc);

@@ -1,12 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_news/models/response/list_new_response.dart';
+import 'package:flutter_news/service/database.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 import 'home.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   ListNewsResponse _listNewsResponse;
+  SharedPreferences prefs;
   Data data;
+
 
   @override
   // TODO: implement initialState
@@ -18,6 +23,18 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     if (event is LoadDataEvent) {
       yield event.isRefresh ? InitState() : LoadingDataState();
       await getData();
+      yield GetDataSuccess(_listNewsResponse);
+    }
+    if (event is SaveRecentEvent){
+      prefs = await SharedPreferences.getInstance();
+      String userId = prefs.get('userId') ?? null;
+      yield LoadingDataState();
+       await DataBase(uid: userId).saveRecentNews(
+         title: event.title,
+         photo: event.photo,
+         url: event.url,
+         id: event.id
+       );
       yield GetDataSuccess(_listNewsResponse);
     }
   }

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_news/models/user.dart';
+import 'file:///C:/Users/Hoang%20Kien/Documents/flutter_news/lib/models/response/user.dart';
 
 class DataBase {
   final String uid;
@@ -20,6 +20,34 @@ class DataBase {
           "email": email,
         });
       }
+    });
+  }
+
+  Future saveRecentNews({String title, String photo, String url,int id}) async {
+    var usersRef = databaseReference.collection("users");
+    usersRef.document(uid).get().then((snapShot) async {
+        await usersRef.document(uid).updateData({
+          "recent_news" : FieldValue.arrayUnion([{
+            "title" : title,
+            "photo" : photo,
+            "url" : url,
+            "id" : id
+          }])
+        });
+    });
+  }
+
+  Future saveLoveNews({String title, String photo, String url,int id}) async {
+    var usersRef = databaseReference.collection("users");
+    usersRef.document(uid).get().then((snapShot) async {
+      await usersRef.document(uid).updateData({
+        "love_news" : FieldValue.arrayUnion([{
+          "love_title" : title,
+          "love_photo" : photo,
+          "love_url" : url,
+          "love_id" : id
+        }])
+      });
     });
   }
 

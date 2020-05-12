@@ -18,3 +18,19 @@ class LoadDataEvent extends HomePageEvent {
     return 'LoadDataEvent{isRefresh: $isRefresh}';
   }
 }
+
+class SaveRecentEvent extends HomePageEvent {
+  final String title;
+  final String url;
+  final String photo;
+  final int id;
+
+  SaveRecentEvent(this.title, this.url, this.photo, this.id);
+
+  @override
+  String toString() {
+    return 'SaveRecentEvent{title: $title, url: $url, photo: $photo, id: $id}';
+  }
+
+
+}

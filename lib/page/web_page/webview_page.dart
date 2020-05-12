@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/service/database.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WebViewPage extends StatelessWidget {
   final TextEditingController commentController;
   final String title;
   final String url;
+  final int id;
+  final String photo;
 
   const WebViewPage(
       {Key key,
       @required this.url,
       @required this.title,
-      this.commentController})
+      this.commentController,
+      this.id,
+      this.photo})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences prefs;
     return Scaffold(
       body: WebviewScaffold(
         url: url,
@@ -32,9 +39,6 @@ class WebViewPage extends StatelessWidget {
         child: BottomAppBar(
           child: Row(
             children: [
-              SizedBox(
-                width: 10,
-              ),
               IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
@@ -43,7 +47,7 @@ class WebViewPage extends StatelessWidget {
               ),
               Container(
                 height: 40,
-                width: 230,
+                width: 200,
                 child: TextField(
                   controller: commentController,
                   style: TextStyle(
@@ -66,7 +70,20 @@ class WebViewPage extends StatelessWidget {
               SizedBox(
                 width: 5,
               ),
-              IconButton(icon: Icon(Icons.bookmark), onPressed: () {})
+              IconButton(
+                  icon: Icon(Icons.bookmark),
+                  onPressed: () async {
+                    prefs = await SharedPreferences.getInstance();
+                    String userId = prefs.get('userId') ?? null;
+                    if (userId != null) {
+                      await DataBase(uid: userId).saveLoveNews(
+                        id: id,
+                        url: url,
+                        photo: photo,
+                        title: title,
+                      );
+                    }
+                  })
             ],
           ),
         ),

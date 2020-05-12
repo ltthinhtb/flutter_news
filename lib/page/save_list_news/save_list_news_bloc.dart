@@ -1,22 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'recent_list_news.dart';
+import 'save_list_news.dart';
 
-class RecentListNewPageBloc
-    extends Bloc<RecentListNewPageEvent, RecentListNewPageState> {
+class SaveListNewPageBloc
+    extends Bloc<SaveListNewPageEvent, SaveListNewPageState> {
   SharedPreferences prefs;
   DocumentSnapshot doc;
 
   @override
-  // TODO: implement initialState
-  RecentListNewPageState get initialState => InitState();
+  SaveListNewPageState get initialState => InitState();
 
   @override
-  Stream<RecentListNewPageState> mapEventToState(
-      RecentListNewPageEvent event) async* {
+  Stream<SaveListNewPageState> mapEventToState(
+      SaveListNewPageEvent event) async* {
     // TODO: implement mapEventToState
-    if (event is LoadRecentListNewsEvent) {
+    if (event is LoadSaveListNewsEvent) {
       yield event.isRefresh ? InitState() : LoadingDataState();
       await getData();
       yield GetDataSuccess(doc);
@@ -29,7 +28,6 @@ class RecentListNewPageBloc
     final databaseReference = Firestore.instance;
     var usersRef = databaseReference.collection("users");
     doc = await usersRef.document(userId).get();
-
     return doc;
   }
 }

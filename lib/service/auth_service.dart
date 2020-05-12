@@ -74,8 +74,10 @@ class AuthService {
         isLoginFB = true;
         break;
       case FacebookLoginStatus.cancelledByUser:
+        isLoginFB = false;
         break;
       case FacebookLoginStatus.error:
+        isLoginFB = false;
         break;
     }
     return isLoginFB;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news/page/web_page/webview_page.dart';
 
 class CustomListItem extends StatefulWidget {
   final String thumbnail;
@@ -26,66 +25,57 @@ class CustomListItem extends StatefulWidget {
 class _CustomListItemState extends State<CustomListItem> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    WebViewPage(url: widget.url, title: widget.title)));
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        child: SizedBox(
-            height: 80,
-            child: Row(
-              children: <Widget>[
-                Container(
-                  height: 80,
-                  child: Image.network(widget.thumbnail),
-                ),
-                Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
-                          child: Text(
-                            widget.title,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: SizedBox(
+          height: 80,
+          child: Row(
+            children: <Widget>[
+              Container(
+                height: 80,
+                child: Image.network(widget.thumbnail),
+              ),
+              Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
+                        child: Text(
+                          widget.title,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              widget.author,
+                              style: TextStyle(),
                             ),
-                          ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              widget.category,
+                              style: TextStyle(fontSize: 12, color: Colors.blue),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: Row(
-                            children: <Widget>[
-                              Text(
-                                widget.author,
-                                style: TextStyle(),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                widget.category,
-                                style: TextStyle(fontSize: 12, color: Colors.blue),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Text(widget.publishDate,
-                              style: TextStyle(color: Colors.grey)),
-                        )
-                      ],
-                    ))
-              ],
-            )),
-      ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                        child: Text(widget.publishDate,
+                            style: TextStyle(color: Colors.grey)),
+                      )
+                    ],
+                  ))
+            ],
+          )),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_news/models/user.dart';
+import 'file:///C:/Users/Hoang%20Kien/Documents/flutter_news/lib/models/response/user.dart';
 
 class ProfileSettingState extends Equatable {
   ProfileSettingState([List props = const []]) : super();
