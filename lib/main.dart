@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news/service/push_notification_service.dart';
 import 'package:flutter_news/theme_bloc/chang_theme.dart';
 import 'package:flutter_news/theme_bloc/change_theme_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'page/main_page/main_page.dart';
 import 'page/onboarding_page.dart';
 import 'theme_bloc/change_theme_bloc.dart';
+
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override

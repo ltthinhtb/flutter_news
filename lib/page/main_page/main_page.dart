@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news/Utils/apptheme.dart';
 import 'package:flutter_news/page/home_page/home_page.dart';
 import 'package:flutter_news/page/profile_page/profile_page.dart';
+import 'package:flutter_news/page/notification_page/notification_page.dart';
 
 class MyHomePage extends StatefulWidget {
   final int currentPage;
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
-            Container(),
+            NotificationPage(),
             ProfilePage(),
           ],
         ),

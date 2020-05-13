@@ -46,6 +46,12 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           },
           child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
+              if (state is AuthenticationLoading)
+                return Scaffold(
+                  body: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
               return Scaffold(
                 appBar: AppBar(
                   title: Text('Đăng Nhập'),
@@ -103,9 +109,10 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                               autocorrect: false,
                               maxLines: 1,
                               autofocus: false,
-                              onChanged: (text) => _bloc.add(ValidateEmail(text)),
+                              onChanged: (text) =>
+                                  _bloc.add(ValidateEmail(text)),
                               decoration: InputDecoration(
-                                errorText: _bloc.errorEmail,
+                                  errorText: _bloc.errorEmail,
                                   hintText: 'Email',
                                   icon: Icon(
                                     Icons.email,
