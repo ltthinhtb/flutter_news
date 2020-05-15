@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'file:///C:/Users/Hoang%20Kien/Documents/flutter_news/lib/models/response/user.dart';
+import 'package:flutter_news/models/response/user.dart';
 import 'package:flutter_news/service/auth_service.dart';
 import 'package:flutter_news/service/database.dart';
 import 'package:image_picker/image_picker.dart';

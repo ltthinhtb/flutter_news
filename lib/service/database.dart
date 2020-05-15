@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'file:///C:/Users/Hoang%20Kien/Documents/flutter_news/lib/models/response/user.dart';
+import 'package:flutter_news/models/response/user.dart';
+
 
 class DataBase {
   final String uid;
