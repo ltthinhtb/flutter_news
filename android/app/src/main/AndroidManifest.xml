@@ -3,7 +3,7 @@
     package="com.example.flutter_news">
 
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name=".Application"
         android:icon="@mipmap/ic_launcher"
         android:label="flutter_news">
         <activity

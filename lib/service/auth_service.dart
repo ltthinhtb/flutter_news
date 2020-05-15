@@ -31,6 +31,7 @@ class AuthService {
     await prefs.setBool('islogin', true);
     await DataBase(uid: currentUser.uid).userCreate(
         currentUser.displayName, currentUser.displayName, currentUser.email);
+    DataBase(uid: currentUser.uid).getToken();
   }
 
   // ignore: non_constant_identifier_names
@@ -71,6 +72,7 @@ class AuthService {
         await DataBase(uid: userProfile['id']).userCreate(
             userProfile['name'], userProfile['name'], userProfile['email']);
         await DataBase(uid: userProfile['id']).updateAvatar(userProfile['picture']['data']['url']);
+        DataBase(uid: userProfile['id']).getToken();
         isLoginFB = true;
         break;
       case FacebookLoginStatus.cancelledByUser:

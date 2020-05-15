@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_news/models/response/user.dart';
 
 
@@ -10,6 +11,22 @@ class DataBase {
   DataBase({this.uid});
 
   final databaseReference = Firestore.instance;
+
+  final FirebaseMessaging _fcm = FirebaseMessaging();
+
+  void getToken() {
+    _fcm.requestNotificationPermissions();
+
+    _fcm.getToken().then((token) {
+      print('token: $token');
+      Firestore.instance
+          .collection('users')
+          .document(uid)
+          .updateData({'pushToken': token});
+    }).catchError((err) {
+        print('error');
+    });
+  }
 
   Future userCreate(String name, String surName, String email) async {
     var usersRef = databaseReference.collection("users");
@@ -63,4 +80,16 @@ class DataBase {
     user = User.fromDocument(doc);
     return user;
   }
+
+  Future userNotification(String title, String photo, String url) async {
+    var usersRef = databaseReference.collection("notification");
+    usersRef.document(uid).get().then((snapShot) async {
+        await usersRef.document(uid).setData({
+          "title": title,
+          'photo': photo,
+          "url": url,
+        });
+    });
+  }
+
 }
