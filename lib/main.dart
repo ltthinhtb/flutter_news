@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news/page/web_page/webview_page.dart';
 import 'package:flutter_news/service/database.dart';
 
 import 'package:flutter_news/theme_bloc/chang_theme.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FirebaseMessaging _fcm = FirebaseMessaging();
+
   // ignore: close_sinks
   ChangeThemeBloc _bloc;
 
@@ -54,23 +56,58 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     _fcm.configure(
       onMessage: (Map<String, dynamic> msg) async {
+        await DataBase(uid: msg['data']['id']).userNotification(
+            msg['data']['title'],
+            msg['data']['photo'],
+            msg['data']['url'],
+            msg['data']['id']);
         print("onMessage: $msg");
-        DataBase(uid: msg['notification']['title']).userNotification(msg['notification']['title'], 'hád', 'sad');
       },
       onLaunch: (Map<String, dynamic> msg) async {
-        DataBase(uid: msg['notification']['title']).userNotification(msg['notification']['title'], 'hád', 'sad');
-        print("onMessage: $msg");
+        await DataBase(uid: msg['data']['id']).userNotification(
+            msg['data']['title'],
+            msg['data']['photo'],
+            msg['data']['url'],
+            msg['data']['id']);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WebViewPage(
+                    id: msg['data']['id'],
+                    photo: msg['data']['photo'],
+                    url: msg['data']['url'],
+                    title: msg['data']['title'])));
+        print("onLaunch: $msg");
       },
       onResume: (Map<String, dynamic> msg) async {
-        DataBase(uid: msg['notification']['title']).userNotification(msg['notification']['title'], 'hád', 'sad');
-        print("onMessage: $msg");
+        await DataBase(uid: msg['data']['id']).userNotification(
+            msg['data']['title'],
+            msg['data']['photo'],
+            msg['data']['url'],
+            msg['data']['id']);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WebViewPage(
+                    id: msg['data']['id'],
+                    photo: msg['data']['photo'],
+                    url: msg['data']['url'],
+                    title: msg['data']['title'])));
+        print("onResume: $msg");
       },
     );
+    _fcm.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
+    _fcm.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
 
     _bloc = ChangeThemeBloc();
     _bloc.add(LoadThemeEvent());
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {

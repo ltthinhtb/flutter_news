@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class NotificationState extends Equatable {
@@ -8,11 +9,16 @@ class NotificationState extends Equatable {
 }
 
 class NotificationSuccessState extends NotificationState {
+  final List<DocumentSnapshot> listDoc;
+
+  NotificationSuccessState(this.listDoc);
 
   @override
   String toString() {
-    return 'NotificationSuccessState{}';
+    return 'NotificationSuccessState{doc: $listDoc}';
   }
+
+
 }
 
 class NotificationLoadingState extends NotificationState {

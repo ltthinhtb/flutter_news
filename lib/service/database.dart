@@ -81,13 +81,14 @@ class DataBase {
     return user;
   }
 
-  Future userNotification(String title, String photo, String url) async {
+  Future userNotification(String title, String photo, String url,String id) async {
     var usersRef = databaseReference.collection("notification");
     usersRef.document(uid).get().then((snapShot) async {
         await usersRef.document(uid).setData({
           "title": title,
           'photo': photo,
           "url": url,
+          "id" : id
         });
     });
   }

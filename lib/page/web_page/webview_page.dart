@@ -23,68 +23,77 @@ class WebViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SharedPreferences prefs;
-    return Scaffold(
-      body: WebviewScaffold(
-        url: url,
-        withZoom: true,
-        withLocalStorage: true,
-        hidden: true,
-        initialChild: Container(
-            child: const Center(
-          child: CircularProgressIndicator(),
-        )),
-      ),
-      bottomNavigationBar: Transform.translate(
-        offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
-        child: BottomAppBar(
-          child: Row(
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              Container(
-                height: 40,
-                width: 200,
-                child: TextField(
-                  controller: commentController,
-                  style: TextStyle(
-                    fontSize: 15.0,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Bình luận của bạn...",
-                    prefixIcon: Icon(
-                      Icons.person,
-                      size: 30,
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+    _displaySnackBar(BuildContext context) {
+      final snackBar = SnackBar(content: Text('Đã lưu thành công'));
+      _scaffoldKey.currentState.showSnackBar(snackBar);
+    }
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        body: WebviewScaffold(
+          url: url,
+          withZoom: true,
+          withLocalStorage: true,
+          hidden: true,
+          initialChild: Container(
+              child: const Center(
+            child: CircularProgressIndicator(),
+          )),
+        ),
+        bottomNavigationBar: Transform.translate(
+          offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
+          child: BottomAppBar(
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Container(
+                  height: 40,
+                  width: 200,
+                  child: TextField(
+                    controller: commentController,
+                    style: TextStyle(
+                      fontSize: 15.0,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "Bình luận của bạn...",
+                      prefixIcon: Icon(
+                        Icons.person,
+                        size: 30,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              IconButton(
-                  icon: Icon(Icons.share), onPressed: () => share(context)),
-              SizedBox(
-                width: 5,
-              ),
-              IconButton(
-                  icon: Icon(Icons.bookmark),
-                  onPressed: () async {
-                    prefs = await SharedPreferences.getInstance();
-                    String userId = prefs.get('userId') ?? null;
-                    if (userId != null) {
-                      await DataBase(uid: userId).saveLoveNews(
-                        id: id,
-                        url: url,
-                        photo: photo,
-                        title: title,
-                      );
-                    }
-                  })
-            ],
+                SizedBox(
+                  width: 5,
+                ),
+                IconButton(
+                    icon: Icon(Icons.share), onPressed: () => share(context)),
+                SizedBox(
+                  width: 5,
+                ),
+                IconButton(
+                    icon: Icon(Icons.bookmark),
+                    onPressed: () async {
+                      _displaySnackBar(context);
+                      prefs = await SharedPreferences.getInstance();
+                      String userId = prefs.get('userId') ?? null;
+                      if (userId != null) {
+                        await DataBase(uid: userId).saveLoveNews(
+                          id: id,
+                          url: url,
+                          photo: photo,
+                          title: title,
+                        );
+                      }
+                    })
+              ],
+            ),
           ),
         ),
       ),
@@ -97,4 +106,5 @@ class WebViewPage extends StatelessWidget {
         subject: title,
         sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
+
 }
