@@ -1,6 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/Utils/apptheme.dart';
+import 'package:flutter_news/page/covid_page/covid.dart';
 import 'package:flutter_news/page/home_page/home_page.dart';
 import 'package:flutter_news/page/profile_page/profile_page.dart';
 import 'package:flutter_news/page/notification_page/notification_page.dart';
@@ -41,18 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           children: <Widget>[
             HomePage(),
-            ListView.separated(
-              itemCount: 4,
-              separatorBuilder: (context, index) => Divider(
-                color: Colors.black,
-              ),
-              itemBuilder: (context, int index) {
-                return ListTile(
-                  title: Text('hello'),
-                  subtitle: Text("thinh"),
-                );
-              },
-            ),
+            CovidPage(),
             NotificationPage(),
             ProfilePage(),
           ],
