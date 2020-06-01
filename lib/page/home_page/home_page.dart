@@ -5,6 +5,7 @@ import 'package:flutter_news/page/home_page/home_bloc.dart';
 import 'package:flutter_news/page/home_page/home_event.dart';
 import 'package:flutter_news/page/web_page/webview_page.dart';
 import 'package:flutter_news/widget/list_item.dart';
+import 'package:flutter_news/widget/list_news_home.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,109 +30,388 @@ class _HomePageState extends State<HomePage> {
       create: (context) => _bloc,
       child:
           BlocBuilder<HomePageBloc, HomePageState>(builder: (context, state) {
-        if (state is GetDataSuccess)
-          return Scaffold(
-            appBar: PreferredSize(
-              child: Padding(
-                padding: EdgeInsets.only(top: 30.0, left: 10.0, right: 10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
-                    ),
-                  ),
-                  child: TextField(
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      hintText: "Tìm kiếm...",
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Colors.black,
-                      ),
-                      suffixIcon: Icon(
-                        Icons.filter_list,
-                        color: Colors.black,
-                      ),
-                      hintStyle: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.black,
+        if (state is GetDataSuccess) {
+          return DefaultTabController(
+            length: 7,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text("Báo lá cải"),
+                actions: [
+                  IconButton(icon: Icon(Icons.search), onPressed: (){})
+                ],
+                bottom: TabBar(
+                  isScrollable: true,
+                  unselectedLabelColor: Colors.white,
+                  labelColor: Colors.red,
+                  //    indicatorWeight: 6.0,
+                  tabs: <Widget>[
+                    Tab(
+                      child: Container(
+                        child: Text('Trang nhất',style: TextStyle(fontSize: 16.0)),
                       ),
                     ),
-                    maxLines: 1,
-                  ),
+                    Tab(
+                      child: Container(
+                        child: Text('Du Lịch',style: TextStyle(fontSize: 16.0),),
+                      ),
+                    ),
+                    Tab(
+                      child: Container(
+                        child: Text('Phim',style: TextStyle(fontSize: 16.0)),
+                      ),
+                    ),
+                    Tab(
+                      child: Container(
+                        child: Text('Thời Trang',style: TextStyle(fontSize: 16.0)),
+                      ),
+                    ),
+                    Tab(
+                      child: Container(
+                        child: Text('Thể Thao',style: TextStyle(fontSize: 16.0)),
+                      ),
+                    ),
+                    Tab(
+                      child: Container(
+                        child: Text('Dịch Vụ',style: TextStyle(fontSize: 16.0)),
+                      ),
+                    ),
+                    Tab(
+                      child: Container(
+                        child: Text('Tình Yêu',style: TextStyle(fontSize: 16.0)),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              preferredSize: Size(
-                MediaQuery.of(context).size.width,
-                60.0,
-              ),
-            ),
-            body: LiquidPullToRefresh(
-              showChildOpacityTransition: false,
-              onRefresh: () => Future.delayed(Duration.zero)
-                  .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
-              child: ListView.separated(
-                itemCount: state.response.data.category.listData.length,
-                separatorBuilder: (context, index) => Divider(
-                  color: Colors.black,
-                ),
-                itemBuilder: (context, int index) {
-                  return InkWell(
-                    onTap: () {
-                      _bloc.add(SaveRecentEvent(
-                          state.response.data.category.listData[index].title,
-                          state.response.data.category.listData[index].shareUrl,
-                          state.response.data.category.listData[index]
-                              .thumbnailUrl,
-                          state.response.data.category.listData[index]
-                              .articleId
-                      ));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WebViewPage(
-                                id: state.response.data.category
-                                    .listData[index].articleId,
-                                  photo:state.response.data.category
-                                      .listData[index].thumbnailUrl ,
-                                  url: state.response.data.category
-                                      .listData[index].shareUrl,
-                                  title: state.response.data.category
-                                      .listData[index].title)));
-                    },
-                    child: CustomListItem(
-                      title: state.response.data.category.listData[index].title,
-                      author: 'Hello',
-                      url:
-                          'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
-                      publishDate: '15/4/2020',
-                      category: 'Việt Cộng',
-                      thumbnail: state
-                          .response.data.category.listData[index].thumbnailUrl,
+              body: TabBarView(
+                children: [
+                  LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    onRefresh: () => Future.delayed(Duration.zero)
+                        .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                    child: ListView.separated(
+                      itemCount: state.response.data.category.listData.length,
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
+                      itemBuilder: (context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            _bloc.add(SaveRecentEvent(
+                                state.response.data.category.listData[index].title,
+                                state.response.data.category.listData[index]
+                                    .shareUrl,
+                                state.response.data.category.listData[index]
+                                    .thumbnailUrl,
+                                state.response.data.category.listData[index]
+                                    .articleId));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebViewPage(
+                                        id: state.response.data.category
+                                            .listData[index].articleId,
+                                        photo: state.response.data.category
+                                            .listData[index].thumbnailUrl,
+                                        url: state.response.data.category
+                                            .listData[index].shareUrl,
+                                        title: state.response.data.category
+                                            .listData[index].title)));
+                          },
+                          child: ListNewsHome(
+
+                            title:
+                            state.response.data.category.listData[index].title,
+                            url:
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            thumbnail: state.response.data.category.listData[index]
+                                .thumbnailUrl,
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                  LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    onRefresh: () => Future.delayed(Duration.zero)
+                        .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                    child: ListView.separated(
+                      itemCount: state.response.data.category.listData.length,
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
+                      itemBuilder: (context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            _bloc.add(SaveRecentEvent(
+                                state.response.data.category.listData[index].title,
+                                state.response.data.category.listData[index]
+                                    .shareUrl,
+                                state.response.data.category.listData[index]
+                                    .thumbnailUrl,
+                                state.response.data.category.listData[index]
+                                    .articleId));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebViewPage(
+                                        id: state.response.data.category
+                                            .listData[index].articleId,
+                                        photo: state.response.data.category
+                                            .listData[index].thumbnailUrl,
+                                        url: state.response.data.category
+                                            .listData[index].shareUrl,
+                                        title: state.response.data.category
+                                            .listData[index].title)));
+                          },
+                          child: ListNewsHome(
+
+                            title:
+                            state.response.data.category.listData[index].title,
+                            url:
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            thumbnail: state.response.data.category.listData[index]
+                                .thumbnailUrl,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    onRefresh: () => Future.delayed(Duration.zero)
+                        .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                    child: ListView.separated(
+                      itemCount: state.response.data.category.listData.length,
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
+                      itemBuilder: (context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            _bloc.add(SaveRecentEvent(
+                                state.response.data.category.listData[index].title,
+                                state.response.data.category.listData[index]
+                                    .shareUrl,
+                                state.response.data.category.listData[index]
+                                    .thumbnailUrl,
+                                state.response.data.category.listData[index]
+                                    .articleId));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebViewPage(
+                                        id: state.response.data.category
+                                            .listData[index].articleId,
+                                        photo: state.response.data.category
+                                            .listData[index].thumbnailUrl,
+                                        url: state.response.data.category
+                                            .listData[index].shareUrl,
+                                        title: state.response.data.category
+                                            .listData[index].title)));
+                          },
+                          child: ListNewsHome(
+
+                            title:
+                            state.response.data.category.listData[index].title,
+                            url:
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            thumbnail: state.response.data.category.listData[index]
+                                .thumbnailUrl,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    onRefresh: () => Future.delayed(Duration.zero)
+                        .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                    child: ListView.separated(
+                      itemCount: state.response.data.category.listData.length,
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
+                      itemBuilder: (context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            _bloc.add(SaveRecentEvent(
+                                state.response.data.category.listData[index].title,
+                                state.response.data.category.listData[index]
+                                    .shareUrl,
+                                state.response.data.category.listData[index]
+                                    .thumbnailUrl,
+                                state.response.data.category.listData[index]
+                                    .articleId));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebViewPage(
+                                        id: state.response.data.category
+                                            .listData[index].articleId,
+                                        photo: state.response.data.category
+                                            .listData[index].thumbnailUrl,
+                                        url: state.response.data.category
+                                            .listData[index].shareUrl,
+                                        title: state.response.data.category
+                                            .listData[index].title)));
+                          },
+                          child: ListNewsHome(
+
+                            title:
+                            state.response.data.category.listData[index].title,
+                            url:
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            thumbnail: state.response.data.category.listData[index]
+                                .thumbnailUrl,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    onRefresh: () => Future.delayed(Duration.zero)
+                        .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                    child: ListView.separated(
+                      itemCount: state.response.data.category.listData.length,
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
+                      itemBuilder: (context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            _bloc.add(SaveRecentEvent(
+                                state.response.data.category.listData[index].title,
+                                state.response.data.category.listData[index]
+                                    .shareUrl,
+                                state.response.data.category.listData[index]
+                                    .thumbnailUrl,
+                                state.response.data.category.listData[index]
+                                    .articleId));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebViewPage(
+                                        id: state.response.data.category
+                                            .listData[index].articleId,
+                                        photo: state.response.data.category
+                                            .listData[index].thumbnailUrl,
+                                        url: state.response.data.category
+                                            .listData[index].shareUrl,
+                                        title: state.response.data.category
+                                            .listData[index].title)));
+                          },
+                          child: ListNewsHome(
+
+                            title:
+                            state.response.data.category.listData[index].title,
+                            url:
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            thumbnail: state.response.data.category.listData[index]
+                                .thumbnailUrl,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    onRefresh: () => Future.delayed(Duration.zero)
+                        .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                    child: ListView.separated(
+                      itemCount: state.response.data.category.listData.length,
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
+                      itemBuilder: (context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            _bloc.add(SaveRecentEvent(
+                                state.response.data.category.listData[index].title,
+                                state.response.data.category.listData[index]
+                                    .shareUrl,
+                                state.response.data.category.listData[index]
+                                    .thumbnailUrl,
+                                state.response.data.category.listData[index]
+                                    .articleId));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebViewPage(
+                                        id: state.response.data.category
+                                            .listData[index].articleId,
+                                        photo: state.response.data.category
+                                            .listData[index].thumbnailUrl,
+                                        url: state.response.data.category
+                                            .listData[index].shareUrl,
+                                        title: state.response.data.category
+                                            .listData[index].title)));
+                          },
+                          child: ListNewsHome(
+
+                            title:
+                            state.response.data.category.listData[index].title,
+                            url:
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            thumbnail: state.response.data.category.listData[index]
+                                .thumbnailUrl,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    onRefresh: () => Future.delayed(Duration.zero)
+                        .then((_) => _bloc.add(LoadDataEvent(isRefresh: true))),
+                    child: ListView.separated(
+                      itemCount: state.response.data.category.listData.length,
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
+                      itemBuilder: (context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            _bloc.add(SaveRecentEvent(
+                                state.response.data.category.listData[index].title,
+                                state.response.data.category.listData[index]
+                                    .shareUrl,
+                                state.response.data.category.listData[index]
+                                    .thumbnailUrl,
+                                state.response.data.category.listData[index]
+                                    .articleId));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebViewPage(
+                                        id: state.response.data.category
+                                            .listData[index].articleId,
+                                        photo: state.response.data.category
+                                            .listData[index].thumbnailUrl,
+                                        url: state.response.data.category
+                                            .listData[index].shareUrl,
+                                        title: state.response.data.category
+                                            .listData[index].title)));
+                          },
+                          child: ListNewsHome(
+
+                            title:
+                            state.response.data.category.listData[index].title,
+                            url:
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            thumbnail: state.response.data.category.listData[index]
+                                .thumbnailUrl,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           );
-        else
+        } else
           return Scaffold(
             body: Center(
               child: CircularProgressIndicator(),

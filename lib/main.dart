@@ -11,6 +11,7 @@ import 'package:flutter_news/theme_bloc/chang_theme.dart';
 import 'package:flutter_news/theme_bloc/change_theme_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Utils/apptheme.dart';
 import 'page/main_page/main_page.dart';
 import 'page/onboarding_page.dart';
 import 'theme_bloc/change_theme_bloc.dart';
@@ -125,7 +126,7 @@ class _MyAppState extends State<MyApp> {
                       ? ThemeData.dark()
                       : ThemeData(
                           brightness: Brightness.light,
-                          appBarTheme: AppBarTheme(color: Colors.grey))),
+                          appBarTheme: AppBarTheme(color: AppTheme.dark_grey,))),
               home: SplashScreen());
         },
       ),

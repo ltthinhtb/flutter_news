@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavyBarItem(
               activeColor: Colors.blue,
               inactiveColor: AppTheme.deactivatedText,
-              title: Text('Danh mục'),
+              title: Text('Covid 19'),
               icon: Icon(Icons.apps)),
           BottomNavyBarItem(
               activeColor: Colors.blue,

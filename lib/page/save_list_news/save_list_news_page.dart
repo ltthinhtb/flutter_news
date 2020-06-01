@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/page/web_page/webview_page.dart';
 import 'package:flutter_news/widget/list_item.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import 'save_list_news.dart';
@@ -48,31 +49,47 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                         color: Colors.black,
                       ),
                       itemBuilder: (context, int index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => WebViewPage(
-                                        id: state.doc.data['love_news'][index]
-                                            ['love_id'],
-                                        photo: state.doc.data['love_news']
-                                            [index]['love_photo'],
-                                        url:
-                                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html',
-                                        title: state.doc.data['love_news']
-                                            [index]['love_title'])));
-                          },
-                          child: CustomListItem(
-                              title: state.doc.data['love_news'][index]
-                                  ['love_title'],
-                              author: 'Hello',
-                              url:
-                                  'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html',
-                              publishDate: '15/4/2020',
-                              category: 'Việt Cộng',
-                              thumbnail: state.doc.data['love_news'][index]
-                                  ['love_photo']),
+                        return Slidable(
+                          actionPane: SlidableDrawerActionPane(),
+                          actionExtentRatio: 0.25,
+                          secondaryActions: <Widget>[
+                            IconSlideAction(
+                              caption: 'Chia sẻ',
+                              color: Colors.black45,
+                              icon: Icons.more_horiz,
+                            ),
+                            IconSlideAction(
+                              caption: 'Xóa bỏ',
+                              color: Colors.red,
+                              icon: Icons.delete,
+                            ),
+                          ],
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WebViewPage(
+                                          id: state.doc.data['love_news'][index]
+                                              ['love_id'],
+                                          photo: state.doc.data['love_news']
+                                              [index]['love_photo'],
+                                          url:
+                                              'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html',
+                                          title: state.doc.data['love_news']
+                                              [index]['love_title'])));
+                            },
+                            child: CustomListItem(
+                                title: state.doc.data['love_news'][index]
+                                    ['love_title'],
+                                author: 'Hello',
+                                url:
+                                    'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html',
+                                publishDate: '15/4/2020',
+                                category: 'Việt Cộng',
+                                thumbnail: state.doc.data['love_news'][index]
+                                    ['love_photo']),
+                          ),
                         );
                       },
                     ),

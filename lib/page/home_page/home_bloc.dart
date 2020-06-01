@@ -42,7 +42,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   Future<Object> getData() async {
     var dio = Dio();
     Response response = await dio.get(
-        'https://gw.vnexpress.net/ar/get_rule_2?category_id=1001002&limit=20&page=1&data_select=title,article_id,thumbnail_url,share_url&fbclid=IwAR29hIP81-wOlGGXAhuH0ryuPwsIdEZwyP_K54eiwDuoxgFfySoNa8ry04k');
+        'https://gw.vnexpress.net/ar/get_rule_2?category_id=1001002&limit=100&page=1&data_select=title,article_id,thumbnail_url,share_url&fbclid=IwAR29hIP81-wOlGGXAhuH0ryuPwsIdEZwyP_K54eiwDuoxgFfySoNa8ry04k');
     _listNewsResponse = ListNewsResponse.fromJson(response.data);
     print(_listNewsResponse);
     return _listNewsResponse;
