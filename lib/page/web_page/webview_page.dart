@@ -4,6 +4,17 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+final Set<JavascriptChannel> jsChannels = [
+  JavascriptChannel(
+      name: 'Print',
+      onMessageReceived: (JavascriptMessage message) {
+        print(message.message);
+      }),
+].toSet();
+
+const kAndroidUserAgent =
+    'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36';
+
 class WebViewPage extends StatelessWidget {
   final TextEditingController commentController;
   final String title;
@@ -28,11 +39,20 @@ class WebViewPage extends StatelessWidget {
       final snackBar = SnackBar(content: Text('Đã lưu thành công'));
       _scaffoldKey.currentState.showSnackBar(snackBar);
     }
+
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
         body: WebviewScaffold(
           url: url,
+          userAgent: kAndroidUserAgent,
+          javascriptChannels: jsChannels,
+          allowFileURLs: true,
+          withJavascript: true,
+          withOverviewMode: true,
+          useWideViewPort: true,
+          enableAppScheme: true,
+          mediaPlaybackRequiresUserGesture: false,
           withZoom: true,
           withLocalStorage: true,
           hidden: true,
@@ -106,5 +126,4 @@ class WebViewPage extends StatelessWidget {
         subject: title,
         sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
-
 }

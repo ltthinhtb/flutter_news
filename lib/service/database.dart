@@ -92,5 +92,11 @@ class DataBase {
         });
     });
   }
+  Future getQuestion() async {
+    var usersRef = databaseReference.collection("question");
+    await usersRef.document(uid).setData({
+
+    });
+  }
 
 }

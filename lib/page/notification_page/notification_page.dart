@@ -4,6 +4,7 @@ import 'package:flutter_news/page/notification_page/notification_bloc.dart';
 import 'package:flutter_news/page/notification_page/notification_event.dart';
 import 'package:flutter_news/page/notification_page/notification_state.dart';
 import 'package:flutter_news/page/web_page/webview_page.dart';
+
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -56,14 +57,14 @@ class _NotificationPageState extends State<NotificationPage> {
                                       builder: (context) => WebViewPage(
                                           id: int.parse(state.listDoc[index]['id']),
                                           photo: state.listDoc[index]['photo'],
-                                          url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.listDoc[index]['id']}.html',
+                                          url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.listDoc[index]['id']}.html?view=app',
                                           title: state.listDoc[index]['title'])));
                             },
                             child: CustomListItem(
                               title: state.listDoc[index]['title'],
                               author: 'Hello',
                               url:
-                                  'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.listDoc[index]['id']}.html',
+                                  'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.listDoc[index]['id']}.html?view=app',
                               publishDate: 'Cách đây 29 phút',
                               category: 'Hôm nay',
                               thumbnail: state.listDoc[index]['photo'],

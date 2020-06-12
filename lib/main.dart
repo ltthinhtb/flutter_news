@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +13,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Utils/apptheme.dart';
 import 'page/main_page/main_page.dart';
 import 'page/onboarding_page.dart';
+import 'page/web_page/webview_page.dart';
+
 import 'theme_bloc/change_theme_bloc.dart';
-
-
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -39,6 +38,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(MyApp());
 }
@@ -75,8 +75,8 @@ class _MyAppState extends State<MyApp> {
             context,
             MaterialPageRoute(
                 builder: (context) => WebViewPage(
-                    id: msg['data']['id'],
-                    photo: msg['data']['photo'],
+//                    id: msg['data']['id'],
+//                    photo: msg['data']['photo'],
                     url: msg['data']['url'],
                     title: msg['data']['title'])));
         print("onLaunch: $msg");
@@ -109,8 +109,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -126,7 +124,9 @@ class _MyAppState extends State<MyApp> {
                       ? ThemeData.dark()
                       : ThemeData(
                           brightness: Brightness.light,
-                          appBarTheme: AppBarTheme(color: AppTheme.dark_grey,))),
+                          appBarTheme: AppBarTheme(
+                            color: AppTheme.dark_grey,
+                          ))),
               home: SplashScreen());
         },
       ),
@@ -187,13 +187,13 @@ class _SplashScreenState extends State<SplashScreen> {
                     Hero(
                       tag: "BaoLaCai",
                       child: Text(
-                        "Báo Lá Cải",
+                        "Giao Hàng Tiết Kiệm",
                         style: TextStyle(
                           fontFamily: 'Sans',
                           fontWeight: FontWeight.w900,
                           fontSize: 35.0,
                           letterSpacing: 0.4,
-                          color: Colors.white,
+                          color: Colors.green,
                         ),
                       ),
                     )

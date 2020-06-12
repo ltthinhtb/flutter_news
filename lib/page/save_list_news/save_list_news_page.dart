@@ -75,7 +75,7 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                                           photo: state.doc.data['love_news']
                                               [index]['love_photo'],
                                           url:
-                                              'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html',
+                                              'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html?view=app',
                                           title: state.doc.data['love_news']
                                               [index]['love_title'])));
                             },
@@ -84,7 +84,7 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                                     ['love_title'],
                                 author: 'Hello',
                                 url:
-                                    'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html',
+                                    'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html?view=app',
                                 publishDate: '15/4/2020',
                                 category: 'Việt Cộng',
                                 thumbnail: state.doc.data['love_news'][index]

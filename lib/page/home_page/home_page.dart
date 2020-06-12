@@ -4,7 +4,7 @@ import 'package:flutter_news/page/home_page/home.dart';
 import 'package:flutter_news/page/home_page/home_bloc.dart';
 import 'package:flutter_news/page/home_page/home_event.dart';
 import 'package:flutter_news/page/web_page/webview_page.dart';
-import 'package:flutter_news/widget/list_item.dart';
+
 import 'package:flutter_news/widget/list_news_home.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             length: 7,
             child: Scaffold(
               appBar: AppBar(
-                title: Text("Báo lá cải"),
+                title: Image.asset('assets/logo.png',height: 100),
                 actions: [
                   IconButton(icon: Icon(Icons.search), onPressed: (){})
                 ],
@@ -119,11 +119,10 @@ class _HomePageState extends State<HomePage> {
                                             .listData[index].title)));
                           },
                           child: ListNewsHome(
-
                             title:
                             state.response.data.category.listData[index].title,
                             url:
-                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html?view=app',
                             thumbnail: state.response.data.category.listData[index]
                                 .thumbnailUrl,
                           ),
@@ -169,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                             title:
                             state.response.data.category.listData[index].title,
                             url:
-                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html?view=app',
                             thumbnail: state.response.data.category.listData[index]
                                 .thumbnailUrl,
                           ),
@@ -215,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                             title:
                             state.response.data.category.listData[index].title,
                             url:
-                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html?view=app',
                             thumbnail: state.response.data.category.listData[index]
                                 .thumbnailUrl,
                           ),
@@ -261,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                             title:
                             state.response.data.category.listData[index].title,
                             url:
-                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html?view=app',
                             thumbnail: state.response.data.category.listData[index]
                                 .thumbnailUrl,
                           ),
@@ -307,7 +306,7 @@ class _HomePageState extends State<HomePage> {
                             title:
                             state.response.data.category.listData[index].title,
                             url:
-                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html?view=app',
                             thumbnail: state.response.data.category.listData[index]
                                 .thumbnailUrl,
                           ),
@@ -353,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                             title:
                             state.response.data.category.listData[index].title,
                             url:
-                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html?view=app',
                             thumbnail: state.response.data.category.listData[index]
                                 .thumbnailUrl,
                           ),
@@ -399,7 +398,7 @@ class _HomePageState extends State<HomePage> {
                             title:
                             state.response.data.category.listData[index].title,
                             url:
-                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html',
+                            'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.response.data.category.listData[index].articleId}.html?view=app',
                             thumbnail: state.response.data.category.listData[index]
                                 .thumbnailUrl,
                           ),

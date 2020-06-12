@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/page/recent_list_news/recent_list_news.dart';
 import 'package:flutter_news/page/web_page/webview_page.dart';
+
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -54,14 +55,14 @@ class _RecentListNewPageState extends State<RecentListNewPage> {
                               builder: (context) => WebViewPage(
                                 id: state.doc.data['recent_news'][index]['id'],
                                 photo: state.doc.data['recent_news'][index]['photo'],
-                                  url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html',
+                                  url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html?view=app',
                                   title: state.doc.data['recent_news'][index]['title'])));
                     },
                     child: CustomListItem(
                       title:  state.doc.data['recent_news'][index]['title'],
                       author : 'Hello',
                       url:
-                      'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html',
+                      'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html?view=app',
                       publishDate: '15/4/2020',
                       category: 'Việt Cộng',
                       thumbnail: state.doc.data['recent_news'][index]['photo'],
