@@ -19,12 +19,10 @@ class SaveListNewPageBloc
     // TODO: implement mapEventToState
     if (event is LoadSaveListNewsEvent) {
       yield event.isRefresh ? InitState() : LoadingDataState();
-      await getData();
       if (await getOption())
         isDark = 1;
       else
         isDark = 0;
-      await getData();
       await getData();
       yield GetDataSuccess(doc);
     }

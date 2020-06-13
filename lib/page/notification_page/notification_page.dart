@@ -56,9 +56,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => WebViewPage(
-//                                          id: int.parse(state.listDoc[index]['id']),
-//                                          photo: state.listDoc[index]['photo'],
-                                          url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.listDoc[index]['id']}.html?view=app',
+                                          id: int.parse(state.listDoc[index]['id']),
+                                          photo: state.listDoc[index]['photo'],
+                                          url: state.listDoc[index]['url']+"?view=app&night_mode=${_bloc.isDark}",
                                           title: state.listDoc[index]['title'])));
                             },
                             child: CustomListItem(

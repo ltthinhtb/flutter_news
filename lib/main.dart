@@ -92,8 +92,8 @@ class _MyAppState extends State<MyApp> {
             context,
             MaterialPageRoute(
                 builder: (context) => WebViewPage(
-//                    id: msg['data']['id'],
-//                    photo: msg['data']['photo'],
+                    id: msg['data']['id'],
+                    photo: msg['data']['photo'],
                     url: msg['data']['url'],
                     title: msg['data']['title'])));
         print("onResume: $msg");
