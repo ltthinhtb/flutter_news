@@ -105,10 +105,10 @@ class WebViewPage extends StatelessWidget {
                       String userId = prefs.get('userId') ?? null;
                       if (userId != null) {
                         await DataBase(uid: userId).saveLoveNews(
-                          id: id,
-                          url: url,
-                          photo: photo,
-                          title: title,
+                          id: id??"",
+                          url: url??"",
+                          photo: photo ??"",
+                          title: title ?? "",
                         );
                       }
                     })

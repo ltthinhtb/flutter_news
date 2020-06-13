@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_news/page/web_page/webview_page.dart';
+
 import 'package:flutter_news/service/database.dart';
 
 import 'package:flutter_news/theme_bloc/chang_theme.dart';
@@ -13,8 +13,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Utils/apptheme.dart';
 import 'page/main_page/main_page.dart';
 import 'page/onboarding_page.dart';
-import 'page/web_page/webview_page.dart';
 
+
+import 'page/web_page/webview_page.dart';
 import 'theme_bloc/change_theme_bloc.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -75,8 +76,8 @@ class _MyAppState extends State<MyApp> {
             context,
             MaterialPageRoute(
                 builder: (context) => WebViewPage(
-//                    id: msg['data']['id'],
-//                    photo: msg['data']['photo'],
+                    id: msg['data']['id'],
+                    photo: msg['data']['photo'],
                     url: msg['data']['url'],
                     title: msg['data']['title'])));
         print("onLaunch: $msg");
@@ -91,8 +92,8 @@ class _MyAppState extends State<MyApp> {
             context,
             MaterialPageRoute(
                 builder: (context) => WebViewPage(
-                    id: msg['data']['id'],
-                    photo: msg['data']['photo'],
+//                    id: msg['data']['id'],
+//                    photo: msg['data']['photo'],
                     url: msg['data']['url'],
                     title: msg['data']['title'])));
         print("onResume: $msg");

@@ -5,6 +5,7 @@ import 'package:flutter_news/page/notification_page/notification_event.dart';
 import 'package:flutter_news/page/notification_page/notification_state.dart';
 import 'package:flutter_news/page/web_page/webview_page.dart';
 
+
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -55,8 +56,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => WebViewPage(
-                                          id: int.parse(state.listDoc[index]['id']),
-                                          photo: state.listDoc[index]['photo'],
+//                                          id: int.parse(state.listDoc[index]['id']),
+//                                          photo: state.listDoc[index]['photo'],
                                           url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.listDoc[index]['id']}.html?view=app',
                                           title: state.listDoc[index]['title'])));
                             },

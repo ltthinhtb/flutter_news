@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/page/web_page/webview_page.dart';
 
 class ListNewsHome extends StatefulWidget {
   final String thumbnail;
@@ -25,42 +26,52 @@ class ListNewsHome extends StatefulWidget {
 class _ListNewsHomeState extends State<ListNewsHome> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: Container(
-          height: 300,
-          child: ListView(
-            physics: ClampingScrollPhysics(),
-            shrinkWrap: true,
-            children: [
-              Text(
-                widget.title,
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                height: 200,
-                child: Image.network(
-                  widget.thumbnail,
-                  fit: BoxFit.cover,
+    return InkWell(
+      onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WebViewPage(
+                    url: widget.url,
+                    title: widget.title)));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        child: Container(
+            height: 300,
+            child: ListView(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                 ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  Text("4h trước"),
-                  SizedBox(
-                    width: 10,
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  height: 200,
+                  child: Image.network(
+                    widget.thumbnail,
+                    fit: BoxFit.cover,
                   ),
-                  Text("Thế giới")
-                ],
-              )
-            ],
-          )),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Text("4h trước"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("Thế giới")
+                  ],
+                )
+              ],
+            )),
+      ),
     );
   }
 }

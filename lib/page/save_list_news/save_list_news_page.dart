@@ -70,10 +70,10 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => WebViewPage(
-                                          id: state.doc.data['love_news'][index]
-                                              ['love_id'],
-                                          photo: state.doc.data['love_news']
-                                              [index]['love_photo'],
+//                                          id: state.doc.data['love_news'][index]
+//                                              ['love_id'],
+//                                          photo: state.doc.data['love_news']
+//                                              [index]['love_photo'],
                                           url:
                                               'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html?view=app',
                                           title: state.doc.data['love_news']
