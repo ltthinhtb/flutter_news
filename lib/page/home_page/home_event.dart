@@ -25,7 +25,7 @@ class SaveRecentEvent extends HomePageEvent {
   final String photo;
   final int id;
 
-  SaveRecentEvent(this.title, this.url, this.photo, this.id);
+  SaveRecentEvent({this.title, this.url, this.photo, this.id});
 
   @override
   String toString() {

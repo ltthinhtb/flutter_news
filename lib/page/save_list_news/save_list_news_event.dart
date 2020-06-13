@@ -18,3 +18,14 @@ class LoadSaveListNewsEvent extends SaveListNewPageEvent {
     return 'LoadDataEvent{isRefresh: $isRefresh}';
   }
 }
+
+class DeleteLoveNewsEvent extends SaveListNewPageEvent {
+  final String id;
+
+  DeleteLoveNewsEvent(this.id);
+
+  @override
+  String toString() {
+    return 'DeleteLoveNewsEvent{id: $id}';
+  }
+}

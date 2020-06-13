@@ -16,6 +16,20 @@ class InitState extends HomePageState {
   }
 }
 
+class SaveRecentSuccess extends HomePageState {
+  final int id;
+  final String title;
+  final String url;
+  final String photo;
+
+  SaveRecentSuccess({this.id, this.title, this.url, this.photo});
+
+  @override
+  String toString() {
+    return 'SaveRecentSuccess{}';
+  }
+}
+
 class LoadingDataState extends HomePageState {
   @override
   String toString() {

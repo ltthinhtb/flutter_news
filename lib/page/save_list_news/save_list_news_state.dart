@@ -16,6 +16,17 @@ class InitState extends SaveListNewPageState {
   }
 }
 
+class DeleteSuccess extends SaveListNewPageState {
+  final String msg;
+
+  DeleteSuccess(this.msg);
+
+  @override
+  String toString() {
+    return 'DeleteSuccess{msg: $msg}';
+  }
+}
+
 class LoadingDataState extends SaveListNewPageState {
   @override
   String toString() {

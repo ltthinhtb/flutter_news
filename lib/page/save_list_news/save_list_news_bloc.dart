@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_news/service/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'save_list_news.dart';
 
@@ -20,6 +21,11 @@ class SaveListNewPageBloc
       await getData();
       yield GetDataSuccess(doc);
     }
+    if (event is DeleteLoveNewsEvent){
+      yield InitState();
+      await DataBase(uid: event.id).deleteLoveNews();
+      yield GetDataSuccess(doc);
+    }
   }
 
   Future<DocumentSnapshot> getData() async {
@@ -30,4 +36,5 @@ class SaveListNewPageBloc
     doc = await usersRef.document(userId).get();
     return doc;
   }
+
 }

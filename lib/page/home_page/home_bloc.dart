@@ -4,14 +4,12 @@ import 'package:flutter_news/models/response/list_new_response.dart';
 import 'package:flutter_news/service/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'home.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   ListNewsResponse _listNewsResponse;
   SharedPreferences prefs;
   Data data;
-
 
   @override
   // TODO: implement initialState
@@ -25,17 +23,28 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       await getData();
       yield GetDataSuccess(_listNewsResponse);
     }
-    if (event is SaveRecentEvent){
+    if (event is SaveRecentEvent) {
       prefs = await SharedPreferences.getInstance();
       String userId = prefs.get('userId') ?? null;
       yield LoadingDataState();
-       await DataBase(uid: userId).saveRecentNews(
-         title: event.title,
-         photo: event.photo,
-         url: event.url,
-         id: event.id
-       );
-      yield GetDataSuccess(_listNewsResponse);
+      if (userId == null) {
+        yield SaveRecentSuccess(
+            title: event.title,
+            photo: event.photo,
+            url: event.url,
+            id: event.id);
+      } else {
+        await DataBase(uid: userId).saveRecentNews(
+            title: event.title,
+            photo: event.photo,
+            url: event.url,
+            id: event.id);
+        yield SaveRecentSuccess(
+            title: event.title,
+            photo: event.photo,
+            url: event.url,
+            id: event.id);
+      }
     }
   }
 

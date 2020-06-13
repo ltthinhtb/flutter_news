@@ -92,10 +92,24 @@ class DataBase {
         });
     });
   }
+
+  Future deleteLoveNews({String title, String photo, String url,int id}) async {
+    var usersRef = databaseReference.collection("users");
+    usersRef.document(uid).get().then((snapShot) async {
+      await usersRef.document(uid).updateData({
+        "recent_news" : FieldValue.arrayRemove([{
+          "love_title" : title,
+          "love_photo" : photo,
+          "love_url" : url,
+          "love_id" : id
+        }])
+      });
+    });
+  }
+
   Future getQuestion() async {
     var usersRef = databaseReference.collection("question");
     await usersRef.document(uid).setData({
-
     });
   }
 
