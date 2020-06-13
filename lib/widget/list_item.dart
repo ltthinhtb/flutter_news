@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class CustomListItem extends StatefulWidget {
   final String thumbnail;
   final String title;
-  final String url;
   final String author;
   final String publishDate;
   final String category;
@@ -15,7 +14,6 @@ class CustomListItem extends StatefulWidget {
     @required this.author,
     @required this.publishDate,
     this.category,
-    this.url,
   }) : super(key: key);
 
   @override

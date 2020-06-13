@@ -35,9 +35,16 @@ class WebViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SharedPreferences prefs;
     final _scaffoldKey = GlobalKey<ScaffoldState>();
-    _displaySnackBar(BuildContext context) {
-      final snackBar = SnackBar(content: Text('Đã lưu thành công'));
+    _displaySnackBar(BuildContext context,String msg) {
+      final snackBar = SnackBar(content: Text(msg));
       _scaffoldKey.currentState.showSnackBar(snackBar);
+    }
+
+    share(BuildContext context) {
+      final RenderBox box = context.findRenderObject();
+      Share.share(url,
+          subject: title,
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
     }
 
     return SafeArea(
@@ -56,74 +63,71 @@ class WebViewPage extends StatelessWidget {
           withZoom: true,
           withLocalStorage: true,
           hidden: true,
+          bottomNavigationBar: Transform.translate(
+            offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
+            child: BottomAppBar(
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Container(
+                    height: 40,
+                    width: 200,
+                    child: TextField(
+                      controller: commentController,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: "Bình luận của bạn...",
+                        prefixIcon: Icon(
+                          Icons.person,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  IconButton(
+                      icon: Icon(Icons.share), onPressed: () => share(context)),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  IconButton(
+                      icon: Icon(Icons.bookmark),
+                      onPressed: () async {
+                        prefs = await SharedPreferences.getInstance();
+                        bool isLogin = prefs.get('islogin') ?? null;
+                        if (isLogin) {
+                          String userId = prefs.get('userId') ?? null;
+                          await DataBase(uid: userId).saveLoveNews(
+                            id: id ?? "",
+                            url: url ?? "",
+                            photo: photo ?? "",
+                            title: title ?? "",
+                          );
+                          _displaySnackBar(context,'Đã lưu thành công');
+                        }
+                        else _displaySnackBar(context,'Bạn cần đăng nhập');
+                      })
+                ],
+              ),
+            ),
+          ),
           initialChild: Container(
               child: const Center(
             child: CircularProgressIndicator(),
           )),
         ),
-        bottomNavigationBar: Transform.translate(
-          offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
-          child: BottomAppBar(
-            child: Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Container(
-                  height: 40,
-                  width: 200,
-                  child: TextField(
-                    controller: commentController,
-                    style: TextStyle(
-                      fontSize: 15.0,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Bình luận của bạn...",
-                      prefixIcon: Icon(
-                        Icons.person,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                IconButton(
-                    icon: Icon(Icons.share), onPressed: () => share(context)),
-                SizedBox(
-                  width: 5,
-                ),
-                IconButton(
-                    icon: Icon(Icons.bookmark),
-                    onPressed: () async {
-                      _displaySnackBar(context);
-                      prefs = await SharedPreferences.getInstance();
-                      String userId = prefs.get('userId') ?? null;
-                      if (userId != null) {
-                        await DataBase(uid: userId).saveLoveNews(
-                          id: id??"",
-                          url: url??"",
-                          photo: photo ??"",
-                          title: title ?? "",
-                        );
-                      }
-                    })
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
 
-  share(BuildContext context) {
-    final RenderBox box = context.findRenderObject();
-    Share.share(url,
-        subject: title,
-        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
-  }
+
 }

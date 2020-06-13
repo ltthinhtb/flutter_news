@@ -60,7 +60,7 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                             ),
                             IconSlideAction(
                               onTap: (){
-                                _bloc.add(DeleteLoveNewsEvent());
+
                               },
                               caption: 'Xóa bỏ',
                               color: Colors.red,
@@ -78,7 +78,7 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                                           photo: state.doc.data['love_news']
                                               [index]['love_photo'],
                                           url:
-                                              'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html?view=app',
+                                          state.doc.data['recent_news'][index]['url']+"?view=app&night_mode=${_bloc.isDark}",
                                           title: state.doc.data['love_news']
                                               [index]['love_title'])));
                             },
@@ -86,8 +86,6 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                                 title: state.doc.data['love_news'][index]
                                     ['love_title'],
                                 author: 'Hello',
-                                url:
-                                    'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['love_news'][index]['love_id']}.html?view=app',
                                 publishDate: '15/4/2020',
                                 category: 'Việt Cộng',
                                 thumbnail: state.doc.data['love_news'][index]

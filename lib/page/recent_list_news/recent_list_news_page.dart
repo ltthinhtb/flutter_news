@@ -54,16 +54,14 @@ class _RecentListNewPageState extends State<RecentListNewPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => WebViewPage(
-//                                id: state.doc.data['recent_news'][index]['id'],
-//                                photo: state.doc.data['recent_news'][index]['photo'],
-                                  url: 'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html?view=app',
+                                id: state.doc.data['recent_news'][index]['id'],
+                                photo: state.doc.data['recent_news'][index]['photo'],
+                                  url: state.doc.data['recent_news'][index]['url']+"?view=app&night_mode=${_bloc.isDark}",
                                   title: state.doc.data['recent_news'][index]['title'])));
                     },
                     child: CustomListItem(
                       title:  state.doc.data['recent_news'][index]['title'],
                       author : 'Hello',
-                      url:
-                      'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.doc.data['recent_news'][index]['id']}.html?view=app',
                       publishDate: '15/4/2020',
                       category: 'Việt Cộng',
                       thumbnail: state.doc.data['recent_news'][index]['photo'],

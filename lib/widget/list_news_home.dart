@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news/page/web_page/webview_page.dart';
 
 class ListNewsHome extends StatefulWidget {
   final String thumbnail;
   final String title;
-  final String url;
   final String publishDate;
   final String category;
 
@@ -14,7 +12,6 @@ class ListNewsHome extends StatefulWidget {
     @required this.title,
     this.publishDate,
     this.category,
-    this.url,
   }) : super(key: key);
 
   @override

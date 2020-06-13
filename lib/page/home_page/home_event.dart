@@ -24,13 +24,12 @@ class SaveRecentEvent extends HomePageEvent {
   final String url;
   final String photo;
   final int id;
+  final String urlOpen;
 
-  SaveRecentEvent({this.title, this.url, this.photo, this.id});
+  SaveRecentEvent( {this.title, this.url, this.photo, this.id,this.urlOpen});
 
   @override
   String toString() {
-    return 'SaveRecentEvent{title: $title, url: $url, photo: $photo, id: $id}';
+    return 'SaveRecentEvent{title: $title, url: $url, photo: $photo, id: $id, urlOpen: $urlOpen}';
   }
-
-
 }

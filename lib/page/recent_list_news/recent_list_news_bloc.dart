@@ -7,6 +7,7 @@ class RecentListNewPageBloc
     extends Bloc<RecentListNewPageEvent, RecentListNewPageState> {
   SharedPreferences prefs;
   DocumentSnapshot doc;
+  int isDark = 0;
 
   @override
   // TODO: implement initialState
@@ -18,6 +19,11 @@ class RecentListNewPageBloc
     // TODO: implement mapEventToState
     if (event is LoadRecentListNewsEvent) {
       yield event.isRefresh ? InitState() : LoadingDataState();
+      await getData();
+      if (await getOption())
+        isDark = 1;
+      else
+        isDark = 0;
       await getData();
       yield GetDataSuccess(doc);
     }
@@ -31,5 +37,10 @@ class RecentListNewPageBloc
     doc = await usersRef.document(userId).get();
 
     return doc;
+  }
+  Future<bool> getOption() async {
+    prefs = await SharedPreferences.getInstance();
+    bool option = prefs.get('theme_option') ?? false;
+    return option;
   }
 }

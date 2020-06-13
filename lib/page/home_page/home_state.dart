@@ -21,12 +21,13 @@ class SaveRecentSuccess extends HomePageState {
   final String title;
   final String url;
   final String photo;
+  final String urlOpen;
 
-  SaveRecentSuccess({this.id, this.title, this.url, this.photo});
+  SaveRecentSuccess( {this.id, this.title, this.url, this.photo,this.urlOpen});
 
   @override
   String toString() {
-    return 'SaveRecentSuccess{}';
+    return 'SaveRecentSuccess{id: $id, title: $title, url: $url, photo: $photo}';
   }
 }
 

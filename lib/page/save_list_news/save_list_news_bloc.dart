@@ -8,6 +8,7 @@ class SaveListNewPageBloc
     extends Bloc<SaveListNewPageEvent, SaveListNewPageState> {
   SharedPreferences prefs;
   DocumentSnapshot doc;
+  int isDark = 0;
 
   @override
   SaveListNewPageState get initialState => InitState();
@@ -19,9 +20,15 @@ class SaveListNewPageBloc
     if (event is LoadSaveListNewsEvent) {
       yield event.isRefresh ? InitState() : LoadingDataState();
       await getData();
+      if (await getOption())
+        isDark = 1;
+      else
+        isDark = 0;
+      await getData();
+      await getData();
       yield GetDataSuccess(doc);
     }
-    if (event is DeleteLoveNewsEvent){
+    if (event is DeleteLoveNewsEvent) {
       yield InitState();
       await DataBase(uid: event.id).deleteLoveNews();
       yield GetDataSuccess(doc);
@@ -37,4 +44,9 @@ class SaveListNewPageBloc
     return doc;
   }
 
+  Future<bool> getOption() async {
+    prefs = await SharedPreferences.getInstance();
+    bool option = prefs.get('theme_option') ?? false;
+    return option;
+  }
 }

@@ -7,8 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
-  ListNewsResponse _listNewsResponse;
+  ListNewsResponse listNewsResponse;
   SharedPreferences prefs;
+  int isDark = 0;
   Data data;
 
   @override
@@ -21,29 +22,37 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     if (event is LoadDataEvent) {
       yield event.isRefresh ? InitState() : LoadingDataState();
       await getData();
-      yield GetDataSuccess(_listNewsResponse);
+      if (await getOption())
+        isDark = 1;
+      else
+        isDark = 0;
+      yield GetDataSuccess(listNewsResponse);
     }
     if (event is SaveRecentEvent) {
       prefs = await SharedPreferences.getInstance();
       String userId = prefs.get('userId') ?? null;
       yield LoadingDataState();
       if (userId == null) {
+        add(LoadDataEvent(isRefresh: true));
         yield SaveRecentSuccess(
             title: event.title,
             photo: event.photo,
             url: event.url,
-            id: event.id);
+            id: event.id,
+            urlOpen: event.urlOpen);
       } else {
         await DataBase(uid: userId).saveRecentNews(
             title: event.title,
             photo: event.photo,
             url: event.url,
             id: event.id);
+        add(LoadDataEvent(isRefresh: true));
         yield SaveRecentSuccess(
             title: event.title,
             photo: event.photo,
             url: event.url,
-            id: event.id);
+            id: event.id,
+        urlOpen: event.urlOpen);
       }
     }
   }
@@ -52,8 +61,14 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     var dio = Dio();
     Response response = await dio.get(
         'https://gw.vnexpress.net/ar/get_rule_2?category_id=1001002&limit=100&page=1&data_select=title,article_id,thumbnail_url,share_url&fbclid=IwAR29hIP81-wOlGGXAhuH0ryuPwsIdEZwyP_K54eiwDuoxgFfySoNa8ry04k');
-    _listNewsResponse = ListNewsResponse.fromJson(response.data);
-    print(_listNewsResponse);
-    return _listNewsResponse;
+    listNewsResponse = ListNewsResponse.fromJson(response.data);
+    print(listNewsResponse);
+    return listNewsResponse;
+  }
+
+  Future<bool> getOption() async {
+    prefs = await SharedPreferences.getInstance();
+    bool option = prefs.get('theme_option') ?? false;
+    return option;
   }
 }

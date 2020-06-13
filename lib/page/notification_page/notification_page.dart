@@ -64,8 +64,6 @@ class _NotificationPageState extends State<NotificationPage> {
                             child: CustomListItem(
                               title: state.listDoc[index]['title'],
                               author: 'Hello',
-                              url:
-                                  'https://vnexpress.net/the-gioi/new-york-cau-cuu-${state.listDoc[index]['id']}.html?view=app',
                               publishDate: 'Cách đây 29 phút',
                               category: 'Hôm nay',
                               thumbnail: state.listDoc[index]['photo'],
