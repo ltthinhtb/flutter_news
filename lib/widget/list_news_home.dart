@@ -12,7 +12,8 @@ class ListNewsHome extends StatefulWidget {
     @required this.thumbnail,
     @required this.title,
     this.publishDate,
-    this.category, this.lead,
+    this.category,
+    this.lead,
   }) : super(key: key);
 
   @override
@@ -22,42 +23,60 @@ class ListNewsHome extends StatefulWidget {
 class _ListNewsHomeState extends State<ListNewsHome> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: Container(
-          child: ListView(
-            physics: ClampingScrollPhysics(),
-            shrinkWrap: true,
+    return Container(
+        child: ListView(
+      physics: ClampingScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Text(
+            widget.title,
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Container(
+          height: 200,
+          child: Image.network(
+            widget.thumbnail,
+            fit: BoxFit.cover,
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Text(
+            widget.lead,
+            style: TextStyle(fontSize: 14),
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Row(
             children: [
               Text(
-                widget.title,
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                "4h trước",
+                style: TextStyle(fontSize: 18),
               ),
               SizedBox(
-                height: 5,
+                width: 10,
               ),
-              Container(
-                height: 200,
-                child: Image.network(
-                  widget.thumbnail,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(widget.lead,style: TextStyle(fontSize: 13),),
-              Row(
-                children: [
-                  Text("4h trước"),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("Thế giới")
-                ],
+              Text(
+                "Thế giới",
+                style: TextStyle(fontSize: 18),
               )
             ],
-          )),
-    );
+          ),
+        )
+      ],
+    ));
   }
 }
