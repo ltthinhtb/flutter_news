@@ -88,6 +88,7 @@ class AppTheme {
   static Color ratingBG = Colors.yellow[600];
 
   static ThemeData lightTheme = ThemeData(
+    fontFamily: 'Times',
     backgroundColor: lightBG,
     primaryColor: lightPrimary,
     accentColor:  lightAccent,
@@ -109,6 +110,7 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
+    fontFamily: 'Times',
     brightness: Brightness.dark,
     backgroundColor: darkBG,
     primaryColor: darkPrimary,

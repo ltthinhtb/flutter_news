@@ -5,13 +5,14 @@ class ListNewsHome extends StatefulWidget {
   final String title;
   final String publishDate;
   final String category;
+  final String lead;
 
   ListNewsHome({
     Key key,
     @required this.thumbnail,
     @required this.title,
     this.publishDate,
-    this.category,
+    this.category, this.lead,
   }) : super(key: key);
 
   @override
@@ -24,14 +25,13 @@ class _ListNewsHomeState extends State<ListNewsHome> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       child: Container(
-          height: 300,
           child: ListView(
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             children: [
               Text(
                 widget.title,
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
               ),
               SizedBox(
                 height: 5,
@@ -46,6 +46,7 @@ class _ListNewsHomeState extends State<ListNewsHome> {
               SizedBox(
                 height: 5,
               ),
+              Text(widget.lead,style: TextStyle(fontSize: 13),),
               Row(
                 children: [
                   Text("4h trước"),

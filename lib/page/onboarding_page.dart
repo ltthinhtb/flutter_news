@@ -4,9 +4,6 @@ import 'package:intro_views_flutter/intro_views_flutter.dart';
 
 import 'main_page/main_page.dart';
 
-
-
-
 class OnBoardingPage extends StatefulWidget {
   @override
   _OnBoardingPageState createState() => _OnBoardingPageState();
@@ -17,16 +14,13 @@ var _fontHeaderStyle = TextStyle(
     fontSize: 21.0,
     fontWeight: FontWeight.w800,
     color: Colors.black87,
-    letterSpacing: 1.5
-);
+    letterSpacing: 1.5);
 
 var _fontDescriptionStyle = TextStyle(
     fontFamily: "Sans",
     fontSize: 20.0,
     color: Colors.black,
-    fontWeight: FontWeight.w400
-);
-
+    fontWeight: FontWeight.w400);
 
 final pages = [
   new PageViewModel(
@@ -34,57 +28,54 @@ final pages = [
       iconColor: Colors.black,
       bubbleBackgroundColor: Colors.black,
       title: Text(
-        'Tikin Shop',style: _fontHeaderStyle,
+        'Tikin Shop',
+        style: _fontHeaderStyle,
       ),
-      body: Text(
-          'Bấm là có',textAlign: TextAlign.center,
-          style: _fontDescriptionStyle
-      ),
-      mainImage: Image.asset(
-        'assets/images/IlustrasiOnBoarding1.jpg',
-        fit: BoxFit.cover,
-        alignment: Alignment.center,
+      body: Text('Bấm là có',
+          textAlign: TextAlign.center, style: _fontDescriptionStyle),
+      mainImage: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white, Colors.blue])),
       )),
-
   new PageViewModel(
-      pageColor: const Color(0xFF607D8B),
       iconColor: Colors.black,
       bubbleBackgroundColor: Colors.black,
       title: Text(
-        'RICARDO Shop',style: _fontHeaderStyle,
+        'RICARDO Shop',
+        style: _fontHeaderStyle,
       ),
-      body: Text(
-          'Mọi thứ đều có',textAlign: TextAlign.center,
-          style: _fontDescriptionStyle
-      ),
-      mainImage: Image.asset(
-        'assets/images/IlustrasiOnBoarding2.jpg',
-        fit: BoxFit.cover,
-        alignment: Alignment.center,
+      body: Text('Mọi thứ đều có',
+          textAlign: TextAlign.center, style: _fontDescriptionStyle),
+      mainImage: Container(
+        child: Image.asset('assets/logo.png',color: Colors.white,),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.red, Colors.blue])),
       )),
-
   new PageViewModel(
-      pageColor: const Color(0xFF607D8B),
       iconColor: Colors.black,
       bubbleBackgroundColor: Colors.black,
       title: Text(
-        'Tikin Shop',style: _fontHeaderStyle,
+        'Tikin Shop',
+        style: _fontHeaderStyle,
       ),
-      body: Text(
-          'Mọi lúc mọi nơi',textAlign: TextAlign.center,
-          style: _fontDescriptionStyle
-      ),
-      mainImage: Image.asset(
-        'assets/images/IlustrasiOnBoarding3.jpg',
-        fit: BoxFit.cover,
-        alignment: Alignment.center,
+      body: Text('Mọi lúc mọi nơi',
+          textAlign: TextAlign.center, style: _fontDescriptionStyle),
+      mainImage: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white, Colors.blue])),
       )),
-
 ];
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Builder(
@@ -93,7 +84,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         showNextButton: true,
         showBackButton: true,
         onTapDoneButton: () {
-          Navigator.of(context).pushReplacement(PageRouteBuilder(pageBuilder:(_,__,___,)=> MyHomePage() ));
+          Navigator.of(context).pushReplacement(PageRouteBuilder(
+              pageBuilder: (
+            _,
+            __,
+            ___,
+          ) =>
+                  MyHomePage()));
         },
         pageButtonTextStyles: TextStyle(
           color: Colors.black,

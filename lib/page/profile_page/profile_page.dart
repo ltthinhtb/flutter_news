@@ -36,10 +36,14 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, state) {
           if (state is DataSuccessState) {
             return Scaffold(
+              appBar: AppBar(
+                title: Text('Thiết lập'),
+              ),
               body: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                 children: <Widget>[
                   Container(
-                    height: 200,
+                    height: 150,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: <Widget>[
@@ -48,10 +52,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         state.user == null
                             ? CircleAvatar(
-                                radius: 50,
+                                radius: 30,
                                 child: Icon(
                                   Icons.person,
-                                  size: 60,
+                                  size: 30,
                                 ),
                               )
                             : (state.user.photoUrl == null
@@ -86,7 +90,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   FlatButton(
-                                    color: Colors.grey,
                                     onPressed: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
@@ -99,7 +102,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     width: 5,
                                   ),
                                   FlatButton(
-                                    color: Colors.grey,
                                     onPressed: () {
                                       Navigator.push(
                                           context,

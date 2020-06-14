@@ -65,22 +65,21 @@ class Category {
 class ListData {
   int articleId;
   String title;
+  String lead;
   String shareUrl;
   String thumbnailUrl;
+  int publishTime;
   int offThumb;
 
-  ListData(
-      {this.articleId,
-        this.title,
-        this.shareUrl,
-        this.thumbnailUrl,
-        this.offThumb});
+  ListData({this.articleId, this.title, this.lead, this.shareUrl, this.thumbnailUrl, this.publishTime, this.offThumb});
 
   ListData.fromJson(Map<String, dynamic> json) {
     articleId = json['article_id'];
     title = json['title'];
+    lead = json['lead'];
     shareUrl = json['share_url'];
     thumbnailUrl = json['thumbnail_url'];
+    publishTime = json['publish_time'];
     offThumb = json['off_thumb'];
   }
 
@@ -88,8 +87,10 @@ class ListData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['article_id'] = this.articleId;
     data['title'] = this.title;
+    data['lead'] = this.lead;
     data['share_url'] = this.shareUrl;
     data['thumbnail_url'] = this.thumbnailUrl;
+    data['publish_time'] = this.publishTime;
     data['off_thumb'] = this.offThumb;
     return data;
   }

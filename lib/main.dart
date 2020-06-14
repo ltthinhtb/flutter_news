@@ -14,7 +14,6 @@ import 'Utils/apptheme.dart';
 import 'page/main_page/main_page.dart';
 import 'page/onboarding_page.dart';
 
-
 import 'page/web_page/webview_page.dart';
 import 'theme_bloc/change_theme_bloc.dart';
 
@@ -123,11 +122,7 @@ class _MyAppState extends State<MyApp> {
                   ? ThemeData.light()
                   : (_bloc.optionValue
                       ? ThemeData.dark()
-                      : ThemeData(
-                          brightness: Brightness.light,
-                          appBarTheme: AppBarTheme(
-                            color: AppTheme.dark_grey,
-                          ))),
+                      : AppTheme.lightTheme),
               home: SplashScreen());
         },
       ),
@@ -158,52 +153,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    new Timer(new Duration(milliseconds: 3000), () {
+    new Timer(new Duration(milliseconds: 1000), () {
       checkFirstSeen();
     });
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [
-                Color.fromRGBO(0, 0, 0, 0.3),
-                Color.fromRGBO(0, 0, 0, 0.4)
-              ],
-                  begin: FractionalOffset.topCenter,
-                  end: FractionalOffset.bottomCenter)),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(top: 30.0),
-                    ),
-                    Hero(
-                      tag: "BaoLaCai",
-                      child: Text(
-                        "Giao Hàng Tiết Kiệm",
-                        style: TextStyle(
-                          fontFamily: 'Sans',
-                          fontWeight: FontWeight.w900,
-                          fontSize: 35.0,
-                          letterSpacing: 0.4,
-                          color: Colors.green,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: Colors.white,
+      child: Center(
+        child: Image.asset('assets/logo.png'),
       ),
     );
   }

@@ -47,64 +47,63 @@ class _HomePageState extends State<HomePage> {
                 return DefaultTabController(
                   length: 7,
                   child: Scaffold(
-                    appBar: AppBar(
-                      title: Image.asset('assets/logo.png', height: 100),
-                      actions: [
-                        IconButton(icon: Icon(Icons.search), onPressed: () {})
-                      ],
-                      bottom: TabBar(
-                        isScrollable: true,
-                        unselectedLabelColor: Colors.white,
-                        labelColor: Colors.red,
-                        //    indicatorWeight: 6.0,
-                        tabs: <Widget>[
-                          Tab(
-                            child: Container(
-                              child: Text('Trang nhất',
-                                  style: TextStyle(fontSize: 16.0)),
-                            ),
-                          ),
-                          Tab(
-                            child: Container(
-                              child: Text(
-                                'Du Lịch',
-                                style: TextStyle(fontSize: 16.0),
+                    appBar: PreferredSize(
+                      preferredSize: Size.fromHeight(80.0),
+                      child: AppBar(
+                        automaticallyImplyLeading: false,
+                        title: Image.asset('assets/logo.png', height: 70),
+                        bottom: TabBar(
+                          isScrollable: true,
+                          //    indicatorWeight: 6.0,
+                          tabs: <Widget>[
+                            Tab(
+                              child: Container(
+                                child: Text('Thế Giới',
+                                    style: TextStyle(fontSize: 16.0)),
                               ),
                             ),
-                          ),
-                          Tab(
-                            child: Container(
-                              child: Text(
-                                  'Phim', style: TextStyle(fontSize: 16.0)),
+                            Tab(
+                              child: Container(
+                                child: Text(
+                                  'Du Lịch',
+                                  style: TextStyle(fontSize: 16.0),
+                                ),
+                              ),
                             ),
-                          ),
-                          Tab(
-                            child: Container(
-                              child: Text('Thời Trang',
-                                  style: TextStyle(fontSize: 16.0)),
+                            Tab(
+                              child: Container(
+                                child: Text(
+                                    'Phim', style: TextStyle(fontSize: 16.0)),
+                              ),
                             ),
-                          ),
-                          Tab(
-                            child: Container(
-                              child:
-                              Text(
-                                  'Thể Thao', style: TextStyle(fontSize: 16.0)),
+                            Tab(
+                              child: Container(
+                                child: Text('Thời Trang',
+                                    style: TextStyle(fontSize: 16.0)),
+                              ),
                             ),
-                          ),
-                          Tab(
-                            child: Container(
-                              child:
-                              Text('Dịch Vụ', style: TextStyle(fontSize: 16.0)),
+                            Tab(
+                              child: Container(
+                                child:
+                                Text(
+                                    'Thể Thao', style: TextStyle(fontSize: 16.0)),
+                              ),
                             ),
-                          ),
-                          Tab(
-                            child: Container(
-                              child:
-                              Text(
-                                  'Tình Yêu', style: TextStyle(fontSize: 16.0)),
+                            Tab(
+                              child: Container(
+                                child:
+                                Text('Dịch Vụ', style: TextStyle(fontSize: 16.0)),
+                              ),
                             ),
-                          )
-                        ],
+                            Tab(
+                              child: Container(
+                                child:
+                                Text(
+                                    'Tình Yêu', style: TextStyle(fontSize: 16.0)),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     body: TabBarView(
@@ -147,6 +146,7 @@ class _HomePageState extends State<HomePage> {
                                       .title,
                                   thumbnail: state.response.data.category
                                       .listData[index].thumbnailUrl,
+                                  lead: state.response.data.category.listData[index].lead,
                                 ),
                               );
                             },
