@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_news/models/response/list_new_response.dart';
+
 
 abstract class HomePageState extends Equatable {
   HomePageState([List props = const []]) : super();
@@ -39,12 +39,9 @@ class LoadingDataState extends HomePageState {
 }
 
 class GetDataSuccess extends HomePageState {
-  final ListNewsResponse response;
-
-  GetDataSuccess(this.response);
 
   @override
   String toString() {
-    return 'GetDataSuccess{response: $response}';
+    return 'GetDataSuccess{response: }';
   }
 }

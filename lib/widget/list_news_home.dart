@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/Utils/apptheme.dart';
 
 class ListNewsHome extends StatefulWidget {
   final String thumbnail;
@@ -41,7 +42,7 @@ class _ListNewsHomeState extends State<ListNewsHome> {
         Container(
           height: 200,
           child: Image.network(
-            widget.thumbnail,
+            widget.thumbnail != "" ? widget.thumbnail : "https://topdev.vn/blog/wp-content/uploads/2018/09/7-2-1.jpg" ,
             fit: BoxFit.cover,
           ),
         ),
@@ -52,7 +53,6 @@ class _ListNewsHomeState extends State<ListNewsHome> {
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Text(
             widget.lead,
-            style: TextStyle(fontSize: 14),
           ),
         ),
         SizedBox(
@@ -64,14 +64,14 @@ class _ListNewsHomeState extends State<ListNewsHome> {
             children: [
               Text(
                 "4h trước",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 12,color: AppTheme.deactivatedText),
               ),
               SizedBox(
                 width: 10,
               ),
               Text(
                 "Thế giới",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 12,color: AppTheme.deactivatedText),
               )
             ],
           ),

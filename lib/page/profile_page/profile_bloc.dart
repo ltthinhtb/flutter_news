@@ -16,7 +16,6 @@ class ProfileSettingBloc
     extends Bloc<ProfileSettingEvent, ProfileSettingState> {
   SharedPreferences prefs;
   bool optionValue;
-
   User user;
   File file;
   AuthService authService = AuthService();
@@ -43,6 +42,7 @@ class ProfileSettingBloc
     if (event is LogOut) {
       yield LoadingDataState();
       await authService.signOut();
+      add(LoadProfileEvent());
       yield DataSuccessState(optionValue, null);
     }
 

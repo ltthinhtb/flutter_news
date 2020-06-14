@@ -4,8 +4,8 @@
 
     <application
         android:name=".Application"
-        android:icon="@mipmap/ic_launcher"
-        android:label="flutter_news">
+        android:icon="@mipmap/launcher_icon"
+        android:label="Nghiện báo">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -57,4 +57,3 @@
          FlutterApplication and put your custom class here. -->
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
-

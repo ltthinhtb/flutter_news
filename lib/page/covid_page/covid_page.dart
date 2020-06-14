@@ -30,26 +30,47 @@ class _CovidPageState extends State<CovidPage> {
             length: 2,
             child: Scaffold(
               appBar: AppBar(
+                automaticallyImplyLeading: false,
                 title: Text('Số ca nhiễm Covid'),
-                bottom: TabBar(
-                  tabs: [Text('Việt Nam'), Text('Thế Giới')],
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(10.0),
+                  child: TabBar(
+                    indicatorColor: Colors.red,
+                    tabs: [
+                      Text('Việt Nam'),
+                      Text('Thế Giới')
+                    ],
+                  ),
                 ),
               ),
               body: TabBarView(
                 children: [
                   SingleChildScrollView(
                     child: DataTable(
+                      columnSpacing: 0,
                       columns: [
                         DataColumn(
                           label: Expanded(
                               child:
-                                  Text("Tỉnh", style: TextStyle(fontSize: 16))),
+                                  Text("Tỉnh", style: TextStyle(fontSize: 12))),
                           numeric: false,
                         ),
                         DataColumn(
                           label: Expanded(
                               child: Text("Số ca nhiễm",
-                                  style: TextStyle(fontSize: 16))),
+                                  style: TextStyle(fontSize: 12))),
+                          numeric: false,
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                              child: Text("Tử vong",
+                                  style: TextStyle(fontSize: 12))),
+                          numeric: false,
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                              child: Text("Bình Phục",
+                                  style: TextStyle(fontSize: 12))),
                           numeric: false,
                         ),
                       ],
@@ -57,10 +78,20 @@ class _CovidPageState extends State<CovidPage> {
                           .map(
                             (e) => DataRow(cells: [
                               DataCell(
-                                Text(e.provinceName),
+                                Text(e.provinceName,
+                                    style: TextStyle(fontSize: 12)),
                               ),
                               DataCell(
-                                Text("${e.confirmed}"),
+                                Text("${e.confirmed}",
+                                    style: TextStyle(fontSize: 12)),
+                              ),
+                              DataCell(
+                                Text("${e.deaths}",
+                                    style: TextStyle(fontSize: 12)),
+                              ),
+                              DataCell(
+                                Text("${e.recovered}",
+                                    style: TextStyle(fontSize: 12)),
                               ),
                             ]),
                           )
@@ -69,17 +100,32 @@ class _CovidPageState extends State<CovidPage> {
                   ),
                   SingleChildScrollView(
                     child: DataTable(
+                      columnSpacing: 0,
                       columns: [
                         DataColumn(
                           label: Expanded(
                               child: Text("Thế Giới",
-                                  style: TextStyle(fontSize: 16))),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ))),
                           numeric: false,
                         ),
                         DataColumn(
                           label: Expanded(
                               child: Text("Số ca nhiễm",
-                                  style: TextStyle(fontSize: 16))),
+                                  style: TextStyle(fontSize: 12))),
+                          numeric: false,
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                              child: Text("Tử vong",
+                                  style: TextStyle(fontSize: 12))),
+                          numeric: false,
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                              child: Text("Bình Phục",
+                                  style: TextStyle(fontSize: 12))),
                           numeric: false,
                         ),
                       ],
@@ -87,10 +133,22 @@ class _CovidPageState extends State<CovidPage> {
                           .map(
                             (e) => DataRow(cells: [
                               DataCell(
-                                Text(e.provinceName),
+                                Text(
+                                  e.provinceName,
+                                  style: TextStyle(fontSize: 12),
+                                ),
                               ),
                               DataCell(
-                                Text("${e.confirmed}"),
+                                Text("${e.confirmed}",
+                                    style: TextStyle(fontSize: 12)),
+                              ),
+                              DataCell(
+                                Text("${e.deaths}",
+                                    style: TextStyle(fontSize: 12)),
+                              ),
+                              DataCell(
+                                Text("${e.recovered}",
+                                    style: TextStyle(fontSize: 12)),
                               ),
                             ]),
                           )

@@ -22,7 +22,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    widget.currentPage != null
+        ? _currentIndex = widget.currentPage
+        : _currentIndex = 0;
+    _pageController =
+        PageController(initialPage: widget.currentPage ?? _currentIndex);
   }
 
   @override

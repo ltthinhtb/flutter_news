@@ -21,9 +21,8 @@ class AppTheme {
   static const String fontName = 'WorkSans';
   static const Color red_dark = Color(0xFF8B0000);
 
-
-
-  static const TextStyle display1 = TextStyle( // h4 -> display1
+  static const TextStyle display1 = TextStyle(
+    // h4 -> display1
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 36,
@@ -32,7 +31,8 @@ class AppTheme {
     color: darkerText,
   );
 
-  static const TextStyle headline = TextStyle( // h5 -> headline
+  static const TextStyle headline = TextStyle(
+    // h5 -> headline
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 24,
@@ -40,7 +40,8 @@ class AppTheme {
     color: darkerText,
   );
 
-  static const TextStyle title = TextStyle( // h6 -> title
+  static const TextStyle title = TextStyle(
+    // h6 -> title
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 16,
@@ -48,7 +49,8 @@ class AppTheme {
     color: darkerText,
   );
 
-  static const TextStyle subtitle = TextStyle( // subtitle2 -> subtitle
+  static const TextStyle subtitle = TextStyle(
+    // subtitle2 -> subtitle
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 14,
@@ -56,7 +58,8 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle body2 = TextStyle( // body1 -> body2
+  static const TextStyle body2 = TextStyle(
+    // body1 -> body2
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 14,
@@ -64,7 +67,8 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle body1 = TextStyle( // body2 -> body1
+  static const TextStyle body1 = TextStyle(
+    // body2 -> body1
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 16,
@@ -72,7 +76,8 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle caption = TextStyle( // Caption -> caption
+  static const TextStyle caption = TextStyle(
+    // Caption -> caption
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 12,
@@ -87,11 +92,24 @@ class AppTheme {
   static Color darkBG = Colors.black;
   static Color ratingBG = Colors.yellow[600];
 
+
   static ThemeData lightTheme = ThemeData(
-    fontFamily: 'Times',
+    primaryIconTheme: IconThemeData(
+        color: Colors.black
+    ),
+    iconTheme: IconThemeData(
+      color: Colors.black
+    ),
+   // fontFamily: 'Times',
+    buttonTheme: ButtonThemeData(
+      hoverColor: Colors.grey,
+      splashColor: Colors.grey,
+      buttonColor: Colors
+          .grey, //  <-- dark color//  <-- this auto selects the right color
+    ),
     backgroundColor: lightBG,
     primaryColor: lightPrimary,
-    accentColor:  lightAccent,
+    accentColor: lightAccent,
     cursorColor: lightAccent,
     scaffoldBackgroundColor: lightBG,
     appBarTheme: AppBarTheme(
@@ -110,7 +128,14 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
-    fontFamily: 'Times',
+    iconTheme: IconThemeData(
+        color: Colors.white
+    ),
+    //fontFamily: 'Times',
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors
+          .white, //  <-- dark color//  <-- this auto selects the right color
+    ),
     brightness: Brightness.dark,
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
@@ -131,5 +156,4 @@ class AppTheme {
 //      ),
     ),
   );
-
 }

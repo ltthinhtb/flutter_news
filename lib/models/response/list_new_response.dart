@@ -2,6 +2,7 @@ class ListNewsResponse {
   int code;
   Data data;
 
+
   ListNewsResponse({this.code, this.data});
 
   ListNewsResponse.fromJson(Map<String, dynamic> json) {
@@ -21,8 +22,9 @@ class ListNewsResponse {
 
 class Data {
   Category category;
+  int categoryId;
 
-  Data({this.category});
+  Data({this.category,this.categoryId});
 
   Data.fromJson(Map<String, dynamic> json) {
     category = json['1001002'] != null

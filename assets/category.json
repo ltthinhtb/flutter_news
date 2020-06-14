@@ -1,0 +1,102 @@
+{
+  "list_category": [
+    {
+      "category": {
+        "name": "Thế giới",
+        "category_id": "1001002",
+        "url": "https://vnexpress.net/the-gioi"
+      }
+    },
+    {
+      "category": {
+        "name": "Thời sự",
+        "category_id": "1001005",
+        "url": "https://vnexpress.net/thoi-su"
+      }
+    },
+    {
+      "category": {
+        "name": "Xe",
+        "category_id": "1001006",
+        "url": "https://vnexpress.net/oto-xe-may"
+      }
+    },
+    {
+      "category": {
+        "name": "Pháp luật",
+        "category_id": "1001007",
+        "url": "https://vnexpress.net/phap-luat"
+      }
+    },
+    {
+      "category": {
+        "name": "Khoa học",
+        "category_id": "1001009",
+        "url": "https://vnexpress.net/khoa-hoc"
+      }
+    },
+    {
+      "category": {
+        "name": "Cười",
+        "category_id": "1001011",
+        "url": "https://vnexpress.net/cuoi"
+      }
+    },
+    {
+      "category": {
+        "name": "Thể thao",
+        "category_id": "1002565",
+        "url": "https://vnexpress.net/the-thao"
+      }
+    },
+    {
+      "category": {
+        "name": "Số hóa",
+        "category_id": "1002592",
+        "url": "https://vnexpress.net/so-hoa"
+      }
+    },
+    {
+      "category": {
+        "name": "Giải trí",
+        "category_id": "1002691",
+        "url": "https://vnexpress.net/giai-tri"
+      }
+    },
+    {
+      "category": {
+        "name": "Đời sống",
+        "category_id": "1002966",
+        "url": "https://vnexpress.net/doi-song"
+      }
+    },
+    {
+      "category": {
+        "name": "Kinh doanh",
+        "category_id": "1003159",
+        "url": "https://vnexpress.net/kinh-doanh"
+      }
+    },
+    {
+      "category": {
+        "name": "Du lịch",
+        "category_id": "1003231",
+        "url": "https://vnexpress.net/du-lich"
+      }
+    },
+    {
+      "category": {
+        "name": "Giáo dục",
+        "category_id": "1003497",
+        "url": "https://vnexpress.net/giao-duc"
+      }
+    },
+    {
+      "category": {
+        "name": "Sức khỏe",
+        "category_id": "1003750",
+        "url": "https://vnexpress.net/suc-khoe"
+      }
+    }
+  ]
+}

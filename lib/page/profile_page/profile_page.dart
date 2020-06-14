@@ -40,84 +40,81 @@ class _ProfilePageState extends State<ProfilePage> {
                 title: Text('Thiết lập'),
               ),
               body: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 children: <Widget>[
-                  Container(
-                    height: 150,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 5,
-                        ),
-                        state.user == null
-                            ? CircleAvatar(
-                                radius: 30,
-                                child: Icon(
-                                  Icons.person,
-                                  size: 30,
+                  Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 5,
+                      ),
+                      state.user == null
+                          ? CircleAvatar(
+                              backgroundColor: Colors.grey,
+                              radius: 30,
+                              child: Icon(
+                                Icons.person,
+                                size: 30,
+                              ),
+                            )
+                          : (state.user.photoUrl == null
+                              ? CircleAvatar(
+                                  radius: 50,
+                                  child: InkWell(
+                                    onTap: () {
+                                      _showDialog(context);
+                                    },
+                                    child: Icon(
+                                      Icons.person,
+                                      size: 30,
+                                    ),
+                                  ),
+                                )
+                              : CircleAvatar(
+                                  child: InkWell(
+                                    onTap: () {
+                                      _showDialog(context);
+                                    },
+                                  ),
+                                  radius: 50,
+                                  backgroundImage:
+                                      NetworkImage(state.user.photoUrl),
+                                )),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      state.user != null
+                          ? Text(state.user.name)
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AuthenticationPage()));
+                                  },
+                                  child: Text('Đăng nhập'),
                                 ),
-                              )
-                            : (state.user.photoUrl == null
-                                ? CircleAvatar(
-                                    radius: 50,
-                                    child: InkWell(
-                                      onTap: () {
-                                        _showDialog(context);
-                                      },
-                                      child: Icon(
-                                        Icons.person,
-                                        size: 60,
-                                      ),
-                                    ),
-                                  )
-                                : CircleAvatar(
-                                    child: InkWell(
-                                      onTap: () {
-                                        _showDialog(context);
-                                      },
-                                    ),
-                                    radius: 50,
-                                    backgroundImage:
-                                        NetworkImage(state.user.photoUrl),
-                                  )),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        state.user != null
-                            ? Text(state.user.name)
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AuthenticationPage()));
-                                    },
-                                    child: Text('Đăng nhập'),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SignUpPage()));
-                                    },
-                                    child: Text('Đăng ký'),
-                                  ),
-                                ],
-                              )
-                      ],
-                    ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignUpPage()));
+                                  },
+                                  child: Text('Đăng ký'),
+                                ),
+                              ],
+                            )
+                    ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text('HOẠT ĐỘNG'),
                   ),
                   ListTile(
@@ -151,28 +148,23 @@ class _ProfilePageState extends State<ProfilePage> {
                     leading: Icon(Icons.book),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text('TÙY CHỈNH'),
                   ),
-                  InkWell(
-                    child: ListTile(
-                      title: Text('Chế độ tối'),
-                      trailing: Switch(
-                        value: _bloc.optionValue == null
-                            ? false
-                            : _bloc.optionValue,
-                        onChanged: (value) {
-                          setState(() {
-                            _bloc.optionValue = value;
-                            BlocProvider.of<ChangeThemeBloc>(context)
-                                .add(ChooseThemeEvent());
-                          });
-                        },
-                        activeTrackColor: Colors.red,
-                        activeColor: Colors.grey,
-                      ),
-                      leading: Icon(Icons.settings),
+                  ListTile(
+                    title: Text('Chế độ tối'),
+                    trailing: Switch(
+                      value:
+                          _bloc.optionValue == null ? false : _bloc.optionValue,
+                      onChanged: (value) {
+                        _bloc.optionValue = value;
+                        BlocProvider.of<ChangeThemeBloc>(context)
+                            .add(ChooseThemeEvent());
+                      },
+                      activeTrackColor: Colors.red,
+                      activeColor: Colors.grey,
                     ),
+                    leading: Icon(Icons.settings),
                   ),
                   Visibility(
                     visible: _bloc.isLogin,

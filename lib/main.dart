@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
               theme: _bloc.optionValue == null
                   ? ThemeData.light()
                   : (_bloc.optionValue
-                      ? ThemeData.dark()
+                      ? AppTheme.darkTheme
                       : AppTheme.lightTheme),
               home: SplashScreen());
         },

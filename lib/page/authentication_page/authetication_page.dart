@@ -4,6 +4,7 @@ import 'package:flutter_news/Utils/apptheme.dart';
 import 'package:flutter_news/page/authentication_page/authenticatin_bloc.dart';
 import 'package:flutter_news/page/authentication_page/authentication.dart';
 import 'package:flutter_news/page/main_page/main_page.dart';
+import 'package:flutter_news/page/profile_page/profile.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_page.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -17,11 +18,13 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   // ignore: close_sinks
+  ProfileSettingBloc profileSettingBloc;
   AuthenticationBloc _bloc;
 
   @override
   void initState() {
     // TODO: implement initState
+    profileSettingBloc = ProfileSettingBloc();
     _bloc = AuthenticationBloc();
     super.initState();
   }
@@ -34,8 +37,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
         child: BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
             if (state is AuthenticationSuccess) {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => MyHomePage()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MyHomePage(currentPage: 3,)));
             }
             if (state is AuthenticationFail) {
               Scaffold.of(context).showSnackBar(SnackBar(
