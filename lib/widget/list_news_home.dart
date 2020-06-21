@@ -40,6 +40,11 @@ class _ListNewsHomeState extends State<ListNewsHome> {
           height: 5,
         ),
         Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 0.3
+            )
+          ),
           height: 200,
           child: Image.network(
             widget.thumbnail != "" ? widget.thumbnail : "https://topdev.vn/blog/wp-content/uploads/2018/09/7-2-1.jpg" ,
@@ -70,7 +75,7 @@ class _ListNewsHomeState extends State<ListNewsHome> {
                 width: 10,
               ),
               Text(
-                "Thế giới",
+                widget.category,
                 style: TextStyle(fontSize: 12,color: AppTheme.deactivatedText),
               )
             ],

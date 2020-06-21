@@ -1,6 +1,5 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_news/Utils/apptheme.dart';
 import 'package:flutter_news/page/covid_page/covid.dart';
 import 'package:flutter_news/page/home_page/home_page.dart';
 import 'package:flutter_news/page/profile_page/profile_page.dart';
@@ -52,35 +51,49 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Colors.white,
-        selectedIndex: _currentIndex,
-        onItemSelected: (index) {
-          setState(() => _currentIndex = index);
-          _pageController.jumpToPage(index);
-        },
-        items: <BottomNavyBarItem>[
-          BottomNavyBarItem(
-              activeColor: Colors.blue,
-              inactiveColor: AppTheme.deactivatedText,
-              title: Text('Trang chủ'),
-              icon: Icon(Icons.home)),
-          BottomNavyBarItem(
-              activeColor: Colors.blue,
-              inactiveColor: AppTheme.deactivatedText,
-              title: Text('Covid 19'),
-              icon: Icon(Icons.apps)),
-          BottomNavyBarItem(
-              activeColor: Colors.blue,
-              inactiveColor: AppTheme.deactivatedText,
-              title: Text('Thông báo'),
-              icon: Icon(Icons.notifications)),
-          BottomNavyBarItem(
-              activeColor: Colors.blue,
-              inactiveColor: AppTheme.deactivatedText,
-              title: Text('Cá nhân'),
-              icon: Icon(Icons.person)),
-        ],
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          // sets the background color of the `BottomNavigationBar`
+          canvasColor: Theme.of(context).primaryColor,
+          // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+          primaryColor: Theme.of(context).accentColor,
+          textTheme: Theme
+              .of(context)
+              .textTheme
+              .copyWith(caption: TextStyle(color: Colors.grey[500]),
+          ),
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          //selectedIndex: _currentIndex,
+//        onItemSelected: (index) {
+//          setState(() => _currentIndex = index);
+//          _pageController.jumpToPage(index);
+//        },
+          onTap: (index) {
+            setState(() => _currentIndex = index);
+            _pageController.jumpToPage(index);
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Container(child: Text('Trang chủ'),),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.menu),
+              title: Container(child: Text('Covid 19'),),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications),
+              title: Container(child: Text('Thông báo'),),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Container(child: Text('Cá nhân'),),
+            ),
+          ],
+        ),
       ),
     );
   }

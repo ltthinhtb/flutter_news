@@ -1,7 +1,8 @@
 class NewsResponse {
   List<Data> data;
   String category;
-  NewsResponse({this.data,this.category});
+  int index;
+  NewsResponse({this.data,this.category,this.index});
   NewsResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = new List<Data>();

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -76,31 +78,21 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle caption = TextStyle(
-    // Caption -> caption
-    fontFamily: fontName,
-    fontWeight: FontWeight.w400,
-    fontSize: 12,
-    letterSpacing: 0.2,
-    color: lightText, // was lightText
-  );
-  static Color lightPrimary = Color(0xfffcfcff);
+  static Color lightPrimary = Colors.grey[200];
   static Color darkPrimary = Colors.black;
-  static Color lightAccent = Color(0xff5563ff);
-  static Color darkAccent = Color(0xff5563ff);
+  static Color lightAccent = Colors.blue;
+  static Color darkAccent = Colors.lightBlue;
   static Color lightBG = Color(0xfffcfcff);
-  static Color darkBG = Colors.black;
-  static Color ratingBG = Colors.yellow[600];
-
+  static Color darkBG = Colors.black45;
+  static Color badgeColor = Colors.red;
 
   static ThemeData lightTheme = ThemeData(
     primaryIconTheme: IconThemeData(
-        color: Colors.black
+        color: Colors.black87
     ),
     iconTheme: IconThemeData(
-      color: Colors.black
+        color: Colors.black87
     ),
-   // fontFamily: 'Times',
     buttonTheme: ButtonThemeData(
       hoverColor: Colors.grey,
       splashColor: Colors.grey,
@@ -108,11 +100,21 @@ class AppTheme {
           .grey, //  <-- dark color//  <-- this auto selects the right color
     ),
     backgroundColor: lightBG,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.grey[300],
+      selectedItemColor: Colors.blueGrey,
+      unselectedItemColor: Colors.black54
+    ),
     primaryColor: lightPrimary,
-    accentColor: lightAccent,
+    accentColor:  lightAccent,
     cursorColor: lightAccent,
-    scaffoldBackgroundColor: lightBG,
+    scaffoldBackgroundColor: Colors.grey[200],
+    tabBarTheme: TabBarTheme(
+      unselectedLabelColor: Colors.black45,
+      labelColor: Colors.blueGrey,
+    ),
     appBarTheme: AppBarTheme(
+      elevation: 0.5,
       textTheme: TextTheme(
         // ignore: deprecated_member_use
         title: TextStyle(
@@ -121,9 +123,6 @@ class AppTheme {
           fontWeight: FontWeight.w800,
         ),
       ),
-//      iconTheme: IconThemeData(
-//        color: lightAccent,
-//      ),
     ),
   );
 
@@ -136,6 +135,11 @@ class AppTheme {
       buttonColor: Colors
           .white, //  <-- dark color//  <-- this auto selects the right color
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.black87,
+        selectedItemColor: Colors.white70,
+        unselectedItemColor: Colors.white10
+    ),
     brightness: Brightness.dark,
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
@@ -143,6 +147,7 @@ class AppTheme {
     scaffoldBackgroundColor: darkBG,
     cursorColor: darkAccent,
     appBarTheme: AppBarTheme(
+      elevation: 0.5,
       textTheme: TextTheme(
         // ignore: deprecated_member_use
         title: TextStyle(
@@ -151,9 +156,7 @@ class AppTheme {
           fontWeight: FontWeight.w800,
         ),
       ),
-//      iconTheme: IconThemeData(
-//        color: darkAccent,
-//      ),
     ),
   );
 }
+

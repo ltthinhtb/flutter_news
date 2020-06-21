@@ -30,8 +30,12 @@ class _CustomListItemState extends State<CustomListItem> {
           child: Row(
             children: <Widget>[
               Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.3)
+                ),
                 height: 80,
-                child: Image.network(widget.thumbnail),
+                //width: 100,
+                child: Image.network(widget.thumbnail != "" ? widget.thumbnail : "https://yt3.ggpht.com/a/AATXAJyPMywRmD62sfK-1CXjwF0YkvrvnmaaHzs4uw=s900-c-k-c0xffffffff-no-rj-mo"),
               ),
               Expanded(
                   child: Column(
@@ -51,13 +55,6 @@ class _CustomListItemState extends State<CustomListItem> {
                         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                         child: Row(
                           children: <Widget>[
-                            Text(
-                              widget.author,
-                              style: TextStyle(),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
                             Text(
                               widget.category,
                               style: TextStyle(fontSize: 12, color: Colors.blue),
