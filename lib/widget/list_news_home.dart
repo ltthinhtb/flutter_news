@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/Utils/apptheme.dart';
 
@@ -25,6 +26,7 @@ class _ListNewsHomeState extends State<ListNewsHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5),
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 5),
       physics: ClampingScrollPhysics(),

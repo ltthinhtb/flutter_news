@@ -26,7 +26,8 @@ class _CustomListItemState extends State<CustomListItem> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: SizedBox(
+      child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 5),
           height: 80,
           child: Row(
             children: <Widget>[

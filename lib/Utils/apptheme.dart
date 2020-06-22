@@ -128,6 +128,7 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
+    cardColor: Colors.white10,
     dividerColor: Colors.grey[700],
     iconTheme: IconThemeData(
         color: Colors.white

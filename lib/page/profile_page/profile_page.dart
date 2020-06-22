@@ -36,162 +36,227 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, state) {
           if (state is DataSuccessState) {
             return Scaffold(
-              appBar: AppBar(
-                title: Text('Thiết lập'),
-              ),
-              body: ListView(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 5,
-                      ),
-                      state.user == null
-                          ? CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              radius: 30,
-                              child: Icon(
-                                Icons.person,
-                                size: 30,
-                              ),
-                            )
-                          : (state.user.photoUrl == null
-                              ? CircleAvatar(
-                                  radius: 50,
-                                  child: InkWell(
-                                    onTap: () {
-                                      _showDialog(context);
-                                    },
-                                    child: Icon(
-                                      Icons.person,
-                                      size: 30,
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        Image.asset(
+                          'assets/background.png',
+                          fit: BoxFit.cover,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                              height: 50,
+                            ),
+                            state.user == null
+                                ? Center(
+                                  child: CircleAvatar(
+                                      backgroundColor: Colors.grey,
+                                      radius: 50,
+                                      child: Icon(
+                                        Icons.person,
+                                        size: 50,
+                                      ),
                                     ),
-                                  ),
                                 )
-                              : CircleAvatar(
-                                  child: InkWell(
-                                    onTap: () {
-                                      _showDialog(context);
-                                    },
-                                  ),
-                                  radius: 50,
-                                  backgroundImage:
-                                      NetworkImage(state.user.photoUrl),
-                                )),
-                      SizedBox(
-                        height: 20,
+                                : (state.user.photoUrl == null
+                                    ? CircleAvatar(
+                                        radius: 50,
+                                        child: InkWell(
+                                          onTap: () {
+                                            _showDialog(context);
+                                          },
+                                          child: Icon(
+                                            Icons.person,
+                                            size: 70,
+                                          ),
+                                        ),
+                                      )
+                                    : CircleAvatar(
+                                        child: InkWell(
+                                          onTap: () {
+                                            _showDialog(context);
+                                          },
+                                        ),
+                                        radius: 50,
+                                        backgroundImage:
+                                            NetworkImage(state.user.photoUrl),
+                                      )),
+                            state.user != null
+                                ? Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          state.user.name,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ))
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AuthenticationPage()));
+                                        },
+                                        child: Text('Đăng nhập',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500),),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignUpPage()));
+                                        },
+                                        child: Text('Đăng ký',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500),),
+                                      ),
+                                    ],
+                                  )
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Card(
+                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              'HOẠT ĐỘNG',
+                              style: TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: ListTile(
+                              onTap: () {
+                                if (state.user == null)
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text('Bạn cần đăng nhập.'),
+                                    duration: Duration(seconds: 3),
+                                  ));
+                                else
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          RecentListNewPage()));
+                              },
+                              title: Text('Tin đã xem'),
+                              trailing: Icon(Icons.chevron_right),
+                              leading: Icon(Icons.update),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: ListTile(
+                              onTap: () {
+                                if (state.user == null)
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text('Bạn cần đăng nhập.'),
+                                    duration: Duration(seconds: 3),
+                                  ));
+                                else
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => SaveListNewPage()));
+                              },
+                              title: Text('Tin yêu thích'),
+                              trailing: Icon(Icons.chevron_right),
+                              leading: Icon(Icons.bookmark),
+                            ),
+                          ),
+                        ],
                       ),
-                      state.user != null
-                          ? Text(state.user.name)
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                AuthenticationPage()));
-                                  },
-                                  child: Text('Đăng nhập'),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SignUpPage()));
-                                  },
-                                  child: Text('Đăng ký'),
-                                ),
-                              ],
-                            )
-                    ],
-                  ),
-                  Divider(thickness: 5,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text('HOẠT ĐỘNG',style: TextStyle(fontWeight: FontWeight.w500),),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: ListTile(
-                      onTap: () {
-                        if (state.user == null)
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                            content: Text('Bạn cần đăng nhập.'),
-                            duration: Duration(seconds: 3),
-                          ));
-                        else
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => RecentListNewPage()));
-                      },
-                      title: Text('Tin đã xem'),
-                      trailing: Icon(Icons.chevron_right),
-                      leading: Icon(Icons.update),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: ListTile(
-                      onTap: () {
-                        if (state.user == null)
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                            content: Text('Bạn cần đăng nhập.'),
-                            duration: Duration(seconds: 3),
-                          ));
-                        else
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SaveListNewPage()));
-                      },
-                      title: Text('Tin yêu thích'),
-                      trailing: Icon(Icons.chevron_right),
-                      leading: Icon(Icons.bookmark),
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  Divider(thickness: 5,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text('TÙY CHỈNH',style: TextStyle(fontWeight: FontWeight.w500),),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: ListTile(
-                      title: Text('Chế độ tối'),
-                      trailing: Switch(
-                        value:
-                            _bloc.optionValue == null ? false : _bloc.optionValue,
-                        onChanged: (value) {
-                          _bloc.optionValue = value;
-                          BlocProvider.of<ChangeThemeBloc>(context)
-                              .add(ChooseThemeEvent());
-                        },
-                        activeTrackColor: Colors.blue,
-                        activeColor: Colors.grey,
+                    Card(
+                      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              'TÙY CHỈNH',
+                              style: TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: ListTile(
+                              title: Text('Chế độ tối'),
+                              trailing: Switch(
+                                value: _bloc.optionValue == null
+                                    ? false
+                                    : _bloc.optionValue,
+                                onChanged: (value) {
+                                  _bloc.optionValue = value;
+                                  BlocProvider.of<ChangeThemeBloc>(context)
+                                      .add(ChooseThemeEvent());
+                                },
+                                activeTrackColor: Colors.blue,
+                                activeColor: Colors.grey,
+                              ),
+                              leading: Icon(Icons.wb_sunny),
+                            ),
+                          ),
+                          Visibility(
+                            visible: _bloc.isLogin,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: ListTile(
+                                onTap: () {
+                                  BlocProvider.of<ProfileSettingBloc>(context)
+                                      .add(LogOut());
+                                },
+                                title: Text('Đăng xuất'),
+                                leading: Icon(Icons.exit_to_app),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      leading: Icon(Icons.wb_sunny),
-                    ),
-                  ),
-                  Visibility(
-                    visible: _bloc.isLogin,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: ListTile(
-                        onTap: (){
-                          BlocProvider.of<ProfileSettingBloc>(context)
-                              .add(LogOut());
-                        },
-                        title: Text('Đăng xuất'),
-                        leading: Icon(Icons.exit_to_app),
-                      ),
-                    ),
-                  ),
-                ],
+                    )
+                  ],
+                ),
               ),
             );
           }
