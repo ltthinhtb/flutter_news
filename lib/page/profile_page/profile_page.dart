@@ -59,6 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       radius: 50,
                                       child: Icon(
                                         Icons.person,
+                                        color: Colors.white,
                                         size: 50,
                                       ),
                                     ),
@@ -72,7 +73,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           },
                                           child: Icon(
                                             Icons.person,
-                                            size: 70,
+                                            color: Colors.white,
+                                            size: 50,
                                           ),
                                         ),
                                       )
