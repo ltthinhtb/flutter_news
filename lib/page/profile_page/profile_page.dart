@@ -40,7 +40,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 title: Text('Thiết lập'),
               ),
               body: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 10),
                 children: <Widget>[
                   Column(
                     children: <Widget>[
@@ -113,70 +112,85 @@ class _ProfilePageState extends State<ProfilePage> {
                             )
                     ],
                   ),
+                  Divider(thickness: 5,),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text('HOẠT ĐỘNG'),
-                  ),
-                  ListTile(
-                    onTap: () {
-                      if (state.user == null)
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text('Bạn cần đăng nhập.'),
-                          duration: Duration(seconds: 3),
-                        ));
-                      else
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => RecentListNewPage()));
-                    },
-                    title: Text('Tin đã xem'),
-                    trailing: Icon(Icons.chevron_right),
-                    leading: Icon(Icons.refresh),
-                  ),
-                  ListTile(
-                    onTap: () {
-                      if (state.user == null)
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text('Bạn cần đăng nhập.'),
-                          duration: Duration(seconds: 3),
-                        ));
-                      else
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SaveListNewPage()));
-                    },
-                    title: Text('Tin yêu thích'),
-                    trailing: Icon(Icons.chevron_right),
-                    leading: Icon(Icons.book),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text('HOẠT ĐỘNG',style: TextStyle(fontWeight: FontWeight.w500),),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text('TÙY CHỈNH'),
-                  ),
-                  ListTile(
-                    title: Text('Chế độ tối'),
-                    trailing: Switch(
-                      value:
-                          _bloc.optionValue == null ? false : _bloc.optionValue,
-                      onChanged: (value) {
-                        _bloc.optionValue = value;
-                        BlocProvider.of<ChangeThemeBloc>(context)
-                            .add(ChooseThemeEvent());
+                    child: ListTile(
+                      onTap: () {
+                        if (state.user == null)
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text('Bạn cần đăng nhập.'),
+                            duration: Duration(seconds: 3),
+                          ));
+                        else
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => RecentListNewPage()));
                       },
-                      activeTrackColor: Colors.red,
-                      activeColor: Colors.grey,
+                      title: Text('Tin đã xem'),
+                      trailing: Icon(Icons.chevron_right),
+                      leading: Icon(Icons.update),
                     ),
-                    leading: Icon(Icons.settings),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ListTile(
+                      onTap: () {
+                        if (state.user == null)
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text('Bạn cần đăng nhập.'),
+                            duration: Duration(seconds: 3),
+                          ));
+                        else
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SaveListNewPage()));
+                      },
+                      title: Text('Tin yêu thích'),
+                      trailing: Icon(Icons.chevron_right),
+                      leading: Icon(Icons.bookmark),
+                    ),
+                  ),
+                  Divider(thickness: 5,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text('TÙY CHỈNH',style: TextStyle(fontWeight: FontWeight.w500),),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ListTile(
+                      title: Text('Chế độ tối'),
+                      trailing: Switch(
+                        value:
+                            _bloc.optionValue == null ? false : _bloc.optionValue,
+                        onChanged: (value) {
+                          _bloc.optionValue = value;
+                          BlocProvider.of<ChangeThemeBloc>(context)
+                              .add(ChooseThemeEvent());
+                        },
+                        activeTrackColor: Colors.blue,
+                        activeColor: Colors.grey,
+                      ),
+                      leading: Icon(Icons.wb_sunny),
+                    ),
                   ),
                   Visibility(
                     visible: _bloc.isLogin,
-                    child: FlatButton(
-                      child: Text('Đăng Xuất'),
-                      onPressed: () {
-                        BlocProvider.of<ProfileSettingBloc>(context)
-                            .add(LogOut());
-                        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()));
-                      },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ListTile(
+                        onTap: (){
+                          BlocProvider.of<ProfileSettingBloc>(context)
+                              .add(LogOut());
+                        },
+                        title: Text('Đăng xuất'),
+                        leading: Icon(Icons.exit_to_app),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );

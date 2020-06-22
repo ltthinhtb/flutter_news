@@ -26,60 +26,50 @@ class _ListNewsHomeState extends State<ListNewsHome> {
   Widget build(BuildContext context) {
     return Container(
         child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
       physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Text(
-            widget.title,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-          ),
+        Text(
+          widget.title,
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
         ),
         SizedBox(
           height: 5,
         ),
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 0.3
-            )
-          ),
           height: 200,
-          child: Image.network(
-            widget.thumbnail != "" ? widget.thumbnail : "https://topdev.vn/blog/wp-content/uploads/2018/09/7-2-1.jpg" ,
-            fit: BoxFit.cover,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              widget.thumbnail != "" ? widget.thumbnail : "https://topdev.vn/blog/wp-content/uploads/2018/09/7-2-1.jpg" ,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         SizedBox(
           height: 5,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Text(
-            widget.lead,
-          ),
+        Text(
+          widget.lead,
         ),
         SizedBox(
           height: 5,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Row(
-            children: [
-              Text(
-                "4h trước",
-                style: TextStyle(fontSize: 12,color: AppTheme.deactivatedText),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                widget.category,
-                style: TextStyle(fontSize: 12,color: AppTheme.deactivatedText),
-              )
-            ],
-          ),
+        Row(
+          children: [
+            Text(
+              "4 giờ trước",
+              style: TextStyle(color: AppTheme.deactivatedText,fontSize: 12),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              widget.category,
+              style: TextStyle(color: AppTheme.deactivatedText,fontSize: 12),
+            )
+          ],
         )
       ],
     ));

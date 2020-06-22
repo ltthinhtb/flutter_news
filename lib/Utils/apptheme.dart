@@ -83,7 +83,7 @@ class AppTheme {
   static Color lightAccent = Colors.blue;
   static Color darkAccent = Colors.lightBlue;
   static Color lightBG = Color(0xfffcfcff);
-  static Color darkBG = Colors.black45;
+  static Color darkBG = Colors.black;
   static Color badgeColor = Colors.red;
 
   static ThemeData lightTheme = ThemeData(
@@ -93,6 +93,7 @@ class AppTheme {
     iconTheme: IconThemeData(
         color: Colors.black87
     ),
+    dividerColor: Colors.grey[200],
     buttonTheme: ButtonThemeData(
       hoverColor: Colors.grey,
       splashColor: Colors.grey,
@@ -108,7 +109,7 @@ class AppTheme {
     primaryColor: lightPrimary,
     accentColor:  lightAccent,
     cursorColor: lightAccent,
-    scaffoldBackgroundColor: Colors.grey[200],
+    scaffoldBackgroundColor: Colors.white,
     tabBarTheme: TabBarTheme(
       unselectedLabelColor: Colors.black45,
       labelColor: Colors.blueGrey,
@@ -127,6 +128,7 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
+    dividerColor: Colors.grey[700],
     iconTheme: IconThemeData(
         color: Colors.white
     ),
@@ -136,13 +138,13 @@ class AppTheme {
           .white, //  <-- dark color//  <-- this auto selects the right color
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.black45,
         selectedItemColor: Colors.white70,
-        unselectedItemColor: Colors.white10
+        unselectedItemColor: Colors.white30
     ),
     brightness: Brightness.dark,
     backgroundColor: darkBG,
-    primaryColor: darkPrimary,
+    //primaryColor: darkPrimary,
     accentColor: darkAccent,
     scaffoldBackgroundColor: darkBG,
     cursorColor: darkAccent,

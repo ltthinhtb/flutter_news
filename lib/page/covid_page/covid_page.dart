@@ -35,10 +35,11 @@ class _CovidPageState extends State<CovidPage> {
                 bottom: PreferredSize(
                   preferredSize: Size.fromHeight(10.0),
                   child: TabBar(
-                    indicatorColor: Colors.red,
                     tabs: [
-                      Text('Việt Nam'),
-                      Text('Thế Giới')
+                      Container(
+                          margin: EdgeInsets.all(10), child: Text('Việt Nam')),
+                      Container(
+                          margin: EdgeInsets.all(10), child: Text('Thế Giới'))
                     ],
                   ),
                 ),

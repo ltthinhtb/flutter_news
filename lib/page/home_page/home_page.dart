@@ -50,14 +50,12 @@ class _HomePageState extends State<HomePage> {
             return DefaultTabController(
               length: _bloc.list.length,
               child: Scaffold(
-
                 appBar: AppBar(
                   automaticallyImplyLeading: false,
-                  title: Image.asset('assets/logo.png', height: 70),
+                  title: Container(child: Image.asset('assets/logo.png', height: 70)),
                   bottom: PreferredSize(
                     preferredSize: Size.fromHeight(30.0),
                     child: TabBar(
-
                         isScrollable: true,
                         //    indicatorWeight: 6.0,
                         tabs: List<Widget>.generate(_bloc.list.length, (index) {

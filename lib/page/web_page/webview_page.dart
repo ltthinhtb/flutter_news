@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/service/database.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -51,6 +52,8 @@ class WebViewPage extends StatelessWidget {
       child: Scaffold(
         key: _scaffoldKey,
         body: WebviewScaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(50),child: AppBar()),
           url: url,
           userAgent: kAndroidUserAgent,
           javascriptChannels: jsChannels,
@@ -66,57 +69,55 @@ class WebViewPage extends StatelessWidget {
           bottomNavigationBar: Transform.translate(
             offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
             child: BottomAppBar(
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Container(
-                    height: 40,
-                    width: 200,
-                    child: TextField(
-                      controller: commentController,
-                      style: TextStyle(
-                        fontSize: 15.0,
-                      ),
-                      decoration: InputDecoration(
-                        hintText: "Bình luận của bạn...",
-                        prefixIcon: Icon(
-                          Icons.person,
-                          size: 30,
+              child: Container(
+                height: 50,
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 200,
+                      child: TextField(
+                        controller: commentController,
+                        style: TextStyle(
+                          fontSize: 15.0,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: "Bình luận của bạn...",
+                          prefixIcon: Icon(
+                            Icons.person,
+                            size: 30,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.share), onPressed: () => share(context)),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.bookmark),
-                      onPressed: () async {
-                        prefs = await SharedPreferences.getInstance();
-                        bool isLogin = prefs.get('islogin') ?? null;
-                        if (isLogin) {
-                          String userId = prefs.get('userId') ?? null;
-                          await DataBase(uid: userId).saveLoveNews(
-                            id: id ?? "",
-                            url: url ?? "",
-                            photo: photo ?? "",
-                            title: title ?? "",
-                          );
-                          _displaySnackBar(context,'Đã lưu thành công');
-                        }
-                        else _displaySnackBar(context,'Bạn cần đăng nhập');
-                      })
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                            icon: Icon(Icons.share), onPressed: () => share(context)),
+                        IconButton(
+                            icon: Icon(Icons.bookmark),
+                            onPressed: () async {
+                              prefs = await SharedPreferences.getInstance();
+                              bool isLogin = prefs.get('islogin') ?? null;
+                              if (isLogin) {
+                                String userId = prefs.get('userId') ?? null;
+                                await DataBase(uid: userId).saveLoveNews(
+                                  id: id ?? "",
+                                  url: url ?? "",
+                                  photo: photo ?? "",
+                                  title: title ?? "",
+                                );
+                                _displaySnackBar(context,'Đã lưu thành công');
+                              }
+                              else _displaySnackBar(context,'Bạn cần đăng nhập');
+                            })
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
