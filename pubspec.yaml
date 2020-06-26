@@ -8,7 +8,7 @@ description: A new Flutter application.
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# In iOS, build-name is used as CFBundle eê53d54de4rd  ShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
@@ -20,7 +20,7 @@ dependencies:
   firebase_core: ^0.4.4+3
   firebase_analytics: ^5.0.11
   firebase_auth: ^0.15.5+3
-  cloud_firestore: ^0.13.4+2
+  cloud_firestore: ^0.13.7
   cached_network_image: ^2.1.0+1
   get_it: ^4.0.2
   firebase_storage: ^3.1.5
@@ -94,6 +94,9 @@ flutter:
     - family: Times
       fonts:
         - asset: assets/fonts/times_new_roman.ttf
+    - family: IconTab
+      fonts:
+        - asset: assets/icon/fonts/IconTab.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

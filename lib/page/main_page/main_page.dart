@@ -4,6 +4,7 @@ import 'package:flutter_news/page/covid_page/covid.dart';
 import 'package:flutter_news/page/home_page/home_page.dart';
 import 'package:flutter_news/page/profile_page/profile_page.dart';
 import 'package:flutter_news/page/notification_page/notification_page.dart';
+import 'package:flutter_news/Icon/icon_tab_icons.dart';
 
 class MyHomePage extends StatefulWidget {
   final int currentPage;
@@ -77,19 +78,19 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Container(child: Text('Trang chủ'),),
+              icon: Icon(IconTab.newspaper),
+              title: Container(child: Text('Tin tức'),),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.menu),
+              icon: Icon(IconTab.heart),
               title: Container(child: Text('Covid 19'),),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
+              icon: Icon(IconTab.bell),
               title: Container(child: Text('Thông báo'),),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(IconTab.user),
               title: Container(child: Text('Cá nhân'),),
             ),
           ],
