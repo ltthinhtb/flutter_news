@@ -46,7 +46,7 @@ class AppTheme {
     // h6 -> title
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
-    fontSize: 16,
+    fontSize: 36,
     letterSpacing: 0.18,
     color: darkerText,
   );
@@ -55,7 +55,7 @@ class AppTheme {
     // subtitle2 -> subtitle
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
-    fontSize: 14,
+    fontSize: 10,
     letterSpacing: -0.04,
     color: darkText,
   );
@@ -102,17 +102,17 @@ class AppTheme {
     ),
     backgroundColor: lightBG,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.grey[300],
-      selectedItemColor: Colors.blueGrey,
-      unselectedItemColor: Colors.black54
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.black87,
+      unselectedItemColor: Colors.black45,
     ),
     primaryColor: lightPrimary,
     accentColor:  lightAccent,
     cursorColor: lightAccent,
     scaffoldBackgroundColor: Colors.white,
     tabBarTheme: TabBarTheme(
-      unselectedLabelColor: Colors.black45,
-      labelColor: Colors.blueGrey,
+      unselectedLabelColor: Colors.black54,
+      labelColor: Colors.black87,
     ),
     appBarTheme: AppBarTheme(
       elevation: 0.5,
@@ -120,8 +120,8 @@ class AppTheme {
         // ignore: deprecated_member_use
         title: TextStyle(
           color: darkBG,
-          fontSize: 18.0,
-          fontWeight: FontWeight.w800,
+          fontSize: 20.0,
+          //fontWeight: FontWeight.w00,
         ),
       ),
     ),
@@ -132,7 +132,7 @@ class AppTheme {
       color: Colors.white
     ),
     cardColor: Colors.white10,
-    dividerColor: Colors.grey[700],
+    dividerColor: Colors.grey[400],
     iconTheme: IconThemeData(
         color: Colors.white
     ),
@@ -143,14 +143,14 @@ class AppTheme {
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Colors.black45,
-        selectedItemColor: Colors.white70,
-        unselectedItemColor: Colors.white30
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white54
     ),
     brightness: Brightness.dark,
-    backgroundColor: darkBG,
+    backgroundColor: Colors.black87,
     //primaryColor: darkPrimary,
     accentColor: darkAccent,
-    scaffoldBackgroundColor: darkBG,
+  //  scaffoldBackgroundColor: Colors.grey,
     cursorColor: darkAccent,
     appBarTheme: AppBarTheme(
       elevation: 0.5,
@@ -159,7 +159,7 @@ class AppTheme {
         title: TextStyle(
           color: lightBG,
           fontSize: 18.0,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w400,
         ),
       ),
     ),

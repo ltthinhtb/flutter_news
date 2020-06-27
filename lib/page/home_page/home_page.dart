@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               child: Scaffold(
                 appBar: AppBar(
                   automaticallyImplyLeading: false,
-                  title: Container(child: Image.asset('assets/logo.png', height: 70)),
+                  title: Container(child: Image.asset('assets/logoAppbar.png', height: 45)),
                   bottom: PreferredSize(
                     preferredSize: Size.fromHeight(30.0),
                     child: TabBar(
@@ -60,7 +60,8 @@ class _HomePageState extends State<HomePage> {
                         //    indicatorWeight: 6.0,
                         tabs: List<Widget>.generate(_bloc.list.length, (index) {
                           return Tab(
-                            text: _bloc.list[index].category.name,
+                            //text: _bloc.list[index].category.name,
+                            child: Text(_bloc.list[index].category.name, style: TextStyle(fontSize: 16),),
                           );
                         })),
                   ),

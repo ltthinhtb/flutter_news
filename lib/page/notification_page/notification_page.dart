@@ -33,8 +33,13 @@ class _NotificationPageState extends State<NotificationPage> {
         builder: (context, state) {
           if (state is NotificationSuccessState)
             return Scaffold(
-              appBar: AppBar(
-                title: Text('Thông báo'),
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(50),
+                child:  AppBar(
+                  title: Center(
+                    child: Text("Thông báo", style: TextStyle(fontWeight: FontWeight.w700),),
+                  )
+                ),
               ),
               body: LiquidPullToRefresh(
                 showChildOpacityTransition: false,
@@ -61,12 +66,15 @@ class _NotificationPageState extends State<NotificationPage> {
                                           url: state.listDoc[index]['url']+"?view=app&night_mode=${_bloc.isDark}",
                                           title: state.listDoc[index]['title'])));
                             },
-                            child: CustomListItem(
-                              title: state.listDoc[index]['title'],
-                              author: 'Hello',
-                              publishDate: 'Cách đây 29 phút',
-                              category: 'Hôm nay',
-                              thumbnail: state.listDoc[index]['photo'],
+                            child: Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child:  CustomListItem(
+                                title: state.listDoc[index]['title'],
+                                author: 'Hello',
+                                publishDate: 'Cách đây 29 phút',
+                                category: 'Hôm nay',
+                                thumbnail: state.listDoc[index]['photo'],
+                              ),
                             ),
                           );
                         },

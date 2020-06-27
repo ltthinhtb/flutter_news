@@ -10,6 +10,7 @@ import 'package:flutter_news/page/sign_up_page/sign_up_page.dart';
 import 'package:flutter_news/service/auth_service.dart';
 import 'package:flutter_news/theme_bloc/chang_theme.dart';
 import 'package:share/share.dart';
+import 'package:flutter_news/Icon/icon_tab_icons.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -41,9 +42,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Stack(
                       children: [
-                        Image.asset(
-                          'assets/background.png',
-                          fit: BoxFit.cover,
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(10) , bottomLeft: Radius.circular(10))
+                          ),
+                          child: Image.asset(
+                            'assets/background.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,10 +61,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             state.user == null
                                 ? Center(
                                   child: CircleAvatar(
-                                      backgroundColor: Colors.grey,
+                                      backgroundColor: Colors.grey[300],
                                       radius: 50,
                                       child: Icon(
-                                        Icons.person,
+                                        IconTab.user,
                                         color: Colors.white,
                                         size: 50,
                                       ),
@@ -66,13 +72,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 )
                                 : (state.user.photoUrl == null
                                     ? CircleAvatar(
+                                        //backgroundColor: Colors.green[100],
                                         radius: 50,
                                         child: InkWell(
                                           onTap: () {
                                             _showDialog(context);
                                           },
                                           child: Icon(
-                                            Icons.person,
+                                            IconTab.user,
                                             color: Colors.white,
                                             size: 50,
                                           ),
@@ -118,8 +125,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: Text('Đăng nhập',
                                           style: TextStyle(
                                               color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500),),
+                                            fontSize: 21,
+                                            fontWeight: FontWeight.w900),),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -135,8 +142,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: Text('Đăng ký',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500),),
+                                            fontSize: 21,
+                                            fontWeight: FontWeight.w900),),
                                       ),
                                     ],
                                   )
@@ -159,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                               'HOẠT ĐỘNG',
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                             ),
                           ),
                           Container(
@@ -176,7 +183,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       builder: (context) =>
                                           RecentListNewPage()));
                               },
-                              title: Text('Tin đã xem'),
+                              title: Text('Tin đã xem', style: TextStyle(fontSize: 16),),
                               trailing: Icon(Icons.chevron_right),
                               leading: Icon(Icons.update),
                             ),
@@ -194,7 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => SaveListNewPage()));
                               },
-                              title: Text('Tin yêu thích'),
+                              title: Text('Tin yêu thích', style: TextStyle(fontSize: 16)),
                               trailing: Icon(Icons.chevron_right),
                               leading: Icon(Icons.bookmark),
                             ),
@@ -217,13 +224,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                               'TÙY CHỈNH',
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: ListTile(
-                              title: Text('Chế độ tối'),
+                              title: Text('Chế độ tối', style: TextStyle(fontSize: 16)),
                               trailing: Switch(
                                 value: _bloc.optionValue == null
                                     ? false
@@ -243,13 +250,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             visible: _bloc.isLogin,
                             child: Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               child: ListTile(
                                 onTap: () {
                                   BlocProvider.of<ProfileSettingBloc>(context)
                                       .add(LogOut());
                                 },
-                                title: Text('Đăng xuất'),
+                                title: Text('Đăng xuất', style: TextStyle(fontSize: 16)),
                                 leading: Icon(Icons.exit_to_app),
                               ),
                             ),

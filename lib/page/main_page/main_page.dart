@@ -64,38 +64,48 @@ class _MyHomePageState extends State<MyHomePage> {
               .copyWith(caption: TextStyle(color: Colors.grey[500]),
           ),
         ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _currentIndex,
-          //selectedIndex: _currentIndex,
-//        onItemSelected: (index) {
-//          setState(() => _currentIndex = index);
-//          _pageController.jumpToPage(index);
-//        },
-          onTap: (index) {
-            setState(() => _currentIndex = index);
-            _pageController.jumpToPage(index);
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(IconTab.newspaper),
-              title: Container(child: Text('Tin tức'),),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(IconTab.heart),
-              title: Container(child: Text('Covid 19'),),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(IconTab.bell),
-              title: Container(child: Text('Thông báo'),),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(IconTab.user),
-              title: Container(child: Text('Cá nhân'),),
-            ),
-          ],
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide( color: Colors.black12, width: 0.8)
+            )
+          ),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _currentIndex,
+            //selectedIndex: _currentIndex,
+  //        onItemSelected: (index) {
+  //          setState(() => _currentIndex = index);
+  //          _pageController.jumpToPage(index);
+  //        },
+            onTap: (index) {
+              setState(() => _currentIndex = index);
+              _pageController.jumpToPage(index);
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(IconTab.newspaper),
+                title: Container(child: Text('Tin tức', style: ts,),),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(IconTab.heart),
+                title: Container(child: Text('Covid 19', style: ts,),),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(IconTab.bell),
+                title: Container(child: Text('Thông báo', style: ts,),),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(IconTab.user),
+                title: Container(child: Text('Cá nhân', style: ts,),),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+  TextStyle ts = TextStyle(
+    fontWeight: FontWeight.w500,
+  );
 }
