@@ -177,5 +177,5 @@ class _CovidPageState extends State<CovidPage> {
       }),
     );
   }
-  TextStyle ts = TextStyle(fontSize: 13, color: Colors.white70);
+  TextStyle ts = TextStyle(fontSize: 13);
 }
