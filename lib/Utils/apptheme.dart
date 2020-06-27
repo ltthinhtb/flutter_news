@@ -87,6 +87,7 @@ class AppTheme {
   static Color badgeColor = Colors.red;
 
   static ThemeData lightTheme = ThemeData(
+
     primaryIconTheme: IconThemeData(
         color: Colors.black87
     ),

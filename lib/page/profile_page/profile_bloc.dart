@@ -15,7 +15,7 @@ import 'profile.dart';
 class ProfileSettingBloc
     extends Bloc<ProfileSettingEvent, ProfileSettingState> {
   SharedPreferences prefs;
-  bool optionValue;
+  bool isDark;
   User user;
   File file;
   AuthService authService = AuthService();
@@ -29,21 +29,20 @@ class ProfileSettingBloc
       ProfileSettingEvent event) async* {
     if (event is LoadProfileEvent) {
       yield LoadingDataState();
-      optionValue = await getOption();
+      isDark = await getOption();
       isLogin = await authService.checkLogin();
-      print('trang thai là $isLogin');
       if (isLogin) {
         user = await getUser();
       } else
         user = null;
-      yield DataSuccessState(optionValue, user);
+      yield DataSuccessState(isDark, user);
     }
 
     if (event is LogOut) {
       yield LoadingDataState();
       await authService.signOut();
       add(LoadProfileEvent());
-      yield DataSuccessState(optionValue, null);
+      yield DataSuccessState(isDark, null);
     }
 
     if (event is UpdateAvatarEvent) {
@@ -54,7 +53,7 @@ class ProfileSettingBloc
               : ImageSource.gallery);
       await uploadFile(file);
       print(user.photoUrl);
-      yield DataSuccessState(optionValue, user);
+      yield DataSuccessState(isDark, user);
     }
   }
 
