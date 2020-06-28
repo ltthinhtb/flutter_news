@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news/Icon/icon_tab_icons.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -40,11 +41,18 @@ class _CommentPageState extends State<CommentPage> {
             return Scaffold(
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(50),
-                child: AppBar(
-                    title: Text(
-                      "Bình luận",
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    )),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(_bloc.isDark == 1 ? "assets/bg_appbar.png" : "assets/bg_appbar_light.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: AppBar(
+                    backgroundColor: Color.fromRGBO(255, 255, 255, _bloc.isDark == 1 ? 0 : 0.3),
+                    title: Center( child: Text("Bình luận        " , style: TextStyle(fontWeight: FontWeight.w500))),
+                  ),
+                ),
               ),
               body: LiquidPullToRefresh(
                 showChildOpacityTransition: false,
@@ -65,7 +73,12 @@ class _CommentPageState extends State<CommentPage> {
                           Timestamp timestamp =
                               state.listDoc['comment'][index]['timestamp'];
                           return Container(
-                              padding: EdgeInsets.only(top: 10),
+                              padding: EdgeInsets.only(top: 5),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.grey[300], width: 1.0)
+                                  )
+                              ),
                               child: ListTile(
                                 leading: Container(
                                     height: 50,
@@ -73,24 +86,29 @@ class _CommentPageState extends State<CommentPage> {
                                     child: state.listDoc['comment'][index]
                                                 ['url'] !=
                                             null
-                                        ? Image.network(state.listDoc['comment']
-                                            [index]['url'])
+                                        ? CircleAvatar(
+                                            backgroundImage: NetworkImage(state.listDoc['comment']
+                                            [index]['url'],),
+                                            radius: 15,
+                                          )
                                         : Icon(Icons.person)),
                                 title: Text(state.listDoc['comment'][index]
                                     ['comment_title']),
                                 subtitle: Container(
                                   margin: EdgeInsets.only(right: 40),
+
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.start,
                                     children: [
-                                      Text('${timestamp.toDate().day}' +
+
+                                      Text('' + state.listDoc['comment'][index]
+                                          ['userName'] + ' | ', style: TextStyle(fontSize: 11),),
+                                      Text('' + '${timestamp.toDate().day}' +
                                           "-${timestamp.toDate().month}" +
-                                          "-${timestamp.toDate().year}"),
-                                      Text(state.listDoc['comment'][index]
-                                          ['userName'])
+                                          "-${timestamp.toDate().year}" , style: TextStyle(fontSize: 11),),
                                     ],
                                   ),
                                 ),
@@ -124,10 +142,10 @@ class _CommentPageState extends State<CommentPage> {
                               fontSize: 15.0,
                             ),
                             decoration: InputDecoration(
-                              hintText: "Bình luận của bạn...",
+                              hintText: "Bình luận của bạn...                         ",
                               prefixIcon: Icon(
-                                Icons.person,
-                                size: 30,
+                                IconTab.user,
+                                size: 25,
                               ),
                             ),
                           ),
@@ -139,10 +157,9 @@ class _CommentPageState extends State<CommentPage> {
                                   id: widget.id.toString(),
                                   comment: commentController.text));
                             },
-                            child: Text(
-                              'Gửi',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 20),
+                            child: Icon(
+                              Icons.send,
+                              color: Colors.grey[500],
                             ),
                           ),
                         )

@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 : (state.user.photoUrl == null
                                     ? CircleAvatar(
                                         //backgroundColor: Colors.green[100],
-                                        radius: 50,
+                                        radius: 30,
                                         child: InkWell(
                                           onTap: () {
                                             _showDialog(context);
@@ -80,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Icon(
                                             IconTab.user,
                                             color: Colors.white,
-                                            size: 50,
+                                            size: 30,
                                           ),
                                         ),
                                       )
@@ -90,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             _showDialog(context);
                                           },
                                         ),
-                                        radius: 50,
+                                        radius: 30,
                                         backgroundImage:
                                             NetworkImage(state.user.photoUrl),
                                       )),

@@ -20,6 +20,7 @@ class WebViewPageBloc extends Bloc<WebViewPageEvent, WebViewPageState>
   bool isLogin;
   DocumentSnapshot doc;
   int count = 0;
+  bool isDark;
 
   @override
   // TODO: implement initialState
@@ -34,7 +35,7 @@ class WebViewPageBloc extends Bloc<WebViewPageEvent, WebViewPageState>
       if(isLogin) user = await getUser();
       else user = null;
       //user = await getUser();
-
+      isDark = await getOption();
       yield WebViewPageSuccess(user: user);
     }
   }
@@ -56,5 +57,10 @@ class WebViewPageBloc extends Bloc<WebViewPageEvent, WebViewPageState>
     else
       count = doc.data["comment"].length;
     return count;
+  }
+  Future<bool> getOption() async {
+    prefs = await SharedPreferences.getInstance();
+    bool option = prefs.get('theme_option') ?? false;
+    return option;
   }
 }

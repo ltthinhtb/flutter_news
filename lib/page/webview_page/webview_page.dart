@@ -81,8 +81,20 @@ class _WebViewPageState extends State<WebViewPage> {
                 );
               if (state is WebViewPageSuccess) {
                 return WebviewScaffold(
-                  appBar: PreferredSize(
-                      preferredSize: Size.fromHeight(50), child: AppBar()),
+                  appBar:PreferredSize(
+                    preferredSize: Size.fromHeight(50),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(_bloc.isDark ? "assets/bg_appbar.png" : "assets/bg_appbar_light.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: AppBar(
+                        backgroundColor: Color.fromRGBO(255, 255, 255, _bloc.isDark  ? 0 : 0.3),
+                      ),
+                    ),
+                  ),
                   url: widget.url,
                   userAgent: kAndroidUserAgent,
                   javascriptChannels: jsChannels,
@@ -125,28 +137,34 @@ class _WebViewPageState extends State<WebViewPage> {
                               },
                               child: Container(
                                 height: 40,
-                                width: 200,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Center(
-                                      child: state.user == null
-                                          ? Icon(
-                                              Icons.person,
-                                              size: 30,
-                                            )
-                                          : state.user.photoUrl == null
+                                    Container(
+                                      padding: EdgeInsets.only(right: 7),
+                                      child: Center(
+                                          child: state.user == null
                                               ? Icon(
-                                                  Icons.person,
-                                                  size: 30,
-                                                )
-                                              : Image.network(
-                                                  state.user.photoUrl,
-                                                  width: 30,
-                                                  height: 30,
-                                                ),
+                                            Icons.person,
+                                            size: 30,
+                                          )
+                                              : state.user.photoUrl == null
+                                              ? Icon(
+                                            Icons.person,
+                                            size: 30,
+                                          )
+                                              : CircleAvatar(
+                                            backgroundImage: NetworkImage(state.user.photoUrl),
+                                            radius: 15,
+                                          )
+//                                      Image.network(
+//                                                  state.user.photoUrl,
+//                                                  width: 30,
+//                                                  height: 30,
+//                                                ),
+                                      ),
                                     ),
                                     Center(child: Text('Bình luận của bạn'))
                                   ],
@@ -175,7 +193,7 @@ class _WebViewPageState extends State<WebViewPage> {
                                                 minWidth: 12,
                                                 minHeight: 12,
                                               ),
-                                              child: Text("${_bloc.count}")),
+                                              child: Text("${_bloc.count}", style: TextStyle(fontSize: 9),)),
                                         )
                                       ],
                                     ),
