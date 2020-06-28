@@ -1,15 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news/page/notification_page/notification_event.dart';
-import 'package:flutter_news/page/notification_page/notification_state.dart';
+import 'package:flutter_news/models/response/user.dart';
+import 'package:flutter_news/service/auth_service.dart';
+import 'package:flutter_news/service/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'notification.dart';
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   BuildContext context;
   int isDark = 0;
   SharedPreferences prefs;
+  AuthService authService = AuthService();
   List<DocumentSnapshot> listDoc;
+  bool isLogin;
 
   @override
   // TODO: implement initialState
@@ -18,7 +22,10 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   @override
   Stream<NotificationState> mapEventToState(NotificationEvent event) async* {
     if (event is LoadNotificationEvent) {
-      yield event.isRefresh ? InitNotificationState() :  NotificationLoadingState();
+      yield event.isRefresh
+          ? InitNotificationState()
+          : NotificationLoadingState();
+      isLogin = await authService.checkLogin();
       if (await getOption())
         isDark = 1;
       else
@@ -26,13 +33,12 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       await getData();
       yield NotificationSuccessState(listDoc);
     }
-
   }
+
   Future<List<DocumentSnapshot>> getData() async {
     final QuerySnapshot result =
-    await Firestore.instance.collection('notification').getDocuments();
+        await Firestore.instance.collection('notification').getDocuments();
     listDoc = result.documents;
-    print(listDoc.length);
     return listDoc;
   }
 
@@ -41,4 +47,5 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     bool option = prefs.get('theme_option') ?? false;
     return option;
   }
+
 }

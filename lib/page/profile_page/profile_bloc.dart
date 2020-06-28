@@ -47,6 +47,7 @@ class ProfileSettingBloc
 
     if (event is UpdateAvatarEvent) {
       yield InitProfileSettingState();
+      // ignore: deprecated_member_use
       file = await ImagePicker.pickImage(
           source: event.isUploadFromCamera
               ? ImageSource.camera
