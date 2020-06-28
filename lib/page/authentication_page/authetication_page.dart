@@ -7,6 +7,7 @@ import 'package:flutter_news/page/main_page/main_page.dart';
 import 'package:flutter_news/page/profile_page/profile.dart';
 import 'package:flutter_news/page/sign_up_page/sign_up_page.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class AuthenticationPage extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class AuthenticationPage extends StatefulWidget {
 class _AuthenticationPageState extends State<AuthenticationPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final flutterWebViewPlugin = FlutterWebviewPlugin();
 
   // ignore: close_sinks
   ProfileSettingBloc profileSettingBloc;
@@ -24,6 +26,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   @override
   void initState() {
     // TODO: implement initState
+    flutterWebViewPlugin.close();
     profileSettingBloc = ProfileSettingBloc();
     _bloc = AuthenticationBloc();
     super.initState();

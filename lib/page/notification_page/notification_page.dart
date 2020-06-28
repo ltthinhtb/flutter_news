@@ -35,20 +35,11 @@ class _NotificationPageState extends State<NotificationPage> {
             return Scaffold(
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(50),
-                child:  Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(_bloc.isDark == 1 ? "assets/bg_appbar.png" : "assets/bg_appbar_light.png"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: AppBar(
-                      backgroundColor: Color.fromRGBO(255, 255, 255, _bloc.isDark == 1 ? 0 : 0.3),
-                      title: Center(
-                        child: Text("Thông báo         ", style: TextStyle(fontWeight: FontWeight.w500),),
-                      )
-                  ),
-                )
+                child:  AppBar(
+                  title: Center(
+                    child: Text("Thông báo", style: TextStyle(fontWeight: FontWeight.w700),),
+                  )
+                ),
               ),
               body: LiquidPullToRefresh(
                 showChildOpacityTransition: false,

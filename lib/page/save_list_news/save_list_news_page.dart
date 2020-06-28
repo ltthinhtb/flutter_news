@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_news/page/web_page/webview_page.dart';
+import 'package:flutter_news/page/webview_page/webview.dart';
+
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -71,9 +72,7 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                               icon: Icons.more_horiz,
                             ),
                             IconSlideAction(
-                              onTap: (){
-
-                              },
+                              onTap: () {},
                               caption: 'Xóa bỏ',
                               color: Colors.red,
                               icon: Icons.delete,
@@ -89,8 +88,9 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                                               ['love_id'],
                                           photo: state.doc.data['love_news']
                                               [index]['love_photo'],
-                                          url:
-                                          state.doc.data['recent_news'][index]['url']+"?view=app&night_mode=${_bloc.isDark}",
+                                          url: state.doc.data['recent_news']
+                                                  [index]['url'] +
+                                              "?view=app&night_mode=${_bloc.isDark}",
                                           title: state.doc.data['love_news']
                                               [index]['love_title'])));
                             },
