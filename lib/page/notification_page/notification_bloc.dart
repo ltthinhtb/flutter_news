@@ -1,10 +1,9 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news/models/response/user.dart';
 import 'package:flutter_news/service/auth_service.dart';
-import 'package:flutter_news/service/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'notification.dart';
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
@@ -47,5 +46,4 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     bool option = prefs.get('theme_option') ?? false;
     return option;
   }
-
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:flutter_news/page/web_page/webview_page.dart';
+import 'package:flutter_news/page/webview_page/webview.dart';
 
 import 'package:flutter_news/widget/list_item.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
