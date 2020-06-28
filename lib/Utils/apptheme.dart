@@ -110,7 +110,7 @@ class AppTheme {
     primaryColor: lightPrimary,
     accentColor:  lightAccent,
     cursorColor: lightAccent,
-    scaffoldBackgroundColor: Colors.white,
+   // scaffoldBackgroundColor: Colors.white,
     tabBarTheme: TabBarTheme(
       unselectedLabelColor: Colors.black54,
       labelColor: Colors.black87,
@@ -154,7 +154,7 @@ class AppTheme {
   //  scaffoldBackgroundColor: Colors.grey,
     cursorColor: darkAccent,
     appBarTheme: AppBarTheme(
-      elevation: 0.5,
+      //elevation: 0.5,
       textTheme: TextTheme(
         // ignore: deprecated_member_use
         title: TextStyle(

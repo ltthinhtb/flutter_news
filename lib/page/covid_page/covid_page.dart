@@ -30,29 +30,38 @@ class _CovidPageState extends State<CovidPage> {
             length: 2,
             child: Scaffold(
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(80),
-                child: AppBar(
-                  automaticallyImplyLeading: false,
-                  title:  Center(
-                    child: Container(
-                      child: PreferredSize(
-                        preferredSize: Size.fromHeight(70),
-                        child: Text("Thông tin Covid 19", style: TextStyle(fontWeight: FontWeight.w700),),
+                preferredSize: Size.fromHeight(75),
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(_bloc.isDark ? "assets/bg_appbar.png" : "assets/bg_appbar_light.png"),
+                        fit: BoxFit.cover,
+                      ),
+                  ),
+                  child: AppBar(
+                    backgroundColor: Color.fromRGBO(255, 255, 255, _bloc.isDark ? 0 : 0.3),
+                    automaticallyImplyLeading: false,
+                    title:  Center(
+                      child: Container(
+                        child: PreferredSize(
+                          preferredSize: Size.fromHeight(20),
+                          child: Text("Thông tin Covid 19", style: TextStyle(fontWeight: FontWeight.w500, color: _bloc.isDark ? Colors.white : Colors.black87),),
+                        ),
+                      ),
+                    ),
+                    bottom: PreferredSize(
+                      preferredSize: Size.fromHeight(10.0),
+                      child: TabBar(
+                        tabs: [
+                          Container(
+                              margin: EdgeInsets.all(10), child: Text('Việt Nam' , style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),)),
+                          Container(
+                              margin: EdgeInsets.all(10), child: Text('Thế Giới', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400,)))
+                        ],
                       ),
                     ),
                   ),
-                  bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(10.0),
-                    child: TabBar(
-                      tabs: [
-                        Container(
-                            margin: EdgeInsets.all(10), child: Text('Việt Nam' , style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),)),
-                        Container(
-                            margin: EdgeInsets.all(10), child: Text('Thế Giới', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400,)))
-                      ],
-                    ),
-                  ),
-                ),
+                )
               ),
               body: TabBarView(
                 children: [

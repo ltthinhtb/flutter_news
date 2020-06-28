@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           decoration: BoxDecoration(
             border: Border(
-              top: BorderSide( color: Colors.black12, width: 0.8)
+              top: BorderSide( color: Colors.black12, width: 1.2)
             )
           ),
           child: BottomNavigationBar(

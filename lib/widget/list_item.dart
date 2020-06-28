@@ -33,6 +33,7 @@ class _CustomListItemState extends State<CustomListItem> {
             children: <Widget>[
               Container(
                 height: 80,
+                margin: EdgeInsets.only(right: 10),
                 //width: 100,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
@@ -49,7 +50,7 @@ class _CustomListItemState extends State<CustomListItem> {
                     child: Text(
                       widget.title,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -58,18 +59,19 @@ class _CustomListItemState extends State<CustomListItem> {
                     padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                     child: Row(
                       children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: Text(widget.publishDate,
+                              style: TextStyle(color: AppTheme.deactivatedText,fontSize: 11)),
+                        ),
                         Text(
                           widget.category,
-                          style: TextStyle(color: AppTheme.deactivatedText,fontSize: 12),
+                          style: TextStyle(color: AppTheme.deactivatedText,fontSize: 11),
                         ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
-                    child: Text(widget.publishDate,
-                        style: TextStyle(color: AppTheme.deactivatedText,fontSize: 12)),
-                  )
+
                 ],
               ))
             ],

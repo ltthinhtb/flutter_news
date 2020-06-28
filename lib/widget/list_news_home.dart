@@ -34,7 +34,7 @@ class _ListNewsHomeState extends State<ListNewsHome> {
       children: [
         Text(
           widget.title,
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
         SizedBox(
           height: 5,
@@ -53,7 +53,7 @@ class _ListNewsHomeState extends State<ListNewsHome> {
           height: 5,
         ),
         Text(
-          widget.lead,
+          widget.lead, style: TextStyle(fontSize: 13),
         ),
         SizedBox(
           height: 5,
@@ -62,14 +62,14 @@ class _ListNewsHomeState extends State<ListNewsHome> {
           children: [
             Text(
               "4 giờ trước",
-              style: TextStyle(color: AppTheme.deactivatedText,fontSize: 12),
+              style: TextStyle(color: AppTheme.deactivatedText,fontSize: 11),
             ),
             SizedBox(
               width: 10,
             ),
             Text(
               widget.category,
-              style: TextStyle(color: AppTheme.deactivatedText,fontSize: 12),
+              style: TextStyle(color: AppTheme.deactivatedText,fontSize: 11),
             )
           ],
         )

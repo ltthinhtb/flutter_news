@@ -50,20 +50,32 @@ class _HomePageState extends State<HomePage> {
             return DefaultTabController(
               length: _bloc.list.length,
               child: Scaffold(
-                appBar: AppBar(
-                  automaticallyImplyLeading: false,
-                  title: Container(child: Image.asset('assets/logoAppbar.png', height: 45)),
-                  bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(30.0),
-                    child: TabBar(
-                        isScrollable: true,
-                        //    indicatorWeight: 6.0,
-                        tabs: List<Widget>.generate(_bloc.list.length, (index) {
-                          return Tab(
-                            //text: _bloc.list[index].category.name,
-                            child: Text(_bloc.list[index].category.name, style: TextStyle(fontSize: 16),),
-                          );
-                        })),
+                appBar: PreferredSize(
+                  preferredSize: Size.fromHeight(85),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(_bloc.isDark == 1 ? "assets/bg_appbar.png" : "assets/bg_appbar_light.png"),
+                          fit: BoxFit.cover,
+                        )
+                    ),
+                    child: AppBar(
+                      backgroundColor: Color.fromRGBO(255, 255, 255, _bloc.isDark == 1 ? 0 : 0.3),
+                      automaticallyImplyLeading: false,
+                      title: Container(child: Image.asset('assets/logoAppbar.png', height: 45)),
+                      bottom: PreferredSize(
+                        preferredSize: Size.fromHeight(25.0),
+                        child: TabBar(
+                            isScrollable: true,
+                            //    indicatorWeight: 6.0,
+                            tabs: List<Widget>.generate(_bloc.list.length, (index) {
+                              return Tab(
+                                //text: _bloc.list[index].category.name,
+                                child: Text(_bloc.list[index].category.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
+                              );
+                            })),
+                      ),
+                    ),
                   ),
                 ),
                 body: TabBarView(

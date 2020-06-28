@@ -43,14 +43,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     Stack(
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10))),
                           child: Image.asset(
                             !_bloc.isDark
-                                ? 'assets/background.png'
-                                : 'assets/background_dark.png',
+                                ? 'assets/bg_personal.png'
+                                : 'assets/bg_personal_dark.png',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -63,16 +59,16 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             state.user == null
                                 ? Center(
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.grey[300],
-                                      radius: 50,
+                                  child: CircleAvatar(
+                                      backgroundColor: _bloc.isDark ? Colors.black : Colors.black54,
+                                      radius: 30,
                                       child: Icon(
                                         IconTab.user,
                                         color: Colors.white,
-                                        size: 50,
+                                        size: 30,
                                       ),
                                     ),
-                                  )
+                                )
                                 : (state.user.photoUrl == null
                                     ? CircleAvatar(
                                         //backgroundColor: Colors.green[100],
@@ -125,13 +121,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   builder: (context) =>
                                                       AuthenticationPage()));
                                         },
-                                        child: Text(
-                                          'Đăng nhập',
+                                        child: Text('Đăng nhập',
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 21,
-                                              fontWeight: FontWeight.w900),
-                                        ),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -144,13 +138,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   builder: (context) =>
                                                       SignUpPage()));
                                         },
-                                        child: Text(
-                                          'Đăng ký',
+                                        child: Text('Đăng ký',
                                           style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 21,
-                                              fontWeight: FontWeight.w900),
-                                        ),
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),),
                                       ),
                                     ],
                                   )
@@ -173,8 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                               'HOẠT ĐỘNG',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 17),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16 , color: _bloc.isDark ? Colors.white : Colors.blue),
                             ),
                           ),
                           Container(
@@ -191,10 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       builder: (context) =>
                                           RecentListNewPage()));
                               },
-                              title: Text(
-                                'Tin đã xem',
-                                style: TextStyle(fontSize: 16),
-                              ),
+                              title: Text('Đọc gần đây', style: TextStyle(fontSize: 16),),
                               trailing: Icon(Icons.chevron_right),
                               leading: Icon(Icons.update),
                             ),
@@ -212,8 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => SaveListNewPage()));
                               },
-                              title: Text('Tin yêu thích',
-                                  style: TextStyle(fontSize: 16)),
+                              title: Text('Đã đánh dấu', style: TextStyle(fontSize: 16)),
                               trailing: Icon(Icons.chevron_right),
                               leading: Icon(Icons.bookmark),
                             ),
@@ -236,15 +223,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                               'TÙY CHỈNH',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 17),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: _bloc.isDark ? Colors.white : Colors.blue),
                             ),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: ListTile(
-                              title: Text('Chế độ tối',
-                                  style: TextStyle(fontSize: 16)),
+                              title: Text('Chế độ tối', style: TextStyle(fontSize: 16)),
                               trailing: Switch(
                                 value: _bloc.isDark == null
                                     ? false
@@ -270,8 +255,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   BlocProvider.of<ProfileSettingBloc>(context)
                                       .add(LogOut());
                                 },
-                                title: Text('Đăng xuất',
-                                    style: TextStyle(fontSize: 16)),
+                                title: Text('Đăng xuất', style: TextStyle(fontSize: 16)),
                                 leading: Icon(Icons.exit_to_app),
                               ),
                             ),
