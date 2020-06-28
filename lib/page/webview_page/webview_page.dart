@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news/page/authentication_page/authentication.dart';
 import 'package:flutter_news/page/comment_page/comment.dart';
-import 'package:flutter_news/page/profile_page/profile.dart';
 import 'package:flutter_news/service/database.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:share/share.dart';
@@ -41,8 +40,6 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> {
-  // ignore: close_sinks
-  ProfileSettingBloc profileSettingBloc;
   WebViewPageBloc _bloc;
 
   @override
@@ -135,16 +132,21 @@ class _WebViewPageState extends State<WebViewPage> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Center(
-                                      child: state.user.photoUrl == null
+                                      child: state.user == null
                                           ? Icon(
                                               Icons.person,
                                               size: 30,
                                             )
-                                          : Image.network(
-                                              state.user.photoUrl,
-                                              width: 30,
-                                              height: 30,
-                                            ),
+                                          : state.user.photoUrl == null
+                                              ? Icon(
+                                                  Icons.person,
+                                                  size: 30,
+                                                )
+                                              : Image.network(
+                                                  state.user.photoUrl,
+                                                  width: 30,
+                                                  height: 30,
+                                                ),
                                     ),
                                     Center(child: Text('Bình luận của bạn'))
                                   ],

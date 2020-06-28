@@ -17,8 +17,9 @@ class WebViewPageBloc extends Bloc<WebViewPageEvent, WebViewPageState>
   String errorEmail;
   User user;
   BuildContext context;
+  bool isLogin;
   DocumentSnapshot doc;
-  int count;
+  int count = 0;
 
   @override
   // TODO: implement initialState
@@ -28,8 +29,12 @@ class WebViewPageBloc extends Bloc<WebViewPageEvent, WebViewPageState>
   Stream<WebViewPageState> mapEventToState(WebViewPageEvent event) async* {
     if (event is LoadWebViewEvent) {
       yield event.isRefresh ? InitWebViewPageState() : WebViewPageLoading();
-      user = await getUser();
-      await getData(id: event.id);
+      count = await getData(id: event.id) ;
+      isLogin = await authService.checkLogin();
+      if(isLogin) user = await getUser();
+      else user = null;
+      //user = await getUser();
+
       yield WebViewPageSuccess(user: user);
     }
   }
@@ -41,7 +46,7 @@ class WebViewPageBloc extends Bloc<WebViewPageEvent, WebViewPageState>
     return user;
   }
 
-  Future<DocumentSnapshot> getData({String id}) async {
+  Future<int> getData({String id}) async {
     prefs = await SharedPreferences.getInstance();
     final databaseReference = Firestore.instance;
     var usersRef = databaseReference.collection("post");
@@ -50,6 +55,6 @@ class WebViewPageBloc extends Bloc<WebViewPageEvent, WebViewPageState>
       count = 0;
     else
       count = doc.data["comment"].length;
-    return doc;
+    return count;
   }
 }
