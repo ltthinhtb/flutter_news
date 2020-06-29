@@ -17,7 +17,7 @@ class AuthenticationPage extends StatefulWidget {
 class _AuthenticationPageState extends State<AuthenticationPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final flutterWebViewPlugin = FlutterWebviewPlugin();
+
 
   // ignore: close_sinks
   ProfileSettingBloc profileSettingBloc;
@@ -26,7 +26,6 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   @override
   void initState() {
     // TODO: implement initState
-    flutterWebViewPlugin.close();
     profileSettingBloc = ProfileSettingBloc();
     _bloc = AuthenticationBloc();
     super.initState();

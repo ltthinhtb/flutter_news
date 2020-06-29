@@ -40,11 +40,13 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> {
+  final flutterWebViewPlugin = FlutterWebviewPlugin();
   WebViewPageBloc _bloc;
 
   @override
   void initState() {
     // TODO: implement initState
+    flutterWebViewPlugin.close();
     _bloc = WebViewPageBloc();
     _bloc.add(LoadWebViewEvent(isRefresh: true, id: widget.id.toString()));
     super.initState();
@@ -81,17 +83,20 @@ class _WebViewPageState extends State<WebViewPage> {
                 );
               if (state is WebViewPageSuccess) {
                 return WebviewScaffold(
-                  appBar:PreferredSize(
+                  appBar: PreferredSize(
                     preferredSize: Size.fromHeight(50),
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(_bloc.isDark ? "assets/bg_appbar.png" : "assets/bg_appbar_light.png"),
+                          image: AssetImage(_bloc.isDark
+                              ? "assets/bg_appbar.png"
+                              : "assets/bg_appbar_light.png"),
                           fit: BoxFit.cover,
                         ),
                       ),
                       child: AppBar(
-                        backgroundColor: Color.fromRGBO(255, 255, 255, _bloc.isDark  ? 0 : 0.3),
+                        backgroundColor: Color.fromRGBO(
+                            255, 255, 255, _bloc.isDark ? 0 : 0.3),
                       ),
                     ),
                   ),
@@ -120,6 +125,7 @@ class _WebViewPageState extends State<WebViewPage> {
                                 prefs = await SharedPreferences.getInstance();
                                 bool isLogin = prefs.get('islogin') ?? false;
                                 if (isLogin) {
+                                  flutterWebViewPlugin.close();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -128,6 +134,7 @@ class _WebViewPageState extends State<WebViewPage> {
                                                 url: widget.url,
                                               )));
                                 } else {
+                                  flutterWebViewPlugin.close();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -147,24 +154,26 @@ class _WebViewPageState extends State<WebViewPage> {
                                       child: Center(
                                           child: state.user == null
                                               ? Icon(
-                                            Icons.person,
-                                            size: 30,
-                                          )
+                                                  Icons.person,
+                                                  size: 30,
+                                                )
                                               : state.user.photoUrl == null
-                                              ? Icon(
-                                            Icons.person,
-                                            size: 30,
-                                          )
-                                              : CircleAvatar(
-                                            backgroundImage: NetworkImage(state.user.photoUrl),
-                                            radius: 15,
-                                          )
+                                                  ? Icon(
+                                                      Icons.person,
+                                                      size: 30,
+                                                    )
+                                                  : CircleAvatar(
+                                                      backgroundImage:
+                                                          NetworkImage(state
+                                                              .user.photoUrl),
+                                                      radius: 15,
+                                                    )
 //                                      Image.network(
 //                                                  state.user.photoUrl,
 //                                                  width: 30,
 //                                                  height: 30,
 //                                                ),
-                                      ),
+                                          ),
                                     ),
                                     Center(child: Text('Bình luận của bạn'))
                                   ],
@@ -193,7 +202,10 @@ class _WebViewPageState extends State<WebViewPage> {
                                                 minWidth: 12,
                                                 minHeight: 12,
                                               ),
-                                              child: Text("${_bloc.count}", style: TextStyle(fontSize: 9),)),
+                                              child: Text(
+                                                "${_bloc.count}",
+                                                style: TextStyle(fontSize: 9),
+                                              )),
                                         )
                                       ],
                                     ),
@@ -203,6 +215,7 @@ class _WebViewPageState extends State<WebViewPage> {
                                       bool isLogin =
                                           prefs.get('islogin') ?? false;
                                       if (isLogin) {
+                                        flutterWebViewPlugin.close();
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(

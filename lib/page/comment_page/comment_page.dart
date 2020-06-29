@@ -19,12 +19,10 @@ class CommentPage extends StatefulWidget {
 
 class _CommentPageState extends State<CommentPage> {
   CommentBloc _bloc;
-  final flutterWebViewPlugin = FlutterWebviewPlugin();
 
   @override
   void initState() {
     print(widget.id);
-    flutterWebViewPlugin.close();
     _bloc = CommentBloc();
     _bloc.add(LoadCommentEvent(isRefresh: true, id: widget.id.toString()));
     super.initState();
