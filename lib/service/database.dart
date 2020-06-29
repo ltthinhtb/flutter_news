@@ -104,6 +104,14 @@ class DataBase {
     });
   }
 
+  Future deleteComment(
+      {
+        String id,
+      String idComment}) async {
+    var usersRef = databaseReference.collection("post");
+    usersRef.document(id).collection('comment').document(idComment).delete();
+  }
+
   Future updateAvatar(String url) async {
     var usersRef = databaseReference.collection("users");
     await usersRef.document(uid).updateData({'photoUrl': url});

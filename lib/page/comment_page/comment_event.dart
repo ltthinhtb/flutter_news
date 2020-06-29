@@ -30,10 +30,27 @@ class SaveCommentEvent extends CommentEvent {
   final String id;
 
   SaveCommentEvent(
-      {this.userName, this.userId, this.url, this.comment, this.timestamp,this.id});
+      {this.userName,
+      this.userId,
+      this.url,
+      this.comment,
+      this.timestamp,
+      this.id});
 
   @override
   String toString() {
     return 'SaveCommentEvent{userName: $userName, userId: $userId, url: $url, comment: $comment, timestamp: $timestamp}';
+  }
+}
+
+class DeleteCommentEvent extends CommentEvent {
+  final String id;
+  final String idComment;
+
+  DeleteCommentEvent({this.id, this.idComment});
+
+  @override
+  String toString() {
+    return 'DeleteCommentEvent{id: $id, idComment: $idComment}';
   }
 }

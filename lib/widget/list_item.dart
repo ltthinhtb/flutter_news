@@ -4,17 +4,13 @@ import 'package:flutter_news/Utils/apptheme.dart';
 class CustomListItem extends StatefulWidget {
   final String thumbnail;
   final String title;
-  final String author;
   final String publishDate;
-  final String category;
 
   CustomListItem({
     Key key,
     @required this.thumbnail,
     @required this.title,
-    @required this.author,
     @required this.publishDate,
-    this.category,
   }) : super(key: key);
 
   @override
@@ -63,10 +59,6 @@ class _CustomListItemState extends State<CustomListItem> {
                           padding: const EdgeInsets.only(right: 5),
                           child: Text(widget.publishDate,
                               style: TextStyle(color: AppTheme.deactivatedText,fontSize: 11)),
-                        ),
-                        Text(
-                          widget.category,
-                          style: TextStyle(color: AppTheme.deactivatedText,fontSize: 11),
                         ),
                       ],
                     ),

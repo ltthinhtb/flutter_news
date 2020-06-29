@@ -134,8 +134,6 @@ class _HomePageState extends State<HomePage> {
                           },
                               child: CustomListItem(
                                   title: _bloc.listNews[i].data[index].title,
-                                  author: 'Thịnh',
-                                  category: _bloc.listNews[i].category,
                                   publishDate: "4 giờ trước",
                                   thumbnail:
                                       _bloc.listNews[i].data[index].thumbnailUrl,

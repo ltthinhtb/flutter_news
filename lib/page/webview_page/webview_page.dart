@@ -40,13 +40,13 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> {
-  final flutterWebViewPlugin = FlutterWebviewPlugin();
+
   WebViewPageBloc _bloc;
 
   @override
   void initState() {
     // TODO: implement initState
-    flutterWebViewPlugin.close();
+
     _bloc = WebViewPageBloc();
     _bloc.add(LoadWebViewEvent(isRefresh: true, id: widget.id.toString()));
     super.initState();
@@ -125,7 +125,7 @@ class _WebViewPageState extends State<WebViewPage> {
                                 prefs = await SharedPreferences.getInstance();
                                 bool isLogin = prefs.get('islogin') ?? false;
                                 if (isLogin) {
-                                  flutterWebViewPlugin.close();
+
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -134,7 +134,7 @@ class _WebViewPageState extends State<WebViewPage> {
                                                 url: widget.url,
                                               )));
                                 } else {
-                                  flutterWebViewPlugin.close();
+
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -215,7 +215,6 @@ class _WebViewPageState extends State<WebViewPage> {
                                       bool isLogin =
                                           prefs.get('islogin') ?? false;
                                       if (isLogin) {
-                                        flutterWebViewPlugin.close();
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(

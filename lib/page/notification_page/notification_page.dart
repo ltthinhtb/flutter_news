@@ -77,9 +77,7 @@ class _NotificationPageState extends State<NotificationPage> {
                               padding: EdgeInsets.only(top: 10),
                               child:  CustomListItem(
                                 title: state.listDoc[index]['title'],
-                                author: 'Hello',
                                 publishDate: 'Cách đây 29 phút',
-                                category: 'Hôm nay',
                                 thumbnail: state.listDoc[index]['photo'],
                               ),
                             ),

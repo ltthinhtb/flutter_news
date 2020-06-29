@@ -99,9 +99,7 @@ class _SaveListNewPageState extends State<SaveListNewPage> {
                               child:  CustomListItem(
                                   title: state.doc.data['love_news'][index]
                                   ['love_title'],
-                                  author: 'Hello',
                                   publishDate: '15/4/2020',
-                                  category: 'Việt Cộng',
                                   thumbnail: state.doc.data['love_news'][index]
                                   ['love_photo']),
                             ),

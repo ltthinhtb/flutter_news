@@ -14,6 +14,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
   DocumentSnapshot doc;
   User user;
   String userId;
+  String commentId;
 
   @override
   // TODO: implement initialState
@@ -39,6 +40,13 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           timestamp: Timestamp.now(),
           userId: userId,
           userName: user.name);
+      yield CommentSuccessState(listDoc: doc);
+      add(LoadCommentEvent(id: event.id,isRefresh: true));
+    }
+
+    if(event is DeleteCommentEvent){
+      yield InitCommentState();
+      DataBase().deleteComment(id: event.id,idComment: event.idComment);
       yield CommentSuccessState(listDoc: doc);
       add(LoadCommentEvent(id: event.id,isRefresh: true));
     }

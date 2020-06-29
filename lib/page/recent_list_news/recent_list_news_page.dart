@@ -78,9 +78,7 @@ class _RecentListNewPageState extends State<RecentListNewPage> {
                       padding: EdgeInsets.only(top: 10),
                       child: CustomListItem(
                         title:  state.doc.data['recent_news'][index]['title'],
-                        author : 'Hello',
                         publishDate: '15/4/2020',
-                        category: 'Việt Cộng',
                         thumbnail: state.doc.data['recent_news'][index]['photo'],
                       ),
                     ),
