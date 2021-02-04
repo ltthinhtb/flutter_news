@@ -147,7 +147,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       await prefs.setBool('seen', true);
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => OnBoardingPage()));
+          new MaterialPageRoute(builder: (context) => MyHomePage()));
     }
   }
 

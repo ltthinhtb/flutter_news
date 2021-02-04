@@ -76,9 +76,9 @@ class _NotificationPageState extends State<NotificationPage> {
                             child: Container(
                               padding: EdgeInsets.only(top: 10),
                               child:  CustomListItem(
-                                title: state.listDoc[index]['title'],
-                                publishDate: 'Cách đây 29 phút',
-                                thumbnail: state.listDoc[index]['photo'],
+                                title: state.listDoc[index]['title'] ?? "",
+                                publishDate: 'Cách đây 29 phút' ?? "",
+                                thumbnail: state.listDoc[index]['photo'] ?? "https://itcraftapps.com/wp-content/uploads/2019/11/flutter-DART.jpg",
                               ),
                             ),
                           );

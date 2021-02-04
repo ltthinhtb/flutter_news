@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:dio/adapter.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_news/models/response/news_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
@@ -87,11 +90,19 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   Future<NewsResponse> getDataBase({String id}) async {
+    final Dio dio = Dio();
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
     var url =
         'https://gw.vnexpress.net/ar/get_rule_2?category_id=$id&limit=50&page=1&data_select=title,article_id,thumbnail_url,share_url,lead,publish_time&fbclid=IwAR3ApQZzINH01eBDgyGx5D8uxjQlVupBzZOiht6HCI12t7At1H8bZTYXTtk';
-    var response = await http.get(url);
-    var jsonResponse = jsonDecode(response.body);
-    var dataCategory = jsonResponse['data'][id];
+    var response = await dio.get(url);
+    Map map = response.data;
+    //var jsonResponse = jsonDecode(response.body);
+    var dataCategory = map['data'][id];
     NewsResponse newsResponse = NewsResponse.fromJson(dataCategory);
     return newsResponse;
   }
